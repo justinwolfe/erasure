@@ -10,7 +10,6 @@ function useFetch(url, defaultData) {
           console.log('json', json) ; 
        // console.log('data', data)
     }, [url])
-
     return data
 }
 
@@ -21,7 +20,7 @@ function Example() {
  
     return (
         <div>
-          <hr />
+          <hr />Example : 
             {JSON.stringify(result)}
         </div>
     )
