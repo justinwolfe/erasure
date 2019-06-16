@@ -2,28 +2,35 @@ import React, { useState , useEffect } from 'react'
 
 function HelloHooks() {
   
-    const [posts , setPosts] = useState( () => {
-       let posts = [] 
+//     const [posts , setPosts] = useState( () => {
+//        // let posts = [] 
             
-      async function test() {
-        fetch('https://jsonplaceholder.typicode.com/todos')
-        .then(response => response.json())
-        .then(json => { console.log('json',json); posts = json })
+//       async function test() {
+//         await fetch('https://jsonplaceholder.typicode.com/todos')
+//         .then(response => response.json())
+//         .then(json => { console.log('json',json); posts = json })
 
-        console.log('posts in usestate', posts)
-        return posts; 
+//         console.log('posts in usestate', posts)
+//         return posts; 
         
-      }
-      
-      return test()
-    })
+//       }
+//       let  posts = test();  
+//       console.log('posts returned', posts)
+//       return posts
+//     })
   
-    const [post , setPost] = useState({userId: 1, id: 1, title: "delectus aut autem", completed: false})
+  const [posts , setPosts] = useState([])
+  const [post , setPost] = useState({userId: 1, id: 1, title: "delectus aut autem", completed: false})
     
     useEffect(() => {
       console.log('posts',posts)
-              setPosts(posts); 
-     })
+      if(!posts.length){
+        fetch('https://jsonplaceholder.typicode.com/todos')
+        .then(response => response.json())
+        .then(json => { console.log('json',json); setPosts(json);  })
+              // setPosts(posts); 
+        }
+     }, [posts])
   
     return (
       <>
