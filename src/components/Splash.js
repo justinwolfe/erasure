@@ -4,21 +4,28 @@ import Mercury from '@postlight/mercury-parser';
 const Splash = () => {
   const [url, setUrl] = useState('')
   const [fetchStatus, setFetchStatus] = useState({})
-
+  const [page, setPage] = useState({})
+  
   useEffect(() => {
     if(fetchStatus === 'fetching'){
       Mercury.parse(url).then(data => {
-        console.log(data)
+        setPage(data)
+        setFetchStatus('fetched')
+      }).catch(err => {
+        setPage(err)
+        setFetchStatus('fetched')
       })
     }
-  }, [fetchStatus])
+  }, [fetchStatus,url])
+  
   return <div>
     <h1>erase-mark</h1>
     <div>
       <p>Enter a URL</p>
-      <input/>
+      <input value={url} onChange={(e) => setUrl(e.target.value)}/>
     </div>
     <button onClick={() => setFetchStatus('fetching')}>Start</button>
+    <div>{JSON.stringify(page)}</div>
   </div>;
 };
 
