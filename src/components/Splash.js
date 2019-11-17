@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Mercury from "@postlight/mercury-parser";
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
@@ -12,9 +11,14 @@ const Splash = () => {
     if (fetchStatus === "fetching") {
       fetch(addProxy(url))
         .then(res => res.text())
-        .then(data => {
-          console.log(data);
-          setPage(data);
+        .then(htmlString => {
+          console.log(htmlString);
+          Mercury.parse((url, {html: htmlString})).then(parsedData => {
+            setPage(JSON.stringify(parsedData))
+          }).catch((error) => {
+            setPage(JSON.stringify(error))
+          })
+          setPage(htmlString);
           setFetchStatus('fetched')
         })
         .catch(err => {
