@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Mercury from "@postlight/mercury-parser";
 
-//using Google as a proxy to avoid paywall issues
-const addProxy = url => `http://googleweblight.com/?lite_url=${url}`;
+const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
 const Splash = () => {
   const [url, setUrl] = useState("");
@@ -11,8 +10,8 @@ const Splash = () => {
 
   useEffect(() => {
     if (fetchStatus === "fetching") {
-      fetch(url)
-        .then(res => res.html())
+      fetch(addProxy(url))
+        .then(res => res.text())
         .then(data => {
           console.log(data);
           setPage(data);
@@ -24,15 +23,16 @@ const Splash = () => {
           setFetchStatus('fetched')
         });
     }
-    /*Mercury.parse(url).then(data => {
-        setPage(data)
+  })
+    /*Mercury.parse(addProxy(url)).then(data => {
+        setPage(JSON.stringify(data))
         setFetchStatus('fetched')
       }).catch(err => {
-        setPage(err)
+        setPage(JSON.stringify(err))
         setFetchStatus('fetched')
-      })*/
+      })
   }, [fetchStatus, url]);
-
+*/
   return (
     <div>
       <h1>erase-mark</h1>
