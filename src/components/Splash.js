@@ -4,8 +4,8 @@ const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
 const renderText = htmlString => {
   const renderer = new DOMParser();
-  renderer.parseFromString(htmlString, 'text/html')
-  const body = renderer.getQuerySelector('body')
+  const doc = renderer.parseFromString(htmlString, 'text/html')
+  const body = doc.getQuerySelector('body')
   return body.textContent
 }
 
@@ -19,13 +19,13 @@ const Splash = () => {
       fetch(addProxy(url))
         .then(res => res.text())
         .then(htmlString => {
-          //setPage(renderText(htmlString));
-          setPage(url)
+          setPage(renderText(htmlString));
+          //setPage(url)
           setFetchStatus('fetched')
         })
         .catch(err => {
           alert(err)
-          setPage('butt');
+          setPage(url);
           setFetchStatus('fetched')
         });
     }
