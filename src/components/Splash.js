@@ -2,9 +2,16 @@ import React, { useState, useEffect } from "react";
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
+const renderText = htmlString => {
+  const renderer = new DOMParser();
+  renderer.parseFromString(htmlString, 'text/html')
+  const body = renderer.getQuerySelector('body')
+  return body.textContent
+}
+
 const Splash = () => {
   const [url, setUrl] = useState("");
-  const [fetchStatus, setFetchStatus] = useState({});
+  const [fetchStatus, setFetchStatus] = useState('');
   const [page, setPage] = useState('');
 
   useEffect(() => {
@@ -12,13 +19,8 @@ const Splash = () => {
       fetch(addProxy(url))
         .then(res => res.text())
         .then(htmlString => {
-          console.log(htmlString);
-          Mercury.parse((url, {html: htmlString})).then(parsedData => {
-            setPage(JSON.stringify(parsedData))
-          }).catch((error) => {
-            setPage(JSON.stringify(error))
-          })
-          setPage(htmlString);
+          //setPage(renderText(htmlString));
+          setPage(url)
           setFetchStatus('fetched')
         })
         .catch(err => {
@@ -28,15 +30,7 @@ const Splash = () => {
         });
     }
   })
-    /*Mercury.parse(addProxy(url)).then(data => {
-        setPage(JSON.stringify(data))
-        setFetchStatus('fetched')
-      }).catch(err => {
-        setPage(JSON.stringify(err))
-        setFetchStatus('fetched')
-      })
-  }, [fetchStatus, url]);
-*/
+
   return (
     <div>
       <h1>erase-mark</h1>
