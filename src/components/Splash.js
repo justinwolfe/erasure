@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Mercury from "@postlight/mercury-parser";
-import remove from 'remove-markdown'
+import remove from "remove-markdown";
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
-/*
-const renderText = htmlString => {
-  const renderer = new DOMParser();
-  const doc = renderer.parseFromString(htmlString, "text/html");
-  var turndownService = new TurndownService();
-  var markdown = turndownService.turndown(doc);
-  return markdown;
-};*/
 
 const cleanMarkdown = markdown => {
   const linkRegex = /\[(.*)\]\(.*\)/gm;
   const matches = markdown.matchAll(linkRegex)
-  console.log(matches)
-  return matches
-}
+  alert(Array.from(matches))
+  return Array.from(matches)
+};
 
 const Splash = () => {
   const [url, setUrl] = useState("");
@@ -29,14 +21,13 @@ const Splash = () => {
       fetch(addProxy(url))
         .then(res => res.text())
         .then(htmlString => {
-          //setPage(renderText(htmlString));
-          //setPage(url)
           Mercury.parse(url, {
-            html: htmlString, contentType: 'markdown'
+            html: htmlString,
+            contentType: "markdown"
           }).then(result => {
             if (result.content) {
-              const cleaned = cleanMarkdown(result.content)
-              setPage(cleaned.toString());
+              const cleaned = cleanMarkdown(result.content);
+              setPage(cleaned.map(entry => entry[1]));
             } else {
               setPage(JSON.stringify(result));
             }
@@ -59,7 +50,7 @@ const Splash = () => {
         <input value={url} onChange={e => setUrl(e.target.value)} />
       </div>
       <button onClick={() => setFetchStatus("fetching")}>Start</button>
-      <div style={{whiteSpace:'pre-line'}}>{page}</div>
+      <div style={{ whiteSpace: "pre-line" }}>{page}</div>
     </div>
   );
 };
