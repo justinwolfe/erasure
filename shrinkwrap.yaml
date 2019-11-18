@@ -3,6 +3,7 @@ dependencies:
   react: 16.8.6
   react-dom: 16.8.6
   react-scripts: 3.0.1
+  remove-markdown: 0.3.0
   turndown: 5.0.3
 packages:
   /@babel/code-frame/7.0.0:
@@ -9326,6 +9327,10 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
+  /remove-markdown/0.3.0:
+    dev: false
+    resolution:
+      integrity: sha1-XktmdJOpNXlyjz1S7MHbnKUF3Jg=
   /remove-trailing-separator/1.1.0:
     dev: false
     resolution:
@@ -11394,4 +11399,5 @@ specifiers:
   react: ^16.8.6
   react-dom: ^16.8.6
   react-scripts: ^3.0.1
+  remove-markdown: ^0.3.0
   turndown: ^5.0.3

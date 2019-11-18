@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Mercury from "@postlight/mercury-parser";
+import remove from 'remove-markdown'
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 /*
@@ -24,9 +25,10 @@ const Splash = () => {
           //setPage(renderText(htmlString));
           //setPage(url)
           Mercury.parse(url, {
-            html: htmlString, contentType: 'text'
+            html: htmlString, contentType: 'markdown'
           }).then(result => {
             if (result.content) {
+              const cleaned = remove(result.contet)
               setPage(result.content);
             } else {
               setPage(JSON.stringify(result));
@@ -50,7 +52,7 @@ const Splash = () => {
         <input value={url} onChange={e => setUrl(e.target.value)} />
       </div>
       <button onClick={() => setFetchStatus("fetching")}>Start</button>
-      <div>{page}</div>
+      <div style={{whiteSpace:'pre-line'}}>{page}</div>
     </div>
   );
 };
