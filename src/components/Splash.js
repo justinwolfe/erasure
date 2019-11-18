@@ -4,15 +4,15 @@ const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
 const renderText = htmlString => {
   const renderer = new DOMParser();
-  const doc = renderer.parseFromString(htmlString, 'text/html')
-  const body = doc.getQuerySelector('body')
-  return body.textContent
-}
+  const doc = renderer.parseFromString(htmlString, "text/html");
+  const body = doc.body.textContent
+  return body;
+};
 
 const Splash = () => {
   const [url, setUrl] = useState("");
-  const [fetchStatus, setFetchStatus] = useState('');
-  const [page, setPage] = useState('');
+  const [fetchStatus, setFetchStatus] = useState("");
+  const [page, setPage] = useState("");
 
   useEffect(() => {
     if (fetchStatus === "fetching") {
@@ -21,15 +21,15 @@ const Splash = () => {
         .then(htmlString => {
           setPage(renderText(htmlString));
           //setPage(url)
-          setFetchStatus('fetched')
+          setFetchStatus("fetched");
         })
         .catch(err => {
-          alert(err)
+          alert(err);
           setPage(url);
-          setFetchStatus('fetched')
+          setFetchStatus("fetched");
         });
     }
-  })
+  });
 
   return (
     <div>
