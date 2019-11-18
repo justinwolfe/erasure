@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import TurndownService from "turndown";
+import Mercury from "@postlight/mercury-parser";
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
-
+/*
 const renderText = htmlString => {
   const renderer = new DOMParser();
   const doc = renderer.parseFromString(htmlString, "text/html");
   var turndownService = new TurndownService();
   var markdown = turndownService.turndown(doc);
-  return markdown
-};
+  return markdown;
+};*/
 
 const Splash = () => {
   const [url, setUrl] = useState("");
@@ -21,8 +21,17 @@ const Splash = () => {
       fetch(addProxy(url))
         .then(res => res.text())
         .then(htmlString => {
-          setPage(renderText(htmlString));
+          //setPage(renderText(htmlString));
           //setPage(url)
+          Mercury.parse(url, {
+            html: htmlString, contentType: 'text'
+          }).then(result => {
+            if (result.content) {
+              setPage(result.content);
+            } else {
+              setPage(JSON.stringify(result));
+            }
+          });
           setFetchStatus("fetched");
         })
         .catch(err => {
