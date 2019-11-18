@@ -6,10 +6,14 @@ const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
 const cleanMarkdown = markdown => {
   let cleanedDoc = markdown;
-  const linkRegex = 
+  const linkRegex = /(\!\[|\[)(.*)\]\(.*\)/gm;
   const matches = [...markdown.matchAll(linkRegex)];
   matches.forEach(match => {
-    cleanedDoc = cleanedDoc.replace(match[0], match[1]);
+    let replacement = match[1]
+    if(match[2]){
+      replacement = match[2]
+    }
+    cleanedDoc = cleanedDoc.replace(match[0], replacement);
   });
   return cleanedDoc;
 };
@@ -30,7 +34,7 @@ const Splash = () => {
           }).then(result => {
             if (result.content) {
               const cleaned = cleanMarkdown(result.content);
-              setPage(cleaned);
+              setPage(result.content);
             } else {
               setPage(JSON.stringify(result));
             }
