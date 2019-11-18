@@ -12,6 +12,13 @@ const renderText = htmlString => {
   return markdown;
 };*/
 
+const cleanMarkdown = markdown => {
+  const linkRegex = /\[(.*)\]\(.*\)/gm;
+  const matches = markdown.matchAll(linkRegex)
+  console.log(matches)
+  return matches
+}
+
 const Splash = () => {
   const [url, setUrl] = useState("");
   const [fetchStatus, setFetchStatus] = useState("");
@@ -28,8 +35,8 @@ const Splash = () => {
             html: htmlString, contentType: 'markdown'
           }).then(result => {
             if (result.content) {
-              const cleaned = remove(result.contet)
-              setPage(result.content);
+              const cleaned = cleanMarkdown(result.content)
+              setPage(cleaned.toString());
             } else {
               setPage(JSON.stringify(result));
             }
