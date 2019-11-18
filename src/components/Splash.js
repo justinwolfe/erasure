@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import TurndownService from "turndown";
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
 const renderText = htmlString => {
   const renderer = new DOMParser();
   const doc = renderer.parseFromString(htmlString, "text/html");
-  const body = doc.body.textContent
-  return body;
+  var turndownService = new TurndownService();
+  var markdown = turndownService.turndown(doc);
+  return markdown
 };
 
 const Splash = () => {
