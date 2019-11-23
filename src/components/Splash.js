@@ -8,13 +8,15 @@ const cleanMarkdown = markdown => {
   let cleanedDoc = markdown;
   const linkRegex = /(\!\[|\[)(.*)\]\(.*\)/gm;
   const matches = [...markdown.matchAll(linkRegex)];
+  console.log(matches)
   matches.forEach(match => {
-    let replacement = match[1]
-    if(match[2]){
-      replacement = match[2]
+    let replacement = match[1];
+    if (match[2]) {
+      replacement = match[2];
     }
     cleanedDoc = cleanedDoc.replace(match[0], replacement);
   });
+  console.log(cleanedDoc)
   return cleanedDoc;
 };
 
