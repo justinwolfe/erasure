@@ -15,8 +15,10 @@ const cleanMarkdown = markdown => {
     if (match[2]) {
       replacement = match[2];
     }
-    cleanedDoc = cleanedDoc.replace(match[0], replacement);
+    //cleanedDoc = cleanedDoc.replace(match[0], replacement);
   });
+  const re = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig; 
+  cleanedDoc = cleanedDoc.replace(re, "")
   return cleanedDoc;
 };
 
