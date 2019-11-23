@@ -4,7 +4,7 @@ import remove from "remove-markdown";
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
-const getContentFromUrl = url => new Promise((resolve, reject) => {
+export const getContentFromUrl = url => new Promise((resolve, reject) => {
   fetch(addProxy(url))
         .then(res => res.text())
         .then(htmlString => {
@@ -16,7 +16,7 @@ const getContentFromUrl = url => new Promise((resolve, reject) => {
               const cleaned = remove(result.content);
               resolve(cleaned)
             } else {
-              resolve(JSON.stringify(result));
+              reject(JSON.stringify(result));
             }
           });
         })

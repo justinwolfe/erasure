@@ -1,39 +1,23 @@
 import React, { useState, useEffect } from "react";
-import Mercury from "@postlight/mercury-parser";
-import remove from "remove-markdown";
-
-const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
+import {getContentFromUrl} from '../utils'
 
 const Splash = () => {
   const [url, setUrl] = useState("");
   const [fetchStatus, setFetchStatus] = useState("");
   const [page, setPage] = useState("");
-
+  
   useEffect(() => {
-    if (fetchStatus === "fetching") {
-      fetch(addProxy(url))
-        .then(res => res.text())
-        .then(htmlString => {
-          Mercury.parse(url, {
-            html: htmlString,
-            contentType: "markdown"
-          }).then(result => {
-            if (result.content) {
-              const cleaned = remove(result.content);
-              setPage(cleaned);
-            } else {
-              setPage(JSON.stringify(result));
-            }
-          });
-          setFetchStatus("fetched");
-        })
-        .catch(err => {
-          alert(err);
-          setPage(url);
-          setFetchStatus("fetched");
-        });
+    if(fetchStatus === "fetching"){
+      getContentFromUrl(url)
+        .then(data => {
+        setPage(data)
+        setFetchStatus("fetched");
+      }).catch(err => {
+        setPage(err)
+        setFetchStatus("fetched");
+      })
     }
-  });
+  })
 
   return (
     <div>
