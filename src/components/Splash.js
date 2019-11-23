@@ -4,24 +4,6 @@ import remove from "remove-markdown";
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
-const cleanMarkdown = markdown => {
-  let cleanedDoc = markdown;
-  const linkRegex = /\[(.+)]\((.*)\)/gm;
-  const matches = [...markdown.matchAll(linkRegex)];
-  matches.forEach(match => {
-    let replacement = match[1];
-    console.log("match0", match[0])
-    console.log("replacement", replacement)
-    if (match[2]) {
-      replacement = match[2];
-    }
-    //cleanedDoc = cleanedDoc.replace(match[0], replacement);
-  });
-  const re = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig; 
-  cleanedDoc = cleanedDoc.replace(re, "")
-  return cleanedDoc;
-};
-
 const Splash = () => {
   const [url, setUrl] = useState("");
   const [fetchStatus, setFetchStatus] = useState("");
@@ -37,7 +19,7 @@ const Splash = () => {
             contentType: "markdown"
           }).then(result => {
             if (result.content) {
-              const cleaned = cleanMarkdown(result.content);
+              const cleaned = remove(result.content);
               setPage(cleaned);
             } else {
               setPage(JSON.stringify(result));
