@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {getContentFromUrl} from '../utils'
 
-const Splash = () => {
+const Splash = ({selectContent}) => {
   const [url, setUrl] = useState("");
   const [fetchStatus, setFetchStatus] = useState("");
   const [page, setPage] = useState("");
