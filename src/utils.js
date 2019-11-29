@@ -4,6 +4,15 @@ import remove from "remove-markdown";
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
+const convertToNestedArray = page => {
+  const paragraphArray = page.split("\n\n")
+  const paragraphArrayWithWordArray = paragraphArray.map(paragraph => {
+    const wordArray = paragraph.split(" ")
+    const letterArray = wordArray.map(word => word.split(""))
+  })
+  return paragraphArray
+}
+
 export const getContentFromUrl = url =>
   new Promise((resolve, reject) => {
     fetch(addProxy(url))
@@ -21,7 +30,8 @@ export const getContentFromUrl = url =>
                 ""
               )
               .replace(/\n\s*\n/g, "\n\n");
-            resolve(cleaned);
+            const converted = convertToNestedArray(cleaned)
+            resolve(JSON.stringify(converted));
           } else {
             reject(JSON.stringify(result));
           }
