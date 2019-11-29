@@ -1,30 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Splash from "./components/Splash.js";
-import Editor from "./components/Editor.js"
+import Editor from "./components/Editor.js";
 
 import "./App.css";
 
-const RegisteredComponents = {
-  splash: <Splash/>,
-  editor: <Editor/>,
-}
-
 const App = () => {
-  const [content, setContent] = useState('')
-  const [currentScreen, setCurrentScreen] = useState('Splash')
-  
+  const [content, setContent] = useState("");
+  const [currentError, setCurrentError] = useState("");
   return (
     <div className="App">
-      {
-        currentScreen === "Splash" && !content (
-          <Splash setContent={setContent} />
-        )
-        || currentScreen === "Editor" && (
-          <Editor/>
-        )
-        || <div>default</div>
-      }
-      <Splash />
+      {(!content && (
+        <Splash setContent={setContent} setCurrentError={setCurrentError} />
+      )) ||
+        (content && <Editor content={content} />) || <div>default</div>}
     </div>
   );
 };
