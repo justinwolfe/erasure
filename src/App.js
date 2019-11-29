@@ -8,7 +8,7 @@ const App = () => {
   const [content, setContent] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
   return (
-    <div className="App">
+    <div style={{margin:'10%'}}className="App">
       {(!content && (
         <Splash setContent={setContent} setCurrentError={setCurrentError} />
       )) ||
