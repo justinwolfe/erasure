@@ -5,7 +5,7 @@ import Editor from "./components/Editor.js";
 import "./App.css";
 
 const App = () => {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
   return (
     <div className="App">

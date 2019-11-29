@@ -7,7 +7,11 @@ const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 const convertToState = document =>
   document.split("\n\n").map((paragraph, paragraphIndex) => ({
     words: paragraph.split(" ").map((word, wordIndex) => ({
-      word,
+      word: word.split("").map((character, characterIndex) => ({
+        character,
+        id: `p${paragraphIndex}-w${wordIndex}-c${characterIndex}`,
+        visible: true
+      })),
       visible: true,
       id: `p${paragraphIndex}-w${wordIndex}`
     })),
