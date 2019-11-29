@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 
 const Editor = ({ content }) => {
   const { paragraphs, url, created } = content;
-  console.log(paragraphs, url, created);
+
   return (
     <div>
-      {paragraphs.map(({ words }) => (
-        <p>
-          {words.map(({ characters }) => (
-            <span>{characters.join()}</span>
-          ))}
-        </p>
-      ))}
+      {paragraphs &&
+        paragraphs.map(paragraph => (
+          <p key={paragraph.id}>
+            {paragraph.words.map(word => (
+              <span style={{marginLeft: '1%'}}key={word.id}>
+                {word.characters.map(character => character.character).join("")}
+              </span>
+            ))}
+          </p>
+        ))}
     </div>
   );
 };
