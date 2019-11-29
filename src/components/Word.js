@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-const Word = ({ characters, isVisible, toggle }) => {
+const Word = ({ characters, id, isVisible, toggleElement }) => {
   const word = characters.map(character => character.character).join("");
   return (
     <React.Fragment>
-      <span>{word}</span>{" "}
+      <span className={isVisible} onClick={(e) => {
+          toggleElement(id)
+        }}>{word}</span>{" "}
     </React.Fragment>
   );
 };

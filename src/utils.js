@@ -9,14 +9,14 @@ const convertToState = document =>
     words: paragraph.split(" ").map((word, wordIndex) => ({
       characters: word.split("").map((character, characterIndex) => ({
         character,
-        id: `p${paragraphIndex}-w${wordIndex}-c${characterIndex}`,
+        id: `${paragraphIndex}-${wordIndex}-${characterIndex}`,
         isVisible: true
       })),
       isVisible: true,
-      id: `p${paragraphIndex}-w${wordIndex}`
+      id: `${paragraphIndex}-${wordIndex}`
     })),
     isVisible: true,
-    id: `p${paragraphIndex}`
+    id: `${paragraphIndex}`
   }));
 
 export const getContentFromUrl = url =>
@@ -36,7 +36,7 @@ export const getContentFromUrl = url =>
                 ""
               )
               .replace(/\n\s*\n/g, "\n\n");
-            console.log(convertToState(cleaned))
+            console.log(convertToState(cleaned));
             const converted = convertToState(cleaned);
             resolve(converted);
           } else {

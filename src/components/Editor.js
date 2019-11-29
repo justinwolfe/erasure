@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Word from "./Word";
 
-const Editor = ({ content }) => {
+const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
 
   return (
@@ -13,7 +13,9 @@ const Editor = ({ content }) => {
               <Word
                 characters={word.characters}
                 key={word.id}
+                id={word.id}
                 isVisible={word.isVisible}
+                toggleElement={toggleElement}
               />
             ))}
           </p>

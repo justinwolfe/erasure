@@ -9,8 +9,11 @@ const App = () => {
   const [currentError, setCurrentError] = useState("");
   
   const toggleElement = (id) => {
-    const [paragraph, word, character] = id.split("-")
-    console.log()
+    const [paragraphIndex, wordIndex, characterIndex] = id.split("-")
+    const newContent = {...content}
+    const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
+    word.isVisible = !word.isVisible
+    setContent(newContent)
   }
   
   return (
@@ -18,7 +21,7 @@ const App = () => {
       {(!content && (
         <Splash setContent={setContent} setCurrentError={setCurrentError} />
       )) ||
-        (content && <Editor content={content} />) || <div>default</div>}
+        (content && <Editor content={content} toggleElement={toggleElement} />) || <div>default</div>}
     </div>
   );
 };
