@@ -10,12 +10,12 @@ const convertToState = document =>
       characters: word.split("").map((character, characterIndex) => ({
         character,
         id: `p${paragraphIndex}-w${wordIndex}-c${characterIndex}`,
-        visible: true
+        isVisible: true
       })),
-      visible: true,
+      isVisible: true,
       id: `p${paragraphIndex}-w${wordIndex}`
     })),
-    visible: true,
+    isVisible: true,
     id: `p${paragraphIndex}`
   }));
 

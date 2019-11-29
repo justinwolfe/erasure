@@ -7,6 +7,12 @@ import "./App.css";
 const App = () => {
   const [content, setContent] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
+  
+  const toggleElement = (id) => {
+    const [paragraph, word, character] = id.split("-")
+    console.log()
+  }
+  
   return (
     <div style={{margin:'10%'}}className="App">
       {(!content && (

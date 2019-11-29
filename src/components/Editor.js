@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Word from './Word'
+import Word from "./Word";
 
 const Editor = ({ content }) => {
   const { paragraphs, url, created } = content;
@@ -10,10 +10,11 @@ const Editor = ({ content }) => {
         paragraphs.map(paragraph => (
           <p className="paragraph" key={paragraph.id}>
             {paragraph.words.map(word => (
-              <Word characters={word.characters}/>
-              <span className="word" key={word.id}>
-                {word.characters.map(character => character.character).join("")}{" "}
-              </span>
+              <Word
+                characters={word.characters}
+                key={word.id}
+                isVisible={word.isVisible}
+              />
             ))}
           </p>
         ))}
