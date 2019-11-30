@@ -20,20 +20,15 @@ const Word = ({ characters, id, isVisible, toggleElement }) => {
         }}
         onTouchStart={e => {
           toggleElement(id);
+          console.log(e);
         }}
-        onMouseDown={e => {
-          
-        }}
-        onMouseEnter={e => {
-          console.log(e.buttons)
-          console.log(id)
-          if(e.buttons){
-            toggleElement(id)
-          }
+        onTouchMove={e => {
+          console.log("touchmove");
+          console.log(e);
+          console.log(id);
         }}
       >
         {word}
-        {isVisible}
       </span>{" "}
     </React.Fragment>
   );
