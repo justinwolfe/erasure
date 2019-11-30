@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 
 const styles = {
   visible: {
-    color: 'black'
+    color: "black"
   },
   invisible: {
-    color: 'white'
+    color: "white"
   }
 };
 
@@ -18,8 +18,15 @@ const Word = ({ characters, id, isVisible, toggleElement }) => {
         onClick={e => {
           toggleElement(id);
         }}
+        onTouchStart={e => {
+          toggleElement(id);
+        }}
+        onDragEnter={e => {
+          console.log(id)
+        }}
       >
-        {word}{isVisible}
+        {word}
+        {isVisible}
       </span>{" "}
     </React.Fragment>
   );
