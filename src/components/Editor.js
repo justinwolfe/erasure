@@ -18,7 +18,8 @@ const Editor = ({ content, toggleElement }) => {
           <p
             onTouchMove={e => {
               console.log("tm", e.target.innerText)
-              document.getElementByPoint(e.x, e.y)
+              console.log(e.clientX, e.clientY)
+              //document.elementsFromPoint(e.clientX, e.clientY)
             }}
             className="paragraph"
             key={paragraph.id}
