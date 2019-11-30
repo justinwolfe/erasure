@@ -21,8 +21,15 @@ const Word = ({ characters, id, isVisible, toggleElement }) => {
         onTouchStart={e => {
           toggleElement(id);
         }}
-        onDragEnter={e => {
+        onMouseDown={e => {
+          
+        }}
+        onMouseEnter={e => {
+          console.log(e.buttons)
           console.log(id)
+          if(e.buttons){
+            toggleElement(id)
+          }
         }}
       >
         {word}
