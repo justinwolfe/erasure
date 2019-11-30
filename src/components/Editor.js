@@ -5,10 +5,24 @@ const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
 
   return (
-    <div style={{ textAlign: "left", wordWrap: "break-word", cursor:'pointer', userSelect:'none' }}>
+    <div
+      style={{
+        textAlign: "left",
+        wordWrap: "break-word",
+        cursor: "pointer",
+        userSelect: "none"
+      }}
+    >
       {paragraphs &&
         paragraphs.map(paragraph => (
-          <p className="paragraph" key={paragraph.id}>
+          <p
+            onTouchMove={e => {
+              console.log("tm", e.target.innerText)
+              document.getElementByPoint(e.x, e.y)
+            }}
+            className="paragraph"
+            key={paragraph.id}
+          >
             {paragraph.words.map(word => (
               <Word
                 characters={word.characters}

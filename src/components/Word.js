@@ -18,15 +18,10 @@ const Word = ({ characters, id, isVisible, toggleElement }) => {
         onClick={e => {
           toggleElement(id);
         }}
-        onTouchStart={e => {
+        /*onTouchStart={e => {
           toggleElement(id);
           console.log(e);
-        }}
-        onTouchMove={e => {
-          console.log("touchmove");
-          console.log(e);
-          console.log(id);
-        }}
+        }}*/
       >
         {word}
       </span>{" "}
