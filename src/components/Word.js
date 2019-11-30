@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 
 const styles = {
   visible: {
-    backgroundColor: 'white'
+    color: 'black'
   },
   invisible: {
-    backgroundColor: 'black'
+    color: 'white'
   }
 };
 

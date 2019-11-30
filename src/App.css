@@ -1,3 +1,11 @@
+:focus {
+    outline: none !important;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .App {
   text-align: center;
   userSelect: none;
