@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 
 const styles = {
   visible: {
-    display: "inline-block"
+    backgroundColor: 'white'
   },
   invisible: {
-    display: "hidden"
+    backgroundColor: 'black'
   }
 };
 

@@ -13,11 +13,10 @@ const App = () => {
     const newContent = { ...content };
     const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
     word.isVisible = !word.isVisible;
-    console.log("before set", newContent.paragraphs[0].words[0])
+    console.log("before set", newContent.paragraphs[paragraphIndex].words[wordIndex])
     setContent(newContent);
   };
 
-  console.log("render", content && content.paragraphs && content.paragraphs[0].words[0])
   return (
     <div style={{ margin: "10%" }} className="App">
       {(!content && (

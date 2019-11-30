@@ -5,7 +5,7 @@ const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
 
   return (
-    <div style={{ textAlign: "left", wordWrap: "break-word" }}>
+    <div style={{ textAlign: "left", wordWrap: "break-word", cursor:'pointer', userSelect:'none' }}>
       {paragraphs &&
         paragraphs.map(paragraph => (
           <p className="paragraph" key={paragraph.id}>
