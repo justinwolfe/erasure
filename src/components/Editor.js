@@ -16,6 +16,11 @@ const Editor = ({ content, toggleElement }) => {
       onTouchStart={e => {
         console.log("ts", e.target.getAttribute("data-visible"));
         const firstTouch = e.target.getAttribute("data-visible");
+        setCurrentTouchState()
+        const key = e.target.getAttribute('name');
+        if(key){
+          toggleElement(key)
+        }
       }}
       onTouchMove={e => {
         const { clientX, clientY } = e.changedTouches[0];
