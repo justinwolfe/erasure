@@ -14,11 +14,11 @@ const Editor = ({ content, toggleElement }) => {
         userSelect: "none"
       }}
       onTouchStart={e => {
-        console.log('ts', e.target.getAttribute('data-visible'))
-        
+        //const visible = e.target.getAttribute('data-visible')
+        //console.log('visible', visible)
       }}
       onTouchMove={e => {
-        const myLocation = e.changedTouches[0];
+        /*const myLocation = e.changedTouches[0];
         console.log(myLocation.clientX, myLocation.clientY);
         const touching = document.elementFromPoint(
           myLocation.clientX,
@@ -31,7 +31,7 @@ const Editor = ({ content, toggleElement }) => {
             console.log(touching.innerText, false);
             toggleElement(key);
           }
-        }
+        }*/
       }}
     >
       {paragraphs &&
