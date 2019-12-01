@@ -10,27 +10,27 @@ const style = {
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
-  const [currentTouchState, setCurrentTouchState] = useState(true);
+  const [currentTouchState, setCurrentTouchState] = useState(false);
 
   const handleTouchStart = e => {
     console.log("ts", currentTouchState);
     const firstTouch = e.target.getAttribute("data-visible");
+    console.log(firstTouch)
     if (firstTouch) {
       setCurrentTouchState(firstTouch);
     }
     const key = e.target.getAttribute("name");
     if (key) {
-      toggleElement(key);
+      toggleElement(key, currentTouchState);
     }
   };
 
   const handleTouchEnd = e => {
-    console.log("te");
-    setCurrentTouchState(undefined);
+    setCurrentTouchState(false);
   };
 
   const handleTouchMove = e => {
-    console.log("tm");
+    console.log("tm", currentTouchState);
     const { clientX, clientY } = e.changedTouches[0];
     const movedIntoElement = document.elementFromPoint(clientX, clientY);
     if (movedIntoElement) {
