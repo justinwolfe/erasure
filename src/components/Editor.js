@@ -3,7 +3,7 @@ import Word from "./Word";
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
-  const [currentTouchState, setCurrentTouchState] = undefined
+  const [currentTouchState, setCurrentTouchState] = useState(undefined)
 
   return (
     <div
@@ -32,7 +32,7 @@ const Editor = ({ content, toggleElement }) => {
             toggleElement(key);
           }
         }
-      }}
+      }}*/
     >
       {paragraphs &&
         paragraphs.map(paragraph => (
