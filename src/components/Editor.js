@@ -12,24 +12,29 @@ const Editor = ({ content, toggleElement }) => {
         cursor: "pointer",
         userSelect: "none"
       }}
+      onTouchStart={e => {
+        console.log(ts)
+      }}
+      onTouchMove={e => {
+        const myLocation = e.changedTouches[0];
+        console.log(myLocation.clientX, myLocation.clientY);
+        const touching = document.elementFromPoint(
+          myLocation.clientX,
+          myLocation.clientY
+        );
+        if (touching) {
+          const key = touching.getAttribute("name");
+          if (key) {
+            console.log(key);
+            console.log(touching.innerText, false);
+            toggleElement(key);
+          }
+        }
+      }}
     >
       {paragraphs &&
         paragraphs.map(paragraph => (
-          <p
-            onTouchMove={e => {
-              console.log("tm", e.target.innerText)
-              const myLocation = e.changedTouches[0]
-              console.log(myLocation.clientX, myLocation.clientY)
-              const touching = document.elementFromPoint(myLocation.clientX, myLocation.clientY)
-              if(touching){
-                console.log(touching.getAttribute('name'))
-                
-              }
-            }}
-            className="paragraph"
-            key={paragraph.id}
-            name={paragraph.id}
-          >
+          <p className="paragraph" key={paragraph.id} name={paragraph.id}>
             {paragraph.words.map(word => (
               <Word
                 characters={word.characters}

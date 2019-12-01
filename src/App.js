@@ -12,7 +12,9 @@ const App = () => {
     const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
     const newContent = { ...content };
     const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
-    word.isVisible = value || !word.isVisible;
+    if (word) {
+      word.isVisible = value || !word.isVisible;
+    }
     setContent(newContent);
   };
 
