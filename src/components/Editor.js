@@ -18,17 +18,24 @@ const Editor = ({ content, toggleElement }) => {
           <p
             onTouchMove={e => {
               console.log("tm", e.target.innerText)
-              console.log(e.clientX, e.clientY)
-              //document.elementsFromPoint(e.clientX, e.clientY)
+              const myLocation = e.changedTouches[0]
+              console.log(myLocation.clientX, myLocation.clientY)
+              const touching = document.elementFromPoint(myLocation.clientX, myLocation.clientY)
+              if(touching){
+                console.log(touching.getAttribute('name'))
+                
+              }
             }}
             className="paragraph"
             key={paragraph.id}
+            name={paragraph.id}
           >
             {paragraph.words.map(word => (
               <Word
                 characters={word.characters}
                 key={word.id}
                 id={word.id}
+                name={word.id}
                 isVisible={word.isVisible}
                 toggleElement={toggleElement}
               />

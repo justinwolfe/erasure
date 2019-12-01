@@ -8,12 +8,11 @@ const App = () => {
   const [content, setContent] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
 
-  const toggleElement = id => {
+  const toggleElement = (id, value) => {
     const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
     const newContent = { ...content };
     const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
-    word.isVisible = !word.isVisible;
-    console.log("before set", newContent.paragraphs[paragraphIndex].words[wordIndex])
+    word.isVisible = value || !word.isVisible;
     setContent(newContent);
   };
 

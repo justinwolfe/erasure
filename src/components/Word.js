@@ -9,11 +9,12 @@ const styles = {
   }
 };
 
-const Word = ({ characters, id, isVisible, toggleElement }) => {
+const Word = ({ characters, id, isVisible, toggleElement, name }) => {
   const word = characters.map(character => character.character).join("");
   return (
     <React.Fragment>
       <span
+        name={id}
         style={isVisible ? styles.visible : styles.invisible}
         onClick={e => {
           toggleElement(id);
