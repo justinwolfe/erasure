@@ -3,7 +3,7 @@ import Word from "./Word";
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
-  const [currentTouchState, setCurrentTouchState] = undefined
+  const [currentTouchState, setCurrentTouchState] = undefined;
 
   return (
     <div
@@ -13,17 +13,12 @@ const Editor = ({ content, toggleElement }) => {
         cursor: "pointer",
         userSelect: "none"
       }}
-      onTouchStart={e => {
-        console.log('ts', e.target.getAttribute('data-visible'))
-        
+      /*onTouchStart={e => {
+        console.log("ts", e.target.getAttribute("data-visible"));
       }}
       onTouchMove={e => {
-        const myLocation = e.changedTouches[0];
-        console.log(myLocation.clientX, myLocation.clientY);
-        const touching = document.elementFromPoint(
-          myLocation.clientX,
-          myLocation.clientY
-        );
+        const { clientX, clientY } = e.changedTouches[0];
+        const touching = document.elementFromPoint(clientX, clientY);
         if (touching) {
           const key = touching.getAttribute("name");
           if (key) {
@@ -32,7 +27,7 @@ const Editor = ({ content, toggleElement }) => {
             toggleElement(key);
           }
         }
-      }}
+      }}*/
     >
       {paragraphs &&
         paragraphs.map(paragraph => (
