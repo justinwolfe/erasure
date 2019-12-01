@@ -3,6 +3,7 @@ import Word from "./Word";
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
+  console.log(paragraphs, url, created)
   const [currentTouchState, setCurrentTouchState] = undefined;
 
   return (

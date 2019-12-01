@@ -36,7 +36,6 @@ export const getContentFromUrl = url =>
                 ""
               )
               .replace(/\n\s*\n/g, "\n\n");
-            console.log(convertToState(cleaned));
             const converted = convertToState(cleaned);
             resolve(converted);
           } else {
