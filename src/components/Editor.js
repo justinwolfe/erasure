@@ -13,7 +13,7 @@ const Editor = ({ content, toggleElement }) => {
         cursor: "pointer",
         userSelect: "none"
       }}
-      onTouchStart={e => {
+      /*onTouchStart={e => {
         console.log('ts', e.target.getAttribute('data-visible'))
         
       }}
