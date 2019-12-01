@@ -3,7 +3,7 @@ import Word from "./Word";
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
-  const [currentTouchState, setCurrentTouchState] = useState(undefined)
+  const [currentTouchState, setCurrentTouchState] = useState(undefined);
 
   return (
     <div
@@ -13,26 +13,23 @@ const Editor = ({ content, toggleElement }) => {
         cursor: "pointer",
         userSelect: "none"
       }}
-      /*onTouchStart={e => {
-        console.log('ts', e.target.getAttribute('data-visible'))
-        
+      onTouchStart={e => {
+        console.log("ts", e.target.getAttribute("data-visible"));
+        const firstTouch = e.target.getAttribute("data-visible");
       }}
       onTouchMove={e => {
-        const myLocation = e.changedTouches[0];
-        console.log(myLocation.clientX, myLocation.clientY);
-        const touching = document.elementFromPoint(
-          myLocation.clientX,
-          myLocation.clientY
-        );
-        if (touching) {
-          const key = touching.getAttribute("name");
+        const { clientX, clientY } = e.changedTouches[0];
+        const movedIntoElement = document.elementFromPoint(clientX, clientY);
+        if (movedIntoElement) {
+          const key = movedIntoElement.getAttribute("name");
+          const visible = movedIntoElement.getAttribute("data-visible");
           if (key) {
             console.log(key);
-            console.log(touching.innerText, false);
-            toggleElement(key);
+            console.log(movedIntoElement.innerText, visible);
+            toggleElement(key, false);
           }
         }
-      }}*/
+      }}
     >
       {paragraphs &&
         paragraphs.map(paragraph => (

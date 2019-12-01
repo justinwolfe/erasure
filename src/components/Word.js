@@ -17,9 +17,9 @@ const Word = ({ characters, id, isVisible, toggleElement, name }) => {
         name={id}
         data-visible={isVisible}
         style={isVisible ? styles.visible : styles.invisible}
-        onClick={e => {
+        /*onClick={e => {
           toggleElement(id);
-        }}
+        }}*/
       >
         {word}
       </span>{" "}
