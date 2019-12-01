@@ -3,6 +3,7 @@ import Word from "./Word";
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
+  const [currentTouchState, setCurrentTouchState] = undefined
 
   return (
     <div
@@ -13,7 +14,8 @@ const Editor = ({ content, toggleElement }) => {
         userSelect: "none"
       }}
       onTouchStart={e => {
-        console.log(ts)
+        console.log('ts', e.target.getAttribute('data-visible'))
+        
       }}
       onTouchMove={e => {
         const myLocation = e.changedTouches[0];

@@ -15,6 +15,7 @@ const Word = ({ characters, id, isVisible, toggleElement, name }) => {
     <React.Fragment>
       <span
         name={id}
+        data-visible={isVisible}
         style={isVisible ? styles.visible : styles.invisible}
         onClick={e => {
           toggleElement(id);
