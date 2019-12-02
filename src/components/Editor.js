@@ -13,25 +13,23 @@ const Editor = ({ content, toggleElement }) => {
   const [currentTouchState, setCurrentTouchState] = useState(undefined);
 
   const handleTouchStart = e => {
-    const firstTouchedElementIsVisible = e.target.getAttribute("data-visible");
-    if(firstTouchedElementIsVisible === "false"){
-      setCurrentTouchState(true)
-    }
     const key = e.target.getAttribute("name");
-    if (key) {
-      toggleElement(key, currentTouchState);
+    if (!key) return;
+    const firstTouchedElementIsVisible = e.target.getAttribute("data-visible");
+    if (firstTouchedElementIsVisible === "false") {
+      setCurrentTouchState(true);
     }
+    toggleElement(key, currentTouchState);
   };
 
-  const handleTouchEnd = e => {
-  };
+  const handleTouchEnd = e => {};
 
   const handleTouchMove = e => {
     const { clientX, clientY } = e.changedTouches[0];
     const movedIntoElement = document.elementFromPoint(clientX, clientY);
     if (movedIntoElement) {
       const key = movedIntoElement.getAttribute("name");
-      console.log("tm", e.innerText, currentTouchState)
+      console.log("tm", movedIntoElement.innerText, currentTouchState);
       if (key) {
         toggleElement(key, false);
       }

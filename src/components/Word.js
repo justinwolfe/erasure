@@ -5,7 +5,7 @@ const styles = {
     color: "black"
   },
   invisible: {
-    color: "white"
+    opacity: "10%"
   }
 };
 
