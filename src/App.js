@@ -13,7 +13,7 @@ const App = () => {
     const newContent = { ...content };
     const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
     if (word) {
-      if (value === false) {
+      if (value === false || value === true) {
         word.isVisible = value;
       } else {
         word.isVisible = !word.isVisible;

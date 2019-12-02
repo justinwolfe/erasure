@@ -13,17 +13,10 @@ const Editor = ({ content, toggleElement }) => {
   const [currentTouchState, setCurrentTouchState] = useState(undefined);
 
   const handleTouchStart = e => {
-    console.log(
-      e.target.innerText,
-      e.target.getAttribute("data-visible"),
-      currentTouchState
-    );
     const firstTouchedElementIsVisible = e.target.getAttribute("data-visible");
-    console.log("ft", firstTouchedElementIsVisible)
-    if(!firstTouchedElementIsVisible){
+    if(firstTouchedElementIsVisible === "false"){
       setCurrentTouchState(true)
     }
-    console.log("updatedTouchState", currentTouchState)
     const key = e.target.getAttribute("name");
     if (key) {
       toggleElement(key, currentTouchState);
@@ -31,7 +24,6 @@ const Editor = ({ content, toggleElement }) => {
   };
 
   const handleTouchEnd = e => {
-    setCurrentTouchState(false);
   };
 
   const handleTouchMove = e => {
@@ -39,8 +31,9 @@ const Editor = ({ content, toggleElement }) => {
     const movedIntoElement = document.elementFromPoint(clientX, clientY);
     if (movedIntoElement) {
       const key = movedIntoElement.getAttribute("name");
+      console.log("tm", e.innerText, currentTouchState)
       if (key) {
-        toggleElement(key, currentTouchState);
+        toggleElement(key, false);
       }
     }
   };
@@ -49,8 +42,8 @@ const Editor = ({ content, toggleElement }) => {
     <div
       style={style}
       onTouchStart={handleTouchStart}
-      //onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+      onTouchMove={handleTouchMove}
+      //onTouchEnd={handleTouchEnd}
     >
       {paragraphs &&
         paragraphs.map(paragraph => (
