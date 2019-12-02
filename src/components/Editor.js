@@ -10,14 +10,20 @@ const style = {
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
-  const [currentTouchState, setCurrentTouchState] = useState(false);
+  const [currentTouchState, setCurrentTouchState] = useState(undefined);
 
   const handleTouchStart = e => {
-    console.log(e.target.innerText, e.target.getAttribute("data-visible"))
+    console.log(
+      e.target.innerText,
+      e.target.getAttribute("data-visible"),
+      currentTouchState
+    );
     const firstTouchedElementIsVisible = e.target.getAttribute("data-visible");
-    firstTouchedElementIsVisible === "true"
-      ? setCurrentTouchState(false)
-      : setCurrentTouchState(true);
+    console.log("ft", firstTouchedElementIsVisible)
+    if(!firstTouchedElementIsVisible){
+      setCurrentTouchState(true)
+    }
+    console.log("updatedTouchState", currentTouchState)
     const key = e.target.getAttribute("name");
     if (key) {
       toggleElement(key, currentTouchState);
