@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Word from "./Word";
+import Controls from "./Controls"
 
 const style = {
   textAlign: "left",
@@ -38,6 +39,7 @@ const Editor = ({ content, toggleElement }) => {
       onTouchMove={handleTouchMove}
       //onTouchEnd={handleTouchEnd}
     >
+      <Controls setCurrentTouchState={setCurrentTouchState}/>
       {paragraphs &&
         paragraphs.map(paragraph => (
           <p className="paragraph" key={paragraph.id} name={paragraph.id}>
