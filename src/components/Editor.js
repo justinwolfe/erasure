@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
-import debounce from ('just-debounce')
+import debounce from "just-debounce";
 
 const style = {
   textAlign: "left",
@@ -15,15 +15,20 @@ const Editor = ({ content, toggleElement }) => {
   const [currentTouchState, setCurrentTouchState] = useState(false);
 
   const handleTouchStart = e => {
+    e.preventDefault()
     const key = e.target.getAttribute("name");
     if (!key) return;
     toggleElement(key, currentTouchState);
   };
 
   const handleTouchEnd = e => {};
+  
+  let counter = 0
 
   const handleTouchMove = e => {
-    console.log(e);
+    e.preventDefault()
+    counter++
+    console.log(counter);
     const { clientX, clientY } = e.changedTouches[0];
     const movedIntoElement = document.elementFromPoint(clientX, clientY);
     if (movedIntoElement) {
@@ -34,15 +39,13 @@ const Editor = ({ content, toggleElement }) => {
     }
   };
 
-  const debounced = (e) => {
-    debounce.handleTouchMove
-  }
+  const debouncedMove = e => debounce(handleTouchMove(e), 500);
 
   return (
     <div
       style={style}
       onTouchStart={handleTouchStart}
-      onTouchMove={debouncedWrapper}
+      onTouchMove={debouncedMove}
     >
       <Controls
         currentTouchState={currentTouchState}
