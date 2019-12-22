@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Word from "./Word";
-import Controls from "./Controls"
+import Controls from "./Controls";
+import { throttle, debounce } from "throttle-debounce";
 
 const style = {
   textAlign: "left",
@@ -35,11 +36,21 @@ const Editor = ({ content, toggleElement }) => {
   return (
     <div
       style={style}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      //onTouchEnd={handleTouchEnd}
+      onTouchStart={() => {
+        throttle(300, () => {
+          handleTouchStart();
+        });
+      }}
+      onTouchMove={() => {
+        throttle(300, () => {
+          handleTouchMove();
+        });
+      }}
     >
-      <Controls setCurrentTouchState={setCurrentTouchState}/>
+      <Controls
+        currentTouchState={currentTouchState}
+        setCurrentTouchState={setCurrentTouchState}
+      />
       {paragraphs &&
         paragraphs.map(paragraph => (
           <p className="paragraph" key={paragraph.id} name={paragraph.id}>

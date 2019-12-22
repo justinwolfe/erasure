@@ -9,7 +9,6 @@ const App = () => {
   const [currentError, setCurrentError] = useState("");
 
   const toggleElement = (id, value) => {
-    console.log(id, value)
     const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
     const newContent = { ...content };
     const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
