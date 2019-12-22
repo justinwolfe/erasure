@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
-import { throttle, debounce } from "throttle-debounce";
+import debounce from ('just-debounce')
 
 const style = {
   textAlign: "left",
@@ -23,6 +23,7 @@ const Editor = ({ content, toggleElement }) => {
   const handleTouchEnd = e => {};
 
   const handleTouchMove = e => {
+    console.log(e);
     const { clientX, clientY } = e.changedTouches[0];
     const movedIntoElement = document.elementFromPoint(clientX, clientY);
     if (movedIntoElement) {
@@ -33,19 +34,15 @@ const Editor = ({ content, toggleElement }) => {
     }
   };
 
+  const debounced = (e) => {
+    debounce.handleTouchMove
+  }
+
   return (
     <div
       style={style}
-      onTouchStart={() => {
-        throttle(300, () => {
-          handleTouchStart();
-        });
-      }}
-      onTouchMove={() => {
-        throttle(300, () => {
-          handleTouchMove();
-        });
-      }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={debouncedWrapper}
     >
       <Controls
         currentTouchState={currentTouchState}

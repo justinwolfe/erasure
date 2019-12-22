@@ -1,12 +1,12 @@
 dependencies:
   '@postlight/mercury-parser': 2.2.0
+  just-debounce: 1.0.0
   react: 16.8.6
   react-dom: 16.8.6
   react-scripts: 3.0.1
   remark: 11.0.2
   remove-markdown: 0.3.0
   strip-markdown: 3.1.1
-  throttle-debounce: 2.1.0
   turndown: 5.0.3
 packages:
   /@babel/code-frame/7.0.0:
@@ -6813,6 +6813,10 @@ packages:
       node: '>=4.0'
     resolution:
       integrity: sha512-yDGDG2DS4JcqhA6blsuYbtsT09xL8AoLuUR2Gb5exrw7UEM19sBcOTq+YBBhrNbl0PUC4R4LnFu+dHg2HKeVvA==
+  /just-debounce/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-h/zPrv/AtozRnVX2cilD+SnqNeo=
   /killable/1.0.1:
     dev: false
     resolution:
@@ -10565,12 +10569,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-iQN8vJLFarGJJua6TLsgDhVnKmo=
-  /throttle-debounce/2.1.0:
-    dev: false
-    engines:
-      node: '>=8'
-    resolution:
-      integrity: sha512-AOvyNahXQuU7NN+VVvOOX+uW6FPaWdAOdRP5HfwYxAfCzXTFKRMoIMk+n+po318+ktcChx+F1Dd91G3YHeMKyg==
   /through/2.3.8:
     dev: false
     resolution:
@@ -11644,11 +11642,11 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   '@postlight/mercury-parser': ^2.2.0
+  just-debounce: ^1.0.0
   react: ^16.8.6
   react-dom: ^16.8.6
   react-scripts: ^3.0.1
   remark: ^11.0.2
   remove-markdown: ^0.3.0
   strip-markdown: ^3.1.1
-  throttle-debounce: ^2.1.0
   turndown: ^5.0.3
