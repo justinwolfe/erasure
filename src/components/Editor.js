@@ -10,15 +10,11 @@ const style = {
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
-  const [currentTouchState, setCurrentTouchState] = useState(undefined);
+  const [currentTouchState, setCurrentTouchState] = useState(false);
 
   const handleTouchStart = e => {
     const key = e.target.getAttribute("name");
     if (!key) return;
-    const firstTouchedElementIsVisible = e.target.getAttribute("data-visible");
-    if (firstTouchedElementIsVisible === "false") {
-      setCurrentTouchState(true);
-    }
     toggleElement(key, currentTouchState);
   };
 
@@ -29,9 +25,8 @@ const Editor = ({ content, toggleElement }) => {
     const movedIntoElement = document.elementFromPoint(clientX, clientY);
     if (movedIntoElement) {
       const key = movedIntoElement.getAttribute("name");
-      console.log("tm", movedIntoElement.innerText, currentTouchState);
       if (key) {
-        toggleElement(key, false);
+        toggleElement(key, currentTouchState);
       }
     }
   };
