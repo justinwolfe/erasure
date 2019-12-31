@@ -6,7 +6,7 @@ const style = {
   top: 0
 }
 
-const Controls = ({ currentTouchType, handleTouchTypeChange }) => {
+const Controls = ({ currentTouchType, handleTouchTypeChange, handleScreenshot }) => {
   return (
     <div style={style}>
       <button
@@ -22,7 +22,7 @@ const Controls = ({ currentTouchType, handleTouchTypeChange }) => {
         ◻️
       </button>
       <button
-        onClick={}>
+        onClick={handleScreenshot}>
         📸
       </button>
     </div>
