@@ -22,7 +22,6 @@ const Editor = ({ content, toggleElement }) => {
   };
 
   const handleTouchStart = e => {
-    e.preventDefault();
     const key = e.target.getAttribute("name");
     if (!key) return;
     if (keyCache.current.has(key)) return;
@@ -31,7 +30,6 @@ const Editor = ({ content, toggleElement }) => {
   };
 
   const handleTouchMove = e => {
-    e.preventDefault();
     const { clientX, clientY } = e.changedTouches[0];
     const movedIntoElement = document.elementFromPoint(clientX, clientY);
     if (movedIntoElement) {
@@ -46,10 +44,10 @@ const Editor = ({ content, toggleElement }) => {
   const debouncedMove = e => debounce(handleTouchMove(e), 300);
 
   const handleScreenshot = () => {
+    console.log("screenshot")
     html2canvas(document.querySelector("#content")).then(canvas => {
-      const url = canvas.toDataUrl();
+      const url = canvas.toDataURL();
       console.log(url);
-      //document.body.appendChild(canvas);
     });
   };
 
@@ -62,7 +60,7 @@ const Editor = ({ content, toggleElement }) => {
       <Controls
         currentTouchType={currentTouchType}
         handleTouchTypeChange={handleTouchTypeChange}
-        screenshot={handleScreenshot}
+        handleScreenshot={handleScreenshot}
       />
       <div id="content">
         {paragraphs &&
