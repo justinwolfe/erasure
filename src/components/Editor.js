@@ -10,12 +10,15 @@ const style = {
   userSelect: "none"
 };
 
-const keyCache = new Set();
-
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
-  const [currentTouchState, setCurrentTouchState] = useState(false);
+  const [currentTouchType, setCurrentTouchType] = useState(false);
   const keyCache = useRef(new Set())
+  
+  const handleTouchTypeChange = (val) => {
+    keyCache.current.clear();
+    setCurrentTouchType(val)
+  }
 
   const handleTouchStart = e => {
     e.preventDefault()
@@ -24,29 +27,25 @@ const Editor = ({ content, toggleElement }) => {
     if (keyCache.current.has(key)) return;
     keyCache.current.add(key)
     console.log(keyCache.current)
-    toggleElement(key, currentTouchState);
+    toggleElement(key, currentTouchType);
   };
-
-  const handleTouchEnd = e => {};
-  
-  let counter = 0
 
   const handleTouchMove = e => {
     e.preventDefault()
-    counter++
-    console.log(counter);
     const { clientX, clientY } = e.changedTouches[0];
     const movedIntoElement = document.elementFromPoint(clientX, clientY);
     if (movedIntoElement) {
       const key = movedIntoElement.getAttribute("name");
       if (key && !keyCache.current.has(key)) {
-        toggleElement(key, currentTouchState);
+        toggleElement(key, currentTouchType);
         keyCache.current.add(key)
       }
     }
   };
+  
+  const handleTouchEnd = e => {};
 
-  const debouncedMove = e => debounce(handleTouchMove(e), 500);
+  const debouncedMove = e => debounce(handleTouchMove(e), 300);
 
   return (
     <div
@@ -55,8 +54,8 @@ const Editor = ({ content, toggleElement }) => {
       onTouchMove={debouncedMove}
     >
       <Controls
-        currentTouchState={currentTouchState}
-        setCurrentTouchState={setCurrentTouchState}
+        currentTouchType={currentTouchType}
+        handleTouchTypeChange={handleTouchTypeChange}
       />
       {paragraphs &&
         paragraphs.map(paragraph => (

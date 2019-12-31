@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-const Controls = ({ currentTouchState, setCurrentTouchState }) => {
+const Controls = ({ currentTouchType, handleTouchTypeChange }) => {
   return (
     <div>
       <button
-        style={currentTouchState ? { border: "1px solid red" } : {}}
-        onClick={() => setCurrentTouchState(true)}
+        style={currentTouchType ? { border: "1px solid red" } : {}}
+        onClick={() => handleTouchTypeChange(true)}
       >
         ◼️
       </button>
       <button
-        style={!currentTouchState ? { border: "1px solid red" } : {}}
-        onClick={() => setCurrentTouchState(false)}
+        style={!currentTouchType ? { border: "1px solid red" } : {}}
+        onClick={() => handleTouchTypeChange(false)}
       >
         ◻️
       </button>
