@@ -14,6 +14,7 @@ const style = {
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
   const [currentTouchType, setCurrentTouchType] = useState(false);
+  const [screenshotLink, setScreenshotLink] = useState(undefined)
   const keyCache = useRef(new Set());
 
   const handleTouchTypeChange = val => {
@@ -48,6 +49,7 @@ const Editor = ({ content, toggleElement }) => {
     html2canvas(document.querySelector("#content")).then(canvas => {
       const url = canvas.toDataURL();
       console.log(url);
+      setScreenshotLink(url)
     });
   };
 
@@ -61,6 +63,7 @@ const Editor = ({ content, toggleElement }) => {
         currentTouchType={currentTouchType}
         handleTouchTypeChange={handleTouchTypeChange}
         handleScreenshot={handleScreenshot}
+        screenshotLink={screenshotLink}
       />
       <div id="content">
         {paragraphs &&

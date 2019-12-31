@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 const style = {
-  position:'sticky',
-  backgroundColor: 'gray',
+  position: "sticky",
+  backgroundColor: "gray",
   top: 0
-}
+};
 
-const Controls = ({ currentTouchType, handleTouchTypeChange, handleScreenshot }) => {
+const Controls = ({
+  currentTouchType,
+  handleTouchTypeChange,
+  handleScreenshot,
+  screenshotLink
+}) => {
   return (
     <div style={style}>
       <button
@@ -21,10 +26,8 @@ const Controls = ({ currentTouchType, handleTouchTypeChange, handleScreenshot })
       >
         ◻️
       </button>
-      <button
-        onClick={handleScreenshot}>
-        📸
-      </button>
+      <button onClick={handleScreenshot}>📸</button>
+      {screenshotLink && <a href={screenshotLink}>📁</a>}
     </div>
   );
 };
