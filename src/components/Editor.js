@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
 import debounce from "just-debounce";
@@ -10,17 +10,20 @@ const style = {
   userSelect: "none"
 };
 
-const keyCache= []
+const keyCache = new Set();
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
   const [currentTouchState, setCurrentTouchState] = useState(false);
+  const keyCache = useRef(new Set())
 
   const handleTouchStart = e => {
     e.preventDefault()
     const key = e.target.getAttribute("name");
     if (!key) return;
-    ke
+    if (keyCache.current.has(key)) return;
+    keyCache.current.add(key)
+    console.log(keyCache.current)
     toggleElement(key, currentTouchState);
   };
 
@@ -36,8 +39,9 @@ const Editor = ({ content, toggleElement }) => {
     const movedIntoElement = document.elementFromPoint(clientX, clientY);
     if (movedIntoElement) {
       const key = movedIntoElement.getAttribute("name");
-      if (key) {
+      if (key && !keyCache.current.has(key)) {
         toggleElement(key, currentTouchState);
+        keyCache.current.add(key)
       }
     }
   };
