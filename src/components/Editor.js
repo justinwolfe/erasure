@@ -26,7 +26,6 @@ const Editor = ({ content, toggleElement }) => {
     if (!key) return;
     if (keyCache.current.has(key)) return;
     keyCache.current.add(key)
-    console.log(keyCache.current)
     toggleElement(key, currentTouchType);
   };
 
@@ -42,8 +41,6 @@ const Editor = ({ content, toggleElement }) => {
       }
     }
   };
-  
-  const handleTouchEnd = e => {};
 
   const debouncedMove = e => debounce(handleTouchMove(e), 300);
 

@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 
+const style = {
+  position:'sticky',
+  backgroundColor: 'gray',
+  top: 0
+}
+
 const Controls = ({ currentTouchType, handleTouchTypeChange }) => {
   return (
-    <div>
+    <div style={style}>
       <button
         style={currentTouchType ? { border: "1px solid red" } : {}}
         onClick={() => handleTouchTypeChange(true)}
@@ -14,6 +20,10 @@ const Controls = ({ currentTouchType, handleTouchTypeChange }) => {
         onClick={() => handleTouchTypeChange(false)}
       >
         ◻️
+      </button>
+      <button
+        onClick={}>
+        📸
       </button>
     </div>
   );
