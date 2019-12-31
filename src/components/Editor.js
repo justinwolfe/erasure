@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
 import debounce from "just-debounce";
-//import html2canvas from "html2canvas";
+import html2canvas from "html2canvas";
 
 const style = {
   textAlign: "left",
@@ -46,11 +46,11 @@ const Editor = ({ content, toggleElement }) => {
   const debouncedMove = e => debounce(handleTouchMove(e), 300);
 
   const handleScreenshot = () => {
-    /*html2canvas(document.querySelector("#content")).then(canvas => {
+    html2canvas(document.querySelector("#content")).then(canvas => {
       const url = canvas.toDataUrl();
       console.log(url);
       //document.body.appendChild(canvas);
-    });*/
+    });
   };
 
   return (
