@@ -24,12 +24,8 @@ const App = () => {
 
   return (
     <div style={{ margin: "10%" }} className="App">
-      {(!content && (
-        <Splash setContent={setContent} setCurrentError={setCurrentError} />
-      )) ||
-        (content && (
-          <Editor content={content} toggleElement={toggleElement} />
-        )) || <div>default</div>}
+      <Splash setContent={setContent} setCurrentError={setCurrentError} />
+      {content && <Editor content={content} toggleElement={toggleElement} />}
     </div>
   );
 };
