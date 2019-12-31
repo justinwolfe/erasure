@@ -48,3 +48,17 @@ export const getContentFromUrl = url =>
         reject(JSON.stringify(err));
       });
   });
+
+export const toggleElement = (id, value, content, setContent) => {
+  const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
+  const newContent = { ...content };
+  const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
+  if (word) {
+    if (value === false || value === true) {
+      word.isVisible = value;
+    } else {
+      word.isVisible = !word.isVisible;
+    }
+  }
+  setContent(newContent);
+};

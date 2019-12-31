@@ -10,6 +10,8 @@ const style = {
   userSelect: "none"
 };
 
+const keyCache= []
+
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
   const [currentTouchState, setCurrentTouchState] = useState(false);
@@ -18,6 +20,7 @@ const Editor = ({ content, toggleElement }) => {
     e.preventDefault()
     const key = e.target.getAttribute("name");
     if (!key) return;
+    ke
     toggleElement(key, currentTouchState);
   };
 
