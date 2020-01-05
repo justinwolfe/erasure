@@ -14,7 +14,7 @@ const style = {
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
   const [currentTouchType, setCurrentTouchType] = useState(false);
-  const [screenshotLink, setScreenshotLink] = useState(undefined)
+  const [screenshotLink, setScreenshotLink] = useState(undefined);
   const keyCache = useRef(new Set());
 
   const handleTouchTypeChange = val => {
@@ -45,11 +45,13 @@ const Editor = ({ content, toggleElement }) => {
   const debouncedMove = e => debounce(handleTouchMove(e), 300);
 
   const handleScreenshot = () => {
-    console.log("screenshot")
-    html2canvas(document.querySelector("#content")).then(canvas => {
+    html2canvas(document.querySelector("#content"), {
+      height: document.body.scrollHeight,
+      windowHeight: document.body.scrollHeight
+    }).then(canvas => {
       const url = canvas.toDataURL();
       console.log(url);
-      setScreenshotLink(url)
+      setScreenshotLink(url);
     });
   };
 
