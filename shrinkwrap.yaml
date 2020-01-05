@@ -1,5 +1,6 @@
 dependencies:
   '@postlight/mercury-parser': 2.2.0
+  dom-to-image: 2.6.0
   html2canvas: 1.0.0-rc.5
   just-debounce: 1.0.0
   react: 16.8.6
@@ -4166,6 +4167,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-2/xPb3ORsQ42nHYiSunXkDjPLBaEj/xTwUO4B7XCZQTRk7EBtTOPaygh10YAAh2OI1Qrp6NWfpAhzswj0ydt9g==
+  /dom-to-image/2.6.0:
+    dev: false
+    resolution:
+      integrity: sha1-ilA2CAiMh7HCL5A0rgMuGJiVWGc=
   /domain-browser/1.2.0:
     dev: false
     engines:
@@ -11663,6 +11668,7 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   '@postlight/mercury-parser': ^2.2.0
+  dom-to-image: ^2.6.0
   html2canvas: 1.0.0-rc.5
   just-debounce: ^1.0.0
   react: ^16.8.6

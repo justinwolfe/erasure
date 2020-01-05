@@ -3,6 +3,7 @@ import Word from "./Word";
 import Controls from "./Controls";
 import debounce from "just-debounce";
 import html2canvas from "html2canvas";
+import domtoimage from 'dom-to-image';
 
 const style = {
   textAlign: "left",
@@ -45,14 +46,18 @@ const Editor = ({ content, toggleElement }) => {
   const debouncedMove = e => debounce(handleTouchMove(e), 300);
 
   const handleScreenshot = () => {
-    html2canvas(document.querySelector("#content"), {
+    domtoimage.toPng(document.querySelector("#content"))
+    .then((dataUrl) => {
+        setScreenshotLink(dataUrl);
+    })
+    /*html2canvas(document.querySelector("#content"), {
       height: document.body.scrollHeight,
       windowHeight: document.body.scrollHeight
     }).then(canvas => {
       const url = canvas.toDataURL();
       console.log(url);
       setScreenshotLink(url);
-    });
+    });*/
   };
 
   return (
