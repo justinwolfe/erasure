@@ -47,29 +47,10 @@ const Editor = ({ content, toggleElement }) => {
   const debouncedMove = e => debounce(handleTouchMove(e), 300);
 
   const handleScreenshot = () => {
-    /*domtoimage.toPng(document.querySelector("#content"))
-    .then((dataUrl) => {
-        setScreenshotLink(dataUrl);
-    })*/
     domtoimage.toBlob(document.querySelector("#content"))
     .then(function (blob) {
         window.saveAs(blob, 'my-node.png');
     });
-    /*domtoimage.toJpeg(document.querySelector("#content"), { quality: 0.95 })
-    .then(function (dataUrl) {
-        var link = document.createElement('a');
-        link.download = 'my-image-name.jpeg';
-        link.href = dataUrl;
-        link.click();
-    });*/
-    /*html2canvas(document.querySelector("#content"), {
-      height: document.body.scrollHeight,
-      windowHeight: document.body.scrollHeight
-    }).then(canvas => {
-      const url = canvas.toDataURL();
-      console.log(url);
-      setScreenshotLink(url);
-    });*/
   };
 
   return (
