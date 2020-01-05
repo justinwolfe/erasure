@@ -46,10 +46,14 @@ const Editor = ({ content, toggleElement }) => {
   const debouncedMove = e => debounce(handleTouchMove(e), 300);
 
   const handleScreenshot = () => {
-    domtoimage.toPng(document.querySelector("#content"))
+    /*domtoimage.toPng(document.querySelector("#content"))
     .then((dataUrl) => {
         setScreenshotLink(dataUrl);
-    })
+    })*/
+    domtoimage.toBlob(document.querySelector("#content"))
+    .then(function (blob) {
+        window.saveAs(blob, 'my-node.png');
+    });
     /*html2canvas(document.querySelector("#content"), {
       height: document.body.scrollHeight,
       windowHeight: document.body.scrollHeight
