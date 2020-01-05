@@ -4,6 +4,7 @@ import Controls from "./Controls";
 import debounce from "just-debounce";
 import html2canvas from "html2canvas";
 import domtoimage from 'dom-to-image';
+import {saveAs} from 'file-saver'
 
 const style = {
   textAlign: "left",
@@ -54,6 +55,13 @@ const Editor = ({ content, toggleElement }) => {
     .then(function (blob) {
         window.saveAs(blob, 'my-node.png');
     });
+    /*domtoimage.toJpeg(document.querySelector("#content"), { quality: 0.95 })
+    .then(function (dataUrl) {
+        var link = document.createElement('a');
+        link.download = 'my-image-name.jpeg';
+        link.href = dataUrl;
+        link.click();
+    });*/
     /*html2canvas(document.querySelector("#content"), {
       height: document.body.scrollHeight,
       windowHeight: document.body.scrollHeight
