@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
 import debounce from "just-debounce";
-import html2canvas from "html2canvas";
 import domtoimage from 'dom-to-image';
 import {saveAs} from 'file-saver'
 
