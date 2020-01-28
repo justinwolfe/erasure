@@ -4,19 +4,20 @@ import Controls from "./Controls";
 import debounce from "just-debounce";
 import { handleScreenshot } from "../utils";
 
-const initialStyle = {
+const editorStyle = {
   textAlign: "left",
   wordWrap: "break-word",
   cursor: "pointer",
   userSelect: "none"
 };
 
+const contentStyle = { backgroundColor: "white", padding: "10%" };
+
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
   const [currentTouchType, setCurrentTouchType] = useState(false);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
   const [mouseDown, setMouseDown] = useState(false);
-  const [style, setStyle] = useState(initialStyle)
   const keyCache = useRef(new Set());
 
   const handleTouchTypeChange = val => {
@@ -56,7 +57,7 @@ const Editor = ({ content, toggleElement }) => {
 
   return (
     <div
-      style={style}
+      style={editorStyle}
       onTouchStart={handleStart}
       onTouchMove={debouncedMove}
       onMouseDown={handleStart}
@@ -69,7 +70,7 @@ const Editor = ({ content, toggleElement }) => {
         handleScreenshot={handleScreenshot}
         screenshotLink={screenshotLink}
       />
-      <div id="content">
+      <div id="content" style={contentStyle}>
         {paragraphs &&
           paragraphs.map(paragraph => (
             <p className="paragraph" key={paragraph.id} name={paragraph.id}>
