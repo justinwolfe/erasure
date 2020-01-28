@@ -43,8 +43,26 @@ const Editor = ({ content, toggleElement }) => {
     }
   };
   
+  const handleMouseMove = e => {
+    const { clientX, clientY } = e
+    const movedIntoElement = document.elementFromPoint(clientX, clientY);
+    if (movedIntoElement) {
+      const key = movedIntoElement.getAttribute("name");
+      if (key && !keyCache.current.has(key)) {
+        toggleElement(key, currentTouchType);
+        keyCache.current.add(key);
+      }
+    }
+  }
+  
   const handleMove = e => {
     console.log(e)
+    if(e.nativeEvent.type === "mousemove"){
+      handleMouseMove(e)
+    }
+    if(e.nativeEvent.type === "touchmove"){
+      handleTouchMove(e)
+    }
   }
 
   const debouncedMove = e => debounce(handleMove(e), 300);
