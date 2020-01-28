@@ -4,9 +4,14 @@ import Editor from "./components/Editor.js";
 
 import "./App.css";
 
+const initialStyle = {
+  margin: "10%",
+};
+
 const App = () => {
   const [content, setContent] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
+  const [style, setStyle] = useState(initialStyle);
 
   const toggleElement = (id, value) => {
     const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
@@ -23,7 +28,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ margin: "10%" }} className="App">
+    <div style={style} className="App">
       <Splash setContent={setContent} setCurrentError={setCurrentError} />
       {content && <Editor content={content} toggleElement={toggleElement} />}
     </div>

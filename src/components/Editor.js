@@ -4,7 +4,7 @@ import Controls from "./Controls";
 import debounce from "just-debounce";
 import { handleScreenshot } from "../utils";
 
-const style = {
+const initialStyle = {
   textAlign: "left",
   wordWrap: "break-word",
   cursor: "pointer",
@@ -16,6 +16,7 @@ const Editor = ({ content, toggleElement }) => {
   const [currentTouchType, setCurrentTouchType] = useState(false);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
   const [mouseDown, setMouseDown] = useState(false);
+  const [style, setStyle] = useState(initialStyle)
   const keyCache = useRef(new Set());
 
   const handleTouchTypeChange = val => {
@@ -30,10 +31,6 @@ const Editor = ({ content, toggleElement }) => {
     toggleElement(key, currentTouchType);
   };
 
-  const handleTouchStart = e => {
-    cacheAndToggle(e.target)
-  };
-
   const handleMove = e => {
     const { clientX, clientY } =
       e.nativeEvent.type === "mousemove" ? e : e.changedTouches[0];
@@ -43,21 +40,17 @@ const Editor = ({ content, toggleElement }) => {
     ) {
       const movedIntoElement = document.elementFromPoint(clientX, clientY);
       if (movedIntoElement) {
-        cacheAndToggle(movedIntoElement)
+        cacheAndToggle(movedIntoElement);
       }
     }
   };
 
   const handleStart = e => {
-    if (e.nativeEvent.type === "mousedown") {
-      setMouseDown(true);
-    }
-    cacheAndToggle(e.target)
+    if (e.nativeEvent.type === "mousedown") setMouseDown(true);
+    cacheAndToggle(e.target);
   };
 
-  const handleStop = e => {
-    setMouseDown(false);
-  };
+  const handleStop = e => setMouseDown(false);
 
   const debouncedMove = e => debounce(handleMove(e), 200);
 
