@@ -42,8 +42,12 @@ const Editor = ({ content, toggleElement }) => {
       }
     }
   };
+  
+  const handleMove = e => {
+    console.log(e)
+  }
 
-  const debouncedMove = e => debounce(handleTouchMove(e), 300);
+  const debouncedMove = e => debounce(handleMove(e), 300);
 
   const handleScreenshot = () => {
     domtoimage.toBlob(document.querySelector("#content"))
