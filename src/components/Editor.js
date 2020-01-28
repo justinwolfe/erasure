@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
 import debounce from "just-debounce";
-import {handleScreenshot} from '../utils'
+import { handleScreenshot } from "../utils";
 
 const style = {
   textAlign: "left",
@@ -15,7 +15,7 @@ const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
   const [currentTouchType, setCurrentTouchType] = useState(false);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
-  const [mouseState, setMouseState] = useState(0)
+  const [mouseDown, setMouseDown] = useState(false);
   const keyCache = useRef(new Set());
 
   const handleTouchTypeChange = val => {
@@ -42,43 +42,44 @@ const Editor = ({ content, toggleElement }) => {
       }
     }
   };
-  
+
   const handleMouseMove = e => {
-    const { clientX, clientY } = e
-    const movedIntoElement = document.elementFromPoint(clientX, clientY);
-    if (movedIntoElement) {
-      const key = movedIntoElement.getAttribute("name");
-      if (key && !keyCache.current.has(key)) {
-        toggleElement(key, currentTouchType);
-        keyCache.current.add(key);
+    const { clientX, clientY } = e;
+  };
+
+  const handleMove = e => {
+    const { clientX, clientY } =
+      e.nativeEvent.type === "mousemove" ? e : e.changedTouches[0];
+    if (
+      (e.nativeEvent.type === "mousemove" && mouseDown) ||
+      e.nativeEvent.type === "touchmove"
+    ) {
+      const movedIntoElement = document.elementFromPoint(clientX, clientY);
+      if (movedIntoElement) {
+        const key = movedIntoElement.getAttribute("name");
+        if (key && !keyCache.current.has(key)) {
+          toggleElement(key, currentTouchType);
+          keyCache.current.add(key);
+        }
       }
     }
-  }
-  
-  const handleMove = e => {
-    if(e.nativeEvent.type === "mousemove" && mouseState){
-      handleMouseMove(e)
-    }
-    if(e.nativeEvent.type === "touchmove"){
-      handleTouchMove(e)
-    }
-  }
-  
-  const handleStart = e => {
-    if(e.nativeEvent.type === "mousedown"){
-      handleMouseMove(e)
-      setMouseState(1)
-    }
-    if(e.nativeEvent.type === "touchstart"){
-      handleTouchMove(e)
-    }
-  }
-  
-  const handleStop = e => {
-    setMouseState(0);
-  }
+  };
 
-  const debouncedMove = e => debounce(handleMove(e), 300);
+  const handleStart = e => {
+    if (e.nativeEvent.type === "mousedown") {
+      handleMouseMove(e);
+      setMouseDown(true);
+    }
+    if (e.nativeEvent.type === "touchstart") {
+      handleTouchMove(e);
+    }
+  };
+
+  const handleStop = e => {
+    setMouseDown(false);
+  };
+
+  const debouncedMove = e => debounce(handleMove(e), 200);
 
   return (
     <div
