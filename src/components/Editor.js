@@ -31,22 +31,6 @@ const Editor = ({ content, toggleElement }) => {
     toggleElement(key, currentTouchType);
   };
 
-  const handleTouchMove = e => {
-    const { clientX, clientY } = e.changedTouches[0];
-    const movedIntoElement = document.elementFromPoint(clientX, clientY);
-    if (movedIntoElement) {
-      const key = movedIntoElement.getAttribute("name");
-      if (key && !keyCache.current.has(key)) {
-        toggleElement(key, currentTouchType);
-        keyCache.current.add(key);
-      }
-    }
-  };
-
-  const handleMouseMove = e => {
-    const { clientX, clientY } = e;
-  };
-
   const handleMove = e => {
     const { clientX, clientY } =
       e.nativeEvent.type === "mousemove" ? e : e.changedTouches[0];
@@ -67,11 +51,7 @@ const Editor = ({ content, toggleElement }) => {
 
   const handleStart = e => {
     if (e.nativeEvent.type === "mousedown") {
-      handleMouseMove(e);
       setMouseDown(true);
-    }
-    if (e.nativeEvent.type === "touchstart") {
-      handleTouchMove(e);
     }
   };
 
