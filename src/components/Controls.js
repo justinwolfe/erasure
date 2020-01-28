@@ -15,16 +15,9 @@ const Controls = ({
   return (
     <div style={style}>
       <button
-        style={currentTouchType ? { border: "1px solid red" } : {}}
-        onClick={() => handleTouchTypeChange(true)}
+        onClick={() => handleTouchTypeChange(!currentTouchType)}
       >
-        ◼️
-      </button>
-      <button
-        style={!currentTouchType ? { border: "1px solid red" } : {}}
-        onClick={() => handleTouchTypeChange(false)}
-      >
-        ◻️
+        {currentTouchType ? '◼️' : '◻️'}
       </button>
       <button onClick={handleScreenshot}>📸</button>
       {screenshotLink && <a href={screenshotLink}>📁</a>}
