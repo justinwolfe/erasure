@@ -23,12 +23,15 @@ const Editor = ({ content, toggleElement }) => {
     setCurrentTouchType(val);
   };
 
-  const handleTouchStart = e => {
-    const key = e.target.getAttribute("name");
-    if (!key) return;
-    if (keyCache.current.has(key)) return;
+  const cacheAndToggle = node => {
+    const key = node.getAttribute("name");
+    if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
     toggleElement(key, currentTouchType);
+  };
+
+  const handleTouchStart = e => {
+    cacheAndToggle(e.target)
   };
 
   const handleMove = e => {
@@ -40,11 +43,7 @@ const Editor = ({ content, toggleElement }) => {
     ) {
       const movedIntoElement = document.elementFromPoint(clientX, clientY);
       if (movedIntoElement) {
-        const key = movedIntoElement.getAttribute("name");
-        if (key && !keyCache.current.has(key)) {
-          toggleElement(key, currentTouchType);
-          keyCache.current.add(key);
-        }
+        cacheAndToggle(movedIntoElement)
       }
     }
   };
@@ -53,6 +52,7 @@ const Editor = ({ content, toggleElement }) => {
     if (e.nativeEvent.type === "mousedown") {
       setMouseDown(true);
     }
+    cacheAndToggle(e.target)
   };
 
   const handleStop = e => {
