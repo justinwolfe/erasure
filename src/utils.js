@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Mercury from "@postlight/mercury-parser";
 import remove from "remove-markdown";
+import domtoimage from "dom-to-image";
+import { saveAs } from "file-saver";
 
 const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
 
@@ -61,4 +63,10 @@ export const toggleElement = (id, value, content, setContent) => {
     }
   }
   setContent(newContent);
+};
+
+export const handleScreenshot = () => {
+  domtoimage.toBlob(document.querySelector("#content")).then(function(blob) {
+    window.saveAs(blob, "my-node.png");
+  });
 };

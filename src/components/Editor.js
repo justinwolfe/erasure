@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
 import debounce from "just-debounce";
-import domtoimage from 'dom-to-image';
-import {saveAs} from 'file-saver'
+import {handleScreenshot} from '../utils'
 
 const style = {
   textAlign: "left",
@@ -16,6 +15,7 @@ const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
   const [currentTouchType, setCurrentTouchType] = useState(false);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
+  const [mouseState, setMouseState] = useState(0)
   const keyCache = useRef(new Set());
 
   const handleTouchTypeChange = val => {
@@ -56,31 +56,38 @@ const Editor = ({ content, toggleElement }) => {
   }
   
   const handleMove = e => {
-    console.log(e)
-    if(e.nativeEvent.type === "mousemove"){
+    if(e.nativeEvent.type === "mousemove" && mouseState){
       handleMouseMove(e)
     }
     if(e.nativeEvent.type === "touchmove"){
       handleTouchMove(e)
     }
   }
+  
+  const handleStart = e => {
+    if(e.nativeEvent.type === "mousedown"){
+      handleMouseMove(e)
+      setMouseState(1)
+    }
+    if(e.nativeEvent.type === "touchstart"){
+      handleTouchMove(e)
+    }
+  }
+  
+  const handleStop = e => {
+    setMouseState(0);
+  }
 
   const debouncedMove = e => debounce(handleMove(e), 300);
-
-  const handleScreenshot = () => {
-    domtoimage.toBlob(document.querySelector("#content"))
-    .then(function (blob) {
-        window.saveAs(blob, 'my-node.png');
-    });
-  };
 
   return (
     <div
       style={style}
-      onTouchStart={handleTouchStart}
+      onTouchStart={handleStart}
       onTouchMove={debouncedMove}
-      onMouseDown={handleTouchStart}
+      onMouseDown={handleStart}
       onMouseMove={debouncedMove}
+      onMouseUp={handleStop}
     >
       <Controls
         currentTouchType={currentTouchType}
