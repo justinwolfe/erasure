@@ -57,6 +57,8 @@ const Editor = ({ content, toggleElement }) => {
       style={style}
       onTouchStart={handleTouchStart}
       onTouchMove={debouncedMove}
+      onMouseDown={handleTouchStart}
+      onMouseMove={debouncedMove}
     >
       <Controls
         currentTouchType={currentTouchType}
