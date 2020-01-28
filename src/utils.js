@@ -17,8 +17,8 @@ const convertToState = document =>
       isVisible: true,
       id: `${paragraphIndex}-${wordIndex}`
     })),
-    isVisible: true,
-    id: `${paragraphIndex}`
+    id: `${paragraphIndex}`,
+    isVisible: true
   }));
 
 export const getContentFromUrl = url =>
@@ -30,16 +30,21 @@ export const getContentFromUrl = url =>
           html: htmlString,
           contentType: "markdown"
         }).then(result => {
+          console.log(result);
           if (result.content) {
-            const cleaned = remove(result.content)
+            let cleanedContent = remove(result.content)
               .replace(/[\[\]\(\)]/gm, "")
               .replace(
                 /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm,
                 ""
               )
               .replace(/\n\s*\n/g, "\n\n");
-            console.log(convertToState(cleaned));
-            const converted = convertToState(cleaned);
+            if (result.title) {
+              cleanedContent = `${result.title}
+
+${cleanedContent}`;
+            }
+            const converted = convertToState(cleanedContent);
             resolve(converted);
           } else {
             reject(JSON.stringify(result));
