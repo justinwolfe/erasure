@@ -10,21 +10,39 @@ const Controls = ({
   markType,
   handleMarkTypeChange,
   handleScreenshot,
-  screenshotLink
+  screenshotLink,
+  textStyle,
+  handleTextStyleChange
 }) => {
   return (
     <div>
       <div>
-        <button onClick={() => {
-            
-          }}>+</button>
-        <button onClick={() => {
-            
-          }}>-</button>
+        <button
+          onClick={() =>
+            handleTextStyleChange(
+              "global",
+              "fontSize",
+              textStyle.global.fontSize + 3
+            )
+          }
+        >
+          +
+        </button>
+        <button
+          onClick={() =>
+            handleTextStyleChange(
+              "global",
+              "fontSize",
+              textStyle.global.fontSize - 3
+            )
+          }
+        >
+          -
+        </button>
       </div>
       <div style={style}>
         <button onClick={() => handleMarkTypeChange(!markType)}>
-          {markType ?  "◻️" : "◼️"}
+          {markType ? "◻️" : "◼️"}
         </button>
         <button onClick={handleScreenshot}>📸</button>
         {screenshotLink && <a href={screenshotLink}>📁</a>}

@@ -13,7 +13,7 @@ const editorStyle = {
 
 const initialTextStyle = {
   global: {
-    fontSize: "50"
+    fontSize: 12
   },
   marked: {
     opacity: "10%"
@@ -33,8 +33,10 @@ const Editor = ({ content, toggleElement }) => {
   const [textStyle, setTextStyle] = useState(initialTextStyle);
   const keyCache = useRef(new Set());
 
-  const handleTextStyleChange = (k, v) => {
-    setTextStyle({ ...textStyle, [k]: v });
+  const handleTextStyleChange = (parentKey, propertyKey, value) => {
+    const newStyle = {...textStyle}
+    newStyle[parentKey][propertyKey] = value
+    setTextStyle(newStyle)
   };
 
   const handleMarkTypeChange = val => {
@@ -88,6 +90,7 @@ const Editor = ({ content, toggleElement }) => {
         handleScreenshot={handleScreenshot}
         screenshotLink={screenshotLink}
         handleTextStyleChange={handleTextStyleChange}
+        textStyle={textStyle}
       />
       <div id="content" style={contentStyle}>
         {paragraphs &&
