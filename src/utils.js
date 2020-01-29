@@ -12,13 +12,13 @@ const convertToState = document =>
       characters: word.split("").map((character, characterIndex) => ({
         character,
         id: `${paragraphIndex}-${wordIndex}-${characterIndex}`,
-        isVisible: true
+        isMarked: false
       })),
-      isVisible: true,
+      isMarked: false,
       id: `${paragraphIndex}-${wordIndex}`
     })),
     id: `${paragraphIndex}`,
-    isVisible: true
+    isMarked: false,
   }));
 
 export const getContentFromUrl = url =>
@@ -62,9 +62,9 @@ export const toggleElement = (id, value, content, setContent) => {
   const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
   if (word) {
     if (value === false || value === true) {
-      word.isVisible = value;
+      word.isMarked = value;
     } else {
-      word.isVisible = !word.isVisible;
+      word.isMarked = !word.isMarked;
     }
   }
   setContent(newContent);

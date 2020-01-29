@@ -15,22 +15,26 @@ const contentStyle = { backgroundColor: "white", padding: "10%" };
 
 const Editor = ({ content, toggleElement }) => {
   const { paragraphs, url, created } = content;
-  const [currentTouchType, setCurrentTouchType] = useState(false);
+  const [markType, setMarkType] = useState(true);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
   const [mouseDown, setMouseDown] = useState(false);
-  const [wordStyle, setWordStyle] = useState({})
+  const [wordStyle, setWordStyle] = useState({});
   const keyCache = useRef(new Set());
+  
+  const handleWordStyleChange = (k, v) => {
+    setWordStyle({...wordStyle, [k]:v})
+  }
 
-  const handleTouchTypeChange = val => {
+  const handleMarkTypeChange = val => {
     keyCache.current.clear();
-    setCurrentTouchType(val);
+    setMarkType(val);
   };
 
   const cacheAndToggle = node => {
     const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
-    toggleElement(key, currentTouchType);
+    toggleElement(key, markType);
   };
 
   const handleMove = e => {
@@ -64,11 +68,11 @@ const Editor = ({ content, toggleElement }) => {
       onMouseDown={handleStart}
       onMouseMove={debouncedMove}
       onMouseUp={handleStop}
-      onDoubleClick={(e) => alert('dblClick')}
+      onDoubleClick={e => alert("dblClick")}
     >
       <Controls
-        currentTouchType={currentTouchType}
-        handleTouchTypeChange={handleTouchTypeChange}
+        markType={markType}
+        handleMarkTypeChange={handleMarkTypeChange}
         handleScreenshot={handleScreenshot}
         screenshotLink={screenshotLink}
       />

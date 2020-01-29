@@ -7,8 +7,8 @@ const style = {
 };
 
 const Controls = ({
-  currentTouchType,
-  handleTouchTypeChange,
+  markType,
+  handleMarkTypeChange,
   handleScreenshot,
   screenshotLink
 }) => {
@@ -23,8 +23,8 @@ const Controls = ({
           }}>-</button>
       </div>
       <div style={style}>
-        <button onClick={() => handleTouchTypeChange(!currentTouchType)}>
-          {currentTouchType ? "◼️" : "◻️"}
+        <button onClick={() => handleMarkTypeChange(!markType)}>
+          {markType ?  "◻️" : "◼️"}
         </button>
         <button onClick={handleScreenshot}>📸</button>
         {screenshotLink && <a href={screenshotLink}>📁</a>}
