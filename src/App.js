@@ -14,9 +14,9 @@ const App = () => {
     const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
     if (word) {
       if (value === false || value === true) {
-        word.isVisible = value;
+        word.isMarked = value;
       } else {
-        word.isVisible = !word.isVisible;
+        word.isMarked = !word.isMarked;
       }
     }
     setContent(newContent);

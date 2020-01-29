@@ -13,14 +13,22 @@ const Controls = ({
   screenshotLink
 }) => {
   return (
-    <div style={style}>
-      <button
-        onClick={() => handleTouchTypeChange(!currentTouchType)}
-      >
-        {currentTouchType ? '◼️' : '◻️'}
-      </button>
-      <button onClick={handleScreenshot}>📸</button>
-      {screenshotLink && <a href={screenshotLink}>📁</a>}
+    <div>
+      <div>
+        <button onClick={() => {
+            
+          }}>+</button>
+        <button onClick={() => {
+            
+          }}>-</button>
+      </div>
+      <div style={style}>
+        <button onClick={() => handleTouchTypeChange(!currentTouchType)}>
+          {currentTouchType ? "◼️" : "◻️"}
+        </button>
+        <button onClick={handleScreenshot}>📸</button>
+        {screenshotLink && <a href={screenshotLink}>📁</a>}
+      </div>
     </div>
   );
 };

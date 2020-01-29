@@ -18,6 +18,7 @@ const Editor = ({ content, toggleElement }) => {
   const [currentTouchType, setCurrentTouchType] = useState(false);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
   const [mouseDown, setMouseDown] = useState(false);
+  const [wordStyle, setWordStyle] = useState({})
   const keyCache = useRef(new Set());
 
   const handleTouchTypeChange = val => {
@@ -63,6 +64,7 @@ const Editor = ({ content, toggleElement }) => {
       onMouseDown={handleStart}
       onMouseMove={debouncedMove}
       onMouseUp={handleStop}
+      onDoubleClick={(e) => alert('dblClick')}
     >
       <Controls
         currentTouchType={currentTouchType}
@@ -80,7 +82,7 @@ const Editor = ({ content, toggleElement }) => {
                   key={word.id}
                   id={word.id}
                   name={word.id}
-                  isVisible={word.isVisible}
+                  isMarked={word.isMarked}
                   toggleElement={toggleElement}
                 />
               ))}

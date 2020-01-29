@@ -9,14 +9,14 @@ const styles = {
   }
 };
 
-const Word = ({ characters, id, isVisible, toggleElement, name }) => {
+const Word = ({ characters, id, isMarked, toggleElement, name }) => {
   const word = characters.map(character => character.character).join("");
   return (
     <React.Fragment>
       <span
         name={id}
-        data-visible={isVisible}
-        style={isVisible ? styles.visible : styles.invisible}
+        data-marked={isMarked}
+        style={isMarked ? styles.invisible : styles.visible}
       >
         {word}
       </span>{" "}
