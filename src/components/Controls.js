@@ -10,7 +10,6 @@ const Controls = ({
   markType,
   handleMarkTypeChange,
   handleScreenshot,
-  screenshotLink,
   textStyle,
   handleTextStyleChange
 }) => {
@@ -45,7 +44,6 @@ const Controls = ({
           {markType ? "◻️" : "◼️"}
         </button>
         <button onClick={handleScreenshot}>📸</button>
-        {screenshotLink && <a href={screenshotLink}>📁</a>}
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const initialTextStyle = {
     fontSize: 15
   },
   marked: {
-    opacity: "10%"
+    opacity: "5%"
   },
   unmarked: {
     opacity: "100%"
@@ -32,6 +32,13 @@ const Editor = ({ content, toggleMark }) => {
   const [mouseDown, setMouseDown] = useState(false);
   const [textStyle, setTextStyle] = useState(initialTextStyle);
   const keyCache = useRef(new Set());
+  
+  const mark = node => {
+    const key = node.getAttribute("name");
+    if (!key || keyCache.current.has(key)) return;
+    keyCache.current.add(key);
+    toggleMark(key, markType);
+  };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {
     const newStyle = {...textStyle}
@@ -42,13 +49,6 @@ const Editor = ({ content, toggleMark }) => {
   const handleMarkTypeChange = val => {
     keyCache.current.clear();
     setMarkType(val);
-  };
-
-  const mark = node => {
-    const key = node.getAttribute("name");
-    if (!key || keyCache.current.has(key)) return;
-    keyCache.current.add(key);
-    toggleMark(key, markType);
   };
 
   const handleMove = e => {
@@ -88,7 +88,6 @@ const Editor = ({ content, toggleMark }) => {
         markType={markType}
         handleMarkTypeChange={handleMarkTypeChange}
         handleScreenshot={handleScreenshot}
-        screenshotLink={screenshotLink}
         handleTextStyleChange={handleTextStyleChange}
         textStyle={textStyle}
       />
