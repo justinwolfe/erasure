@@ -11,6 +11,18 @@ const editorStyle = {
   userSelect: "none"
 };
 
+const initialTextStyle = {
+  global: {
+    fontSize: "50"
+  },
+  marked: {
+    opacity: "10%"
+  },
+  unmarked: {
+    opacity: "100%"
+  }
+};
+
 const contentStyle = { backgroundColor: "white", padding: "10%" };
 
 const Editor = ({ content, toggleElement }) => {
@@ -18,12 +30,12 @@ const Editor = ({ content, toggleElement }) => {
   const [markType, setMarkType] = useState(true);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
   const [mouseDown, setMouseDown] = useState(false);
-  const [wordStyle, setWordStyle] = useState({});
+  const [textStyle, setTextStyle] = useState(initialTextStyle);
   const keyCache = useRef(new Set());
-  
-  const handleWordStyleChange = (k, v) => {
-    setWordStyle({...wordStyle, [k]:v})
-  }
+
+  const handleTextStyleChange = (k, v) => {
+    setTextStyle({ ...textStyle, [k]: v });
+  };
 
   const handleMarkTypeChange = val => {
     keyCache.current.clear();
@@ -75,6 +87,7 @@ const Editor = ({ content, toggleElement }) => {
         handleMarkTypeChange={handleMarkTypeChange}
         handleScreenshot={handleScreenshot}
         screenshotLink={screenshotLink}
+        handleTextStyleChange={handleTextStyleChange}
       />
       <div id="content" style={contentStyle}>
         {paragraphs &&
@@ -88,6 +101,7 @@ const Editor = ({ content, toggleElement }) => {
                   name={word.id}
                   isMarked={word.isMarked}
                   toggleElement={toggleElement}
+                  textStyle={textStyle}
                 />
               ))}
             </p>
