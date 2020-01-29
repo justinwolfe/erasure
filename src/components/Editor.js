@@ -13,7 +13,7 @@ const editorStyle = {
 
 const initialTextStyle = {
   global: {
-    fontSize: 12
+    fontSize: 15
   },
   marked: {
     opacity: "10%"
@@ -25,7 +25,7 @@ const initialTextStyle = {
 
 const contentStyle = { backgroundColor: "white", padding: "10%" };
 
-const Editor = ({ content, toggleElement }) => {
+const Editor = ({ content, toggleMark }) => {
   const { paragraphs, url, created } = content;
   const [markType, setMarkType] = useState(true);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
@@ -44,11 +44,11 @@ const Editor = ({ content, toggleElement }) => {
     setMarkType(val);
   };
 
-  const cacheAndToggle = node => {
+  const mark = node => {
     const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
-    toggleElement(key, markType);
+    toggleMark(key, markType);
   };
 
   const handleMove = e => {
@@ -60,14 +60,14 @@ const Editor = ({ content, toggleElement }) => {
     ) {
       const movedIntoElement = document.elementFromPoint(clientX, clientY);
       if (movedIntoElement) {
-        cacheAndToggle(movedIntoElement);
+        mark(movedIntoElement);
       }
     }
   };
 
   const handleStart = e => {
     if (e.nativeEvent.type === "mousedown") setMouseDown(true);
-    cacheAndToggle(e.target);
+    mark(e.target);
   };
 
   const handleStop = e => setMouseDown(false);
@@ -103,7 +103,6 @@ const Editor = ({ content, toggleElement }) => {
                   id={word.id}
                   name={word.id}
                   isMarked={word.isMarked}
-                  toggleElement={toggleElement}
                   textStyle={textStyle}
                 />
               ))}

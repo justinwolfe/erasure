@@ -8,7 +8,7 @@ const App = () => {
   const [content, setContent] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
 
-  const toggleElement = (id, value) => {
+  const toggleMark = (id, value) => {
     const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
     const newContent = { ...content };
     const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
@@ -25,7 +25,7 @@ const App = () => {
   return (
     <div className="App">
       <Splash setContent={setContent} setCurrentError={setCurrentError} />
-      {content && <Editor content={content} toggleElement={toggleElement} />}
+      {content && <Editor content={content} toggleMark={toggleMark} />}
     </div>
   );
 };
