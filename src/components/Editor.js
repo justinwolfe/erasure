@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  ReactCSSTransitionGroup
+} from "react";
 import Word from "./Word";
 import Controls from "./Controls";
 import debounce from "just-debounce";
@@ -32,7 +37,7 @@ const Editor = ({ content, toggleMark }) => {
   const [mouseDown, setMouseDown] = useState(false);
   const [textStyle, setTextStyle] = useState(initialTextStyle);
   const keyCache = useRef(new Set());
-  
+
   const mark = node => {
     const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
@@ -41,9 +46,9 @@ const Editor = ({ content, toggleMark }) => {
   };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {
-    const newStyle = {...textStyle}
-    newStyle[parentKey][propertyKey] = value
-    setTextStyle(newStyle)
+    const newStyle = { ...textStyle };
+    newStyle[parentKey][propertyKey] = value;
+    setTextStyle(newStyle);
   };
 
   const handleMarkTypeChange = val => {
@@ -92,21 +97,23 @@ const Editor = ({ content, toggleMark }) => {
         textStyle={textStyle}
       />
       <div id="content" style={contentStyle}>
-        {paragraphs &&
-          paragraphs.map(paragraph => (
-            <p className="paragraph" key={paragraph.id} name={paragraph.id}>
-              {paragraph.words.map(word => (
-                <Word
-                  characters={word.characters}
-                  key={word.id}
-                  id={word.id}
-                  name={word.id}
-                  isMarked={word.isMarked}
-                  textStyle={textStyle}
-                />
-              ))}
-            </p>
-          ))}
+        <ReactCSSTransitionGroup>
+          {paragraphs &&
+            paragraphs.map(paragraph => (
+              <p className="paragraph" key={paragraph.id} name={paragraph.id}>
+                {paragraph.words.map(word => (
+                  <Word
+                    characters={word.characters}
+                    key={word.id}
+                    id={word.id}
+                    name={word.id}
+                    isMarked={word.isMarked}
+                    textStyle={textStyle}
+                  />
+                ))}
+              </p>
+            ))}
+        </ReactCSSTransitionGroup>
       </div>
     </div>
   );
