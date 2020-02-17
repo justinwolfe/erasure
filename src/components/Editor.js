@@ -2,12 +2,12 @@ import React, {
   useState,
   useEffect,
   useRef,
-  ReactCSSTransitionGroup
 } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
 import debounce from "just-debounce";
 import { handleScreenshot } from "../utils";
+
 
 const editorStyle = {
   textAlign: "left",
@@ -97,7 +97,6 @@ const Editor = ({ content, toggleMark }) => {
         textStyle={textStyle}
       />
       <div id="content" style={contentStyle}>
-        <ReactCSSTransitionGroup>
           {paragraphs &&
             paragraphs.map(paragraph => (
               <p className="paragraph" key={paragraph.id} name={paragraph.id}>
@@ -113,7 +112,6 @@ const Editor = ({ content, toggleMark }) => {
                 ))}
               </p>
             ))}
-        </ReactCSSTransitionGroup>
       </div>
     </div>
   );
