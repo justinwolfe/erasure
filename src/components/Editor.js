@@ -38,7 +38,9 @@ const Editor = ({ content, toggleMark, getWord }) => {
     keyCache.current.add(key);
     if (currentGesture === undefined) {
       const word = getWord(key);
-      setCurrentGesture(!word.isMarked);
+      if (word) {
+        setCurrentGesture(!word.isMarked);
+      }
     }
     toggleMark(key, currentGesture);
   };
