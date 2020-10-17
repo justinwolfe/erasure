@@ -75,7 +75,10 @@ const Editor = ({ content, toggleMark }) => {
     mark(e.target);
   };
 
-  const handleStop = e => setMouseDown(false);
+  const handleStop = e => {
+    keyCache.current.clear();
+    setMouseDown(false);
+  }
 
   const debouncedMove = e => debounce(handleMove(e), 200);
 
@@ -84,6 +87,7 @@ const Editor = ({ content, toggleMark }) => {
       style={editorStyle}
       onTouchStart={handleStart}
       onTouchMove={debouncedMove}
+      onTouchEnd={handleStop}
       onMouseDown={handleStart}
       onMouseMove={debouncedMove}
       onMouseUp={handleStop}

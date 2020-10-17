@@ -9,16 +9,16 @@ const App = () => {
   const [currentError, setCurrentError] = useState("");
 
   const toggleMark = (id, value) => {
+    if (!id) {
+      return;
+    }
     const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
     const newContent = { ...content };
     const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
-    if (word) {
-      if (value === false || value === true) {
-        word.isMarked = value;
-      } else {
-        word.isMarked = !word.isMarked;
-      }
+    if (!word) {
+      return;
     }
+    word.isMarked = !word.isMarked;
     setContent(newContent);
   };
 
