@@ -13,7 +13,7 @@ const editorStyle = {
 
 const initialTextStyle = {
   global: {
-    fontSize: "20px"
+    fontSize: 20
   },
   marked: {
     opacity: "5%"
@@ -27,10 +27,8 @@ const contentStyle = { backgroundColor: "white", padding: "10%" };
 
 const Editor = ({ content, toggleMark, getWord }) => {
   const { paragraphs, url, created } = content;
-  const [markType, setMarkType] = useState(true);
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
-  const [screenshotLink, setScreenshotLink] = useState(undefined);
   const [textStyle, setTextStyle] = useState(initialTextStyle);
   const keyCache = useRef(new Set());
 
@@ -40,10 +38,7 @@ const Editor = ({ content, toggleMark, getWord }) => {
     keyCache.current.add(key);
     if (currentGesture === undefined) {
       const word = getWord(key);
-      if (word) {
-        setCurrentGesture(!word.isMarked);
-      }
-      console.log(word);
+      setCurrentGesture(!word.isMarked);
     }
     toggleMark(key, currentGesture);
   };
@@ -52,11 +47,6 @@ const Editor = ({ content, toggleMark, getWord }) => {
     const newStyle = { ...textStyle };
     newStyle[parentKey][propertyKey] = value;
     setTextStyle(newStyle);
-  };
-
-  const handleMarkTypeChange = val => {
-    keyCache.current.clear();
-    setMarkType(val);
   };
 
   const handleMove = e => {
@@ -102,9 +92,6 @@ const Editor = ({ content, toggleMark, getWord }) => {
         'gestureStarted'{JSON.stringify(gestureStarted)}
       </div>
       <Controls
-        markType={markType}
-        handleMarkTypeChange={handleMarkTypeChange}
-        handleScreenshot={handleScreenshot}
         handleTextStyleChange={handleTextStyleChange}
         textStyle={textStyle}
       />
