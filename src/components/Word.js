@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 
-
-
 const Word = ({ characters, id, isMarked, name, textStyle }) => {
   const word = characters.map(character => character.character).join("");
   return (

@@ -18,7 +18,7 @@ const editorStyle = {
 
 const initialTextStyle = {
   global: {
-    fontSize: 15
+    fontSize: "20px"
   },
   marked: {
     opacity: "5%"
@@ -33,6 +33,7 @@ const contentStyle = { backgroundColor: "white", padding: "10%" };
 const Editor = ({ content, toggleMark }) => {
   const { paragraphs, url, created } = content;
   const [markType, setMarkType] = useState(true);
+  const [currentMark, setCurrentMark] = useState(true);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
   const [mouseDown, setMouseDown] = useState(false);
   const [textStyle, setTextStyle] = useState(initialTextStyle);
@@ -93,6 +94,9 @@ const Editor = ({ content, toggleMark }) => {
       onMouseUp={handleStop}
       onDoubleClick={e => alert("dblClick")}
     >
+      <div>
+      'currentMark'{JSON.stringify(currentMark)}
+      </div>
       <Controls
         markType={markType}
         handleMarkTypeChange={handleMarkTypeChange}
