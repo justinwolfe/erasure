@@ -7,9 +7,6 @@ const style = {
 };
 
 const Controls = ({
-  markType,
-  handleMarkTypeChange,
-  handleScreenshot,
   textStyle,
   handleTextStyleChange
 }) => {
@@ -40,10 +37,6 @@ const Controls = ({
         </button>
       </div>
       <div style={style}>
-        <button onClick={() => handleMarkTypeChange(!markType)}>
-          {markType ? "◻️" : "◼️"}
-        </button>
-        <button onClick={handleScreenshot}>📸</button>
       </div>
     </div>
   );

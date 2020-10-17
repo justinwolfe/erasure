@@ -1,13 +1,8 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
 import debounce from "just-debounce";
 import { handleScreenshot } from "../utils";
-
 
 const editorStyle = {
   textAlign: "left",
@@ -30,10 +25,10 @@ const initialTextStyle = {
 
 const contentStyle = { backgroundColor: "white", padding: "10%" };
 
-const Editor = ({ content, toggleMark }) => {
+const Editor = ({ content, toggleMark, getWord }) => {
   const { paragraphs, url, created } = content;
   const [markType, setMarkType] = useState(true);
-  const [currentGesture, setCurrentGesture] = useState(true);
+  const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
   const [textStyle, setTextStyle] = useState(initialTextStyle);
@@ -43,7 +38,14 @@ const Editor = ({ content, toggleMark }) => {
     const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
-    toggleMark(key);
+    if (currentGesture === undefined) {
+      const word = getWord(key);
+      if (word) {
+        setCurrentGesture(!word.isMarked);
+      }
+      console.log(word);
+    }
+    toggleMark(key, currentGesture);
   };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {
@@ -78,8 +80,9 @@ const Editor = ({ content, toggleMark }) => {
 
   const handleStop = e => {
     keyCache.current.clear();
-    setGestureStarted(false)
-  }
+    setGestureStarted(false);
+    setCurrentGesture(undefined);
+  };
 
   const debouncedMove = e => debounce(handleMove(e), 200);
 
@@ -95,8 +98,8 @@ const Editor = ({ content, toggleMark }) => {
       onDoubleClick={e => alert("dblClick")}
     >
       <div>
-      'currentGesture'{JSON.stringify(currentGesture)}
-      'gestureStarted'{JSON.stringify(gestureStarted)}
+        'currentGesture'{JSON.stringify(currentGesture)}
+        'gestureStarted'{JSON.stringify(gestureStarted)}
       </div>
       <Controls
         markType={markType}
@@ -106,21 +109,21 @@ const Editor = ({ content, toggleMark }) => {
         textStyle={textStyle}
       />
       <div id="content" style={contentStyle}>
-          {paragraphs &&
-            paragraphs.map(paragraph => (
-              <p className="paragraph" key={paragraph.id} name={paragraph.id}>
-                {paragraph.words.map(word => (
-                  <Word
-                    characters={word.characters}
-                    key={word.id}
-                    id={word.id}
-                    name={word.id}
-                    isMarked={word.isMarked}
-                    textStyle={textStyle}
-                  />
-                ))}
-              </p>
-            ))}
+        {paragraphs &&
+          paragraphs.map(paragraph => (
+            <p className="paragraph" key={paragraph.id} name={paragraph.id}>
+              {paragraph.words.map(word => (
+                <Word
+                  characters={word.characters}
+                  key={word.id}
+                  id={word.id}
+                  name={word.id}
+                  isMarked={word.isMarked}
+                  textStyle={textStyle}
+                />
+              ))}
+            </p>
+          ))}
       </div>
     </div>
   );

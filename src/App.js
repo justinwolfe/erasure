@@ -8,6 +8,16 @@ const App = () => {
   const [content, setContent] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
 
+  const getWord = id => {
+    if (!id) {
+      return undefined;
+    }
+    const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
+    const newContent = { ...content };
+    const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
+    return word;
+  };
+
   const toggleMark = (id, value) => {
     if (!id) {
       return undefined;
@@ -24,13 +34,15 @@ const App = () => {
       word.isMarked = !word.isMarked;
     }
     setContent(newContent);
-    return word.isMarked
+    return word.isMarked;
   };
 
   return (
     <div className="App">
       <Splash setContent={setContent} setCurrentError={setCurrentError} />
-      {content && <Editor content={content} toggleMark={toggleMark} />}
+      {content && (
+        <Editor content={content} getWord={getWord} toggleMark={toggleMark} />
+      )}
     </div>
   );
 };
