@@ -33,9 +33,9 @@ const contentStyle = { backgroundColor: "white", padding: "10%" };
 const Editor = ({ content, toggleMark }) => {
   const { paragraphs, url, created } = content;
   const [markType, setMarkType] = useState(true);
-  const [currentMark, setCurrentMark] = useState(true);
+  const [currentGesture, setCurrentGesture] = useState(true);
+  const [gestureStarted, setGestureStarted] = useState(false);
   const [screenshotLink, setScreenshotLink] = useState(undefined);
-  const [mouseDown, setMouseDown] = useState(false);
   const [textStyle, setTextStyle] = useState(initialTextStyle);
   const keyCache = useRef(new Set());
 
@@ -43,7 +43,7 @@ const Editor = ({ content, toggleMark }) => {
     const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
-    toggleMark(key, markType);
+    toggleMark(key);
   };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {
@@ -61,7 +61,7 @@ const Editor = ({ content, toggleMark }) => {
     const { clientX, clientY } =
       e.nativeEvent.type === "mousemove" ? e : e.changedTouches[0];
     if (
-      (e.nativeEvent.type === "mousemove" && mouseDown) ||
+      (e.nativeEvent.type === "mousemove" && gestureStarted) ||
       e.nativeEvent.type === "touchmove"
     ) {
       const movedIntoElement = document.elementFromPoint(clientX, clientY);
@@ -72,13 +72,13 @@ const Editor = ({ content, toggleMark }) => {
   };
 
   const handleStart = e => {
-    if (e.nativeEvent.type === "mousedown") setMouseDown(true);
+    setGestureStarted(true);
     mark(e.target);
   };
 
   const handleStop = e => {
     keyCache.current.clear();
-    setMouseDown(false);
+    setGestureStarted(false)
   }
 
   const debouncedMove = e => debounce(handleMove(e), 200);
@@ -95,7 +95,8 @@ const Editor = ({ content, toggleMark }) => {
       onDoubleClick={e => alert("dblClick")}
     >
       <div>
-      'currentMark'{JSON.stringify(currentMark)}
+      'currentGesture'{JSON.stringify(currentGesture)}
+      'gestureStarted'{JSON.stringify(gestureStarted)}
       </div>
       <Controls
         markType={markType}

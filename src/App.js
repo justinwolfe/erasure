@@ -10,13 +10,13 @@ const App = () => {
 
   const toggleMark = (id, value) => {
     if (!id) {
-      return;
+      return undefined;
     }
     const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
     const newContent = { ...content };
     const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
     if (!word) {
-      return;
+      return undefined;
     }
     if (value === false || value === true) {
       word.isMarked = value;
@@ -24,6 +24,7 @@ const App = () => {
       word.isMarked = !word.isMarked;
     }
     setContent(newContent);
+    return word.isMarked
   };
 
   return (
