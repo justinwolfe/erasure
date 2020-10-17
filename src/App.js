@@ -18,7 +18,11 @@ const App = () => {
     if (!word) {
       return;
     }
-    word.isMarked = !word.isMarked;
+    if (value === false || value === true) {
+      word.isMarked = value;
+    } else {
+      word.isMarked = !word.isMarked;
+    }
     setContent(newContent);
   };
 
