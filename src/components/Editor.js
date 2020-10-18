@@ -43,6 +43,7 @@ const Editor = ({ content, toggleMark, getWord }) => {
       }
     }
     toggleMark(key, currentGesture);
+    console.log(paragraphs)
   };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {
@@ -76,7 +77,10 @@ const Editor = ({ content, toggleMark, getWord }) => {
   };
   
   const handleDoubleClick = e => {
-    alert()
+    const key = e.target.getAttribute("name");
+    if(key){
+      alert(key)
+    }
   }
 
   const debouncedMove = e => debounce(handleMove(e), 100);
