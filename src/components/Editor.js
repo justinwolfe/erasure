@@ -43,7 +43,6 @@ const Editor = ({ content, toggleMark, getWord }) => {
       }
     }
     toggleMark(key, currentGesture);
-    console.log(paragraphs)
   };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {
@@ -83,7 +82,7 @@ const Editor = ({ content, toggleMark, getWord }) => {
     }
   }
 
-  const debouncedMove = e => debounce(handleMove(e), 100);
+  const debouncedMove = e => debounce(handleMove(e), 200);
 
   return (
     <div
