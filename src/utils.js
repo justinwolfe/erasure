@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Mercury from "@postlight/mercury-parser";
 import remove from "remove-markdown";
 import domtoimage from "dom-to-image";
@@ -56,20 +55,6 @@ ${cleanedContent}`;
         reject(JSON.stringify(err));
       });
   });
-
-export const toggleElement = (id, value, content, setContent) => {
-  const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
-  const newContent = { ...content };
-  const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
-  if (word) {
-    if (value === false || value === true) {
-      word.isMarked = value;
-    } else {
-      word.isMarked = !word.isMarked;
-    }
-  }
-  setContent(newContent);
-};
 
 export const handleScreenshot = () => {
   domtoimage.toBlob(document.querySelector("#content")).then(function(blob) {
