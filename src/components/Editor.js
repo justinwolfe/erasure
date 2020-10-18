@@ -23,7 +23,7 @@ const initialTextStyle = {
   }
 };
 
-const contentStyle = { backgroundColor: "white", padding: "10%" };
+const contentStyle = { backgroundColor: "white", padding: "15%" };
 
 const Editor = ({ content, toggleMark, getWord, editWord }) => {
   const { paragraphs, url, created } = content;
