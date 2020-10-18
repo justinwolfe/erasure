@@ -67,7 +67,6 @@ const Editor = ({ content, toggleMark, getWord }) => {
 
   const handleStart = e => {
     setGestureStarted(true);
-    mark(e.target);
   };
 
   const handleStop = e => {
@@ -75,8 +74,12 @@ const Editor = ({ content, toggleMark, getWord }) => {
     setGestureStarted(false);
     setCurrentGesture(undefined);
   };
+  
+  const handleDoubleClick = e => {
+    alert()
+  }
 
-  const debouncedMove = e => debounce(handleMove(e), 200);
+  const debouncedMove = e => debounce(handleMove(e), 100);
 
   return (
     <div
@@ -87,7 +90,7 @@ const Editor = ({ content, toggleMark, getWord }) => {
       onMouseDown={handleStart}
       onMouseMove={debouncedMove}
       onMouseUp={handleStop}
-      onDoubleClick={e => alert("dblClick")}
+      onDoubleClick={handleDoubleClick}
     >
       <div>
         'currentGesture'{JSON.stringify(currentGesture)}
