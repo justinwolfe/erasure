@@ -13,7 +13,9 @@ const editorStyle = {
 
 const initialTextStyle = {
   global: {
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: 'Helvetica, Arial',
+    lineHeight:'1.4'
   },
   marked: {
     opacity: "5%"
@@ -23,7 +25,7 @@ const initialTextStyle = {
   }
 };
 
-const contentStyle = { backgroundColor: "white", padding: "15%" };
+const contentStyle = { backgroundColor: "white", padding: "12%" };
 
 const Editor = ({ content, toggleMark, getWord, editWord }) => {
   const { paragraphs, url, created } = content;
@@ -95,10 +97,6 @@ const Editor = ({ content, toggleMark, getWord, editWord }) => {
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
     >
-      <div>
-        'currentGesture'{JSON.stringify(currentGesture)}
-        'gestureStarted'{JSON.stringify(gestureStarted)}
-      </div>
       <Controls
         handleTextStyleChange={handleTextStyleChange}
         textStyle={textStyle}
