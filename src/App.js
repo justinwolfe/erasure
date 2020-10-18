@@ -13,9 +13,14 @@ const App = () => {
       return undefined;
     }
     const [paragraphIndex, wordIndex, characterIndex] = id.split("-");
-    const newContent = { ...content };
-    const word = newContent.paragraphs[paragraphIndex].words[wordIndex];
+    const word = content.paragraphs[paragraphIndex].words[wordIndex];
     return word;
+  };
+
+  const editWord = id => {
+    const word = getWord(id);
+    console.log(word)
+    alert(word.characters.join(""));
   };
 
   const toggleMark = (id, value) => {
@@ -41,7 +46,12 @@ const App = () => {
     <div className="App">
       <Splash setContent={setContent} setCurrentError={setCurrentError} />
       {content && (
-        <Editor content={content} getWord={getWord} toggleMark={toggleMark} />
+        <Editor
+          content={content}
+          getWord={getWord}
+          toggleMark={toggleMark}
+          editWord={editWord}
+        />
       )}
     </div>
   );

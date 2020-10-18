@@ -25,7 +25,7 @@ const initialTextStyle = {
 
 const contentStyle = { backgroundColor: "white", padding: "10%" };
 
-const Editor = ({ content, toggleMark, getWord }) => {
+const Editor = ({ content, toggleMark, getWord, editWord }) => {
   const { paragraphs, url, created } = content;
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
@@ -78,7 +78,7 @@ const Editor = ({ content, toggleMark, getWord }) => {
   const handleDoubleClick = e => {
     const key = e.target.getAttribute("name");
     if(key){
-      alert(key)
+      editWord(key)
     }
   }
 
@@ -114,7 +114,7 @@ const Editor = ({ content, toggleMark, getWord }) => {
                   id={word.id}
                   name={word.id}
                   isMarked={word.isMarked}
-                                    customCharacters={word.customCharacters}
+                  customCharacters={word.customCharacters}
                   textStyle={textStyle}
                 />
               ))}
