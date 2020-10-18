@@ -15,7 +15,8 @@ const convertToState = document =>
         isMarked: false
       })),
       isMarked: false,
-      id: `${paragraphIndex}-${wordIndex}`
+      id: `${paragraphIndex}-${wordIndex}`,
+      customCharacters: false,
     })),
     id: `${paragraphIndex}`,
     isMarked: false,

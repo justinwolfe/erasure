@@ -114,6 +114,7 @@ const Editor = ({ content, toggleMark, getWord }) => {
                   id={word.id}
                   name={word.id}
                   isMarked={word.isMarked}
+                                    customCharacters={word.customCharacters}
                   textStyle={textStyle}
                 />
               ))}
