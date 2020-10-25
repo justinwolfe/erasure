@@ -7,6 +7,10 @@ import "./App.css";
 const App = () => {
   const [content, setContent] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
+  
+  const saveToLocalStorage = (key, dataObject) => {
+    window.localStorage.setItem(key, JSON.stringify(dataObject))
+  }
 
   const getWord = id => {
     if (!id) {
@@ -42,12 +46,15 @@ const App = () => {
     updatedContent.paragraphs[paragraphIndex].words[wordIndex] = word;
 
     setContent(updatedContent);
+    saveToLocalStorage('content', updatedContent);
     return word.isMarked;
   };
 
   return (
     <div className="App">
-      <Splash setContent={setContent} setCurrentError={setCurrentError} />
+      {!content && (
+        <Splash setContent={setContent} setCurrentError={setCurrentError} />
+      )}
       {content && (
         <Editor
           content={content}
