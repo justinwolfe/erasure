@@ -4,15 +4,6 @@ import Controls from "./Controls";
 import debounce from "just-debounce";
 import { handleScreenshot } from "../utils";
 
-const editorStyle = {
-  textAlign: "left",
-  wordWrap: "break-word",
-  cursor: "pointer",
-  userSelect: "none"
-};
-
-const contentStyle = { backgroundColor: "white", padding: "12%" };
-
 const Editor = ({
   page,
   toggleWord,
@@ -20,7 +11,8 @@ const Editor = ({
   editWord,
   reset,
   textStyle,
-  setTextStyle,
+  editorStyle,
+  contentStyle,
   dispatch
 }) => {
   const [currentGesture, setCurrentGesture] = useState(undefined);
@@ -38,12 +30,6 @@ const Editor = ({
       }
     }
     toggleWord(key, currentGesture);
-  };
-
-  const handleTextStyleChange = (parentKey, propertyKey, value) => {
-    const newStyle = { ...textStyle };
-    newStyle[parentKey][propertyKey] = value;
-    setTextStyle(newStyle);
   };
 
   const handleMove = e => {
@@ -91,7 +77,6 @@ const Editor = ({
       onDoubleClick={handleDoubleClick}
     >
       <Controls
-        handleTextStyleChange={handleTextStyleChange}
         textStyle={textStyle}
         reset={reset}
         dispatch={dispatch}

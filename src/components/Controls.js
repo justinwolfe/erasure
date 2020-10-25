@@ -12,10 +12,13 @@ const Controls = ({ textStyle, reset, dispatch }) => {
       <div>
         <button
           onClick={() =>
-            dispatch("updateTextStyle", {
-              parentKey: "global",
-              propertyKey: "fontSize",
-              operation: 'increment'
+            dispatch({
+              type: "updateTextStyle",
+              data: {
+                parentKey: "global",
+                propertyKey: "fontSize",
+                operation: "increment"
+              }
             })
           }
         >
@@ -23,10 +26,13 @@ const Controls = ({ textStyle, reset, dispatch }) => {
         </button>
         <button
           onClick={() =>
-            dispatch("updateTextStyle", {
-              parentKey: "global",
-              propertyKey: "fontSize",
-              operation: 'decrement'
+            dispatch({
+              type: "updateTextStyle",
+              data: {
+                parentKey: "global",
+                propertyKey: "fontSize",
+                operation: "decrement"
+              }
             })
           }
         >

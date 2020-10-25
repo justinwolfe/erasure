@@ -22,8 +22,6 @@ const initialTextStyle = {
 };
 
 const App = () => {
-  const [currentError, setCurrentError] = useState("");
-  const [textStyle, setTextStyle] = useState(initialTextStyle);
   const [state, dispatch] = useImmerReducer(reducer, initialState)
   
   const logDispatch = (action) => {
@@ -64,6 +62,10 @@ const App = () => {
   
   useEffect(() => {
     //const saved = getLocalStorage('content');
+  }, [state])
+  
+  useEffect(() => {
+    
   }, [])
   
   console.log("state", state)
@@ -71,7 +73,7 @@ const App = () => {
   return (
     <div className="App">
       {!state.page && (
-        <Splash setCurrentError={setCurrentError} dispatch={logDispatch} />
+        <Splash dispatch={logDispatch} />
       )}
       {state.page && (
         <Editor

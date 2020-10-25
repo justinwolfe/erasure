@@ -3,6 +3,16 @@ export const initialState = {
   error: false,
   page: undefined,
   style: {
+    content: {
+      backgroundColor: "white",
+      padding: "12%"
+    },
+    editor: {
+      textAlign: "left",
+      wordWrap: "break-word",
+      cursor: "pointer",
+      userSelect: "none"
+    },
     text: {
       global: {
         fontSize: 20,
