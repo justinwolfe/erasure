@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import Splash from "./components/Splash.js";
 import Editor from "./components/Editor.js";
 
@@ -23,6 +23,13 @@ const App = () => {
   const [meta, setMeta] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
   const [textStyle, setTextStyle] = useState(initialTextStyle);
+  const [state, dispatch] = useReducer((state, action) => {
+    switch(action.type)
+  }, {
+    content:undefined,
+    meta: undefined,
+    text:initialTextStyle
+  })
   
   const saveToLocalStorage = (key, dataObject) => {
     window.localStorage.setItem(key, JSON.stringify(dataObject))
