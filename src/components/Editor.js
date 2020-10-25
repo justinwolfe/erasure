@@ -27,7 +27,7 @@ const initialTextStyle = {
 
 const contentStyle = { backgroundColor: "white", padding: "12%" };
 
-const Editor = ({ content, toggleMark, getWord, editWord }) => {
+const Editor = ({ content, toggleMark, getWord, editWordm, reset }) => {
   const { paragraphs, url, created } = content;
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
@@ -100,6 +100,7 @@ const Editor = ({ content, toggleMark, getWord, editWord }) => {
       <Controls
         handleTextStyleChange={handleTextStyleChange}
         textStyle={textStyle}
+        reset={reset}
       />
       <div id="content" style={contentStyle}>
         {paragraphs &&

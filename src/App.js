@@ -50,6 +50,11 @@ const App = () => {
     saveToLocalStorage('content', updatedContent);
     return word.isMarked;
   };
+  
+  const reset = () => {
+    setContent(undefined)
+    window.localStorage.clear();
+  }
 
   return (
     <div className="App">
@@ -62,6 +67,7 @@ const App = () => {
           getWord={getWord}
           toggleMark={toggleMark}
           editWord={editWord}
+          reset={reset}
         />
       )}
     </div>

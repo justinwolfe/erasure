@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const style = {
   position: "sticky",
@@ -6,10 +6,7 @@ const style = {
   top: 0
 };
 
-const Controls = ({
-  textStyle,
-  handleTextStyleChange
-}) => {
+const Controls = ({ textStyle, handleTextStyleChange, reset }) => {
   return (
     <div>
       <div>
@@ -35,9 +32,9 @@ const Controls = ({
         >
           -
         </button>
+        <button onClick={() => reset()}>reset</button>
       </div>
-      <div style={style}>
-      </div>
+      <div style={style}></div>
     </div>
   );
 };
