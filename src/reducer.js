@@ -22,19 +22,21 @@ export const reducer = (draft, action) => {
   switch (action.type) {
     case "reset":
       return initialState;
-    case "loadLocalStorage": 
-      return draft
+    case "loadLocalStorage":
+      return draft;
     case "loadContent":
       draft.page = action.data.page;
       draft.meta = action.data.meta;
-      return draft
+      return draft;
     case "toggleWord":
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
-      draft.page[action.data.paragraphIndex].words[action.data.wordIndex].isMarked = !draft.page[action.data.paragraphIndex].words[action.data.wordIndex].isMarked
-      return draft
+      if (draft.page[paragraphIndex].words[wordIndex]) {
+        draft.page[paragraphIndex].words[wordIndex].isMarked = !draft.page[
+          paragraphIndex
+        ].words[wordIndex].isMarked;
+      }
+      return draft;
     case "toggleCharacter":
-      return draft
+      return draft;
   }
 };
-
-

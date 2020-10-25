@@ -102,7 +102,7 @@ const App = () => {
       )}
       {content && (
         <Editor
-          page={content.page}
+          page={state.page}
           getWord={getWord}
           toggleMark={toggleMark}
           editWord={editWord}
