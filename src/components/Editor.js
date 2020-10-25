@@ -78,7 +78,6 @@ const Editor = ({
     >
       <Controls
         textStyle={textStyle}
-        reset={reset}
         dispatch={dispatch}
       />
       <div id="content" style={contentStyle}>

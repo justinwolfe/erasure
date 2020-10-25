@@ -33,7 +33,8 @@ export const reducer = (draft, action) => {
   switch (action.type) {
     case "reset":
       return initialState;
-    case "loadLocalStorage":
+    case "loadFromStorage":
+      draft = action.data;
       return draft;
     case "loadContent":
       draft.page = action.data.page;

@@ -7,20 +7,6 @@ import {getLocalStorage, setLocalStorage} from './utils'
 
 import "./App.css";
 
-const initialTextStyle = {
-  global: {
-    fontSize: 20,
-    fontFamily: 'Helvetica, Arial',
-    lineHeight:'1.4'
-  },
-  marked: {
-    opacity: "5%"
-  },
-  unmarked: {
-    opacity: "100%"
-  }
-};
-
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState)
   
@@ -57,15 +43,20 @@ const App = () => {
   
   const reset = () => {
     window.localStorage.clear();
-    dispatch('reset');
+    dispatch({type:'reset'});
   }
   
   useEffect(() => {
-    //const saved = getLocalStorage('content');
+    setLocalStorage('state', state)
   }, [state])
   
   useEffect(() => {
-    
+    console.log('loading from saved state')
+    const saved = getLocalStorage('state');
+    console.log(saved)
+    if(saved){
+      dispatch({type:'loadFromStorage', data: state})
+    }
   }, [])
   
   console.log("state", state)
@@ -84,6 +75,8 @@ const App = () => {
           reset={reset}
           dispatch={logDispatch}
           textStyle={state.style.text}
+          editorStyle={state.style.editor}
+          contentStyle={state.style.content}
         />
       )}
     </div>

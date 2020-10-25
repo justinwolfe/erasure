@@ -62,7 +62,7 @@ export const handleScreenshot = () => {
   });
 };
 
-export const saveLocalStorage = (key, dataObject) => {
+export const setLocalStorage = (key, dataObject) => {
   window.localStorage.setItem(key, JSON.stringify(dataObject));
 };
 

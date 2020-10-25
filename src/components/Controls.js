@@ -6,7 +6,7 @@ const style = {
   top: 0
 };
 
-const Controls = ({ textStyle, reset, dispatch }) => {
+const Controls = ({ textStyle, dispatch }) => {
   return (
     <div>
       <div>
@@ -38,7 +38,7 @@ const Controls = ({ textStyle, reset, dispatch }) => {
         >
           -
         </button>
-        <button onClick={() => reset()}>reset</button>
+        <button onClick={() => dispatch({ type: "reset" })}>reset</button>
       </div>
       <div style={style}></div>
     </div>
