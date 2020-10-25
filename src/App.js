@@ -47,20 +47,21 @@ const App = () => {
   }
   
   useEffect(() => {
-    setLocalStorage('state', state)
+    if(typeof state.meta !== "undefined"){
+      console.log("saving state", state)
+      setLocalStorage('state', state)
+      console.log(getLocalStorage('state'))
+    }
   }, [state])
   
   useEffect(() => {
-    console.log('loading from saved state')
     const saved = getLocalStorage('state');
-    console.log(saved)
     if(saved){
+      console.log("loading state", state)
       dispatch({type:'loadFromStorage', data: state})
     }
   }, [])
   
-  console.log("state", state)
-
   return (
     <div className="App">
       {!state.page && (
