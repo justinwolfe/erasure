@@ -38,7 +38,7 @@ const Editor = ({
       }
     }
     toggleMark(key, currentGesture);
-    dispatch({ type: "toggleWord", data: { key } });
+    dispatch({ type: "toggleWord", data: { key, currentGesture } });
   };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {

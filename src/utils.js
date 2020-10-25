@@ -3,7 +3,7 @@ import remove from "remove-markdown";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 
-const addProxy = url => `https://cors-anywhere.herokuapp.com/${url}`;
+const addProxy = url => `https://api.codetabs.com/v1/proxy?quest=${url}`;
 
 const convertToState = document =>
   document.split("\n\n").map((paragraph, paragraphIndex) => ({

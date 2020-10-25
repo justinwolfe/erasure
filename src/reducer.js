@@ -1,8 +1,7 @@
 export const initialState = {
-  content: undefined,
-  original: undefined,
   meta: undefined,
   error: false,
+  page: undefined,
   text: {
     global: {
       fontSize: 20,
@@ -31,9 +30,7 @@ export const reducer = (draft, action) => {
     case "toggleWord":
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
       if (draft.page[paragraphIndex].words[wordIndex]) {
-        draft.page[paragraphIndex].words[wordIndex].isMarked = !draft.page[
-          paragraphIndex
-        ].words[wordIndex].isMarked;
+        draft.page[paragraphIndex].words[wordIndex].isMarked = action.data.currentGesture;
       }
       return draft;
     case "toggleCharacter":

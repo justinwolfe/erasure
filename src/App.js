@@ -50,7 +50,7 @@ const App = () => {
       return undefined;
     }
     const [paragraphIndex, wordIndex] = id.split("-");
-    const word = content.page[paragraphIndex].words[wordIndex];
+    const word = state.page[paragraphIndex].words[wordIndex];
     return word;
   };
 
