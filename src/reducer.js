@@ -25,10 +25,11 @@ export const reducer = (draft, action) => {
     case "loadLocalStorage": 
       return draft
     case "loadContent":
-      draft.content = action.content;
-      draft.meta = action.meta;
+      draft.page = action.data.page;
+      draft.meta = action.data.meta;
       return draft
-    case "toggleWord": 
+    case "toggleWord":
+      draft.page[action.data.paragraphIndex].words[action.data.wordIndex].isMarked = !draft.page[action.data.paragraphIndex].words[action.data.wordIndex].isMarked
       return draft
     case "toggleCharacter":
       return draft

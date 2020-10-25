@@ -29,6 +29,7 @@ const Editor = ({ page, toggleMark, getWord, editWord, reset, textStyle, setText
       }
     }
     toggleMark(key, currentGesture);
+    dispatch("toggleWord")
   };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {

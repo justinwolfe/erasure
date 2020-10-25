@@ -93,6 +93,7 @@ const App = () => {
     setContent(saved);
   }, [])
 
+  console.log("state", state)
   return (
     <div className="App">
       {!content && (
