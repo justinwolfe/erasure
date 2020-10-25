@@ -2,6 +2,7 @@ dependencies:
   '@postlight/mercury-parser': 2.2.0
   dom-to-image: 2.6.0
   file-saver: 2.0.2
+  immer: 7.0.14
   just-debounce: 1.0.0
   react: 16.8.6
   react-dom: 16.8.6
@@ -11,6 +12,7 @@ dependencies:
   strip-markdown: 3.1.1
   styled-components: 5.0.1
   turndown: 5.0.3
+  use-immer: 0.4.1
 packages:
   /@babel/code-frame/7.0.0:
     dependencies:
@@ -5793,6 +5795,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
+  /immer/7.0.14:
+    dev: false
+    resolution:
+      integrity: sha512-BxCs6pJwhgSEUEOZjywW7OA8DXVzfHjkBelSEl0A+nEu0+zS4cFVdNOONvt55N4WOm8Pu4xqSPYxhm1Lv2iBBA==
   /import-cwd/2.1.0:
     dependencies:
       import-from: 2.1.0
@@ -11162,6 +11168,13 @@ packages:
     dev: false
     resolution:
       integrity: sha1-ODjpfPxgUh63PFJajlW/3Z4uKPE=
+  /use-immer/0.4.1:
+    dev: false
+    peerDependencies:
+      immer: '>=2.0.0'
+      react: ^16.8.0
+    resolution:
+      integrity: sha512-lXukZMx+sWwkWOLMyd5/5Obr6xTDFGSOJ85/nGQk/qhpWAohaFWrYJkT2+70seU/F6Dh7S41c9X6TWL9ljReGQ==
   /use/3.1.1:
     dev: false
     engines:
@@ -11835,6 +11848,7 @@ specifiers:
   '@postlight/mercury-parser': ^2.2.0
   dom-to-image: ^2.6.0
   file-saver: ^2.0.2
+  immer: ^7.0.13
   just-debounce: ^1.0.0
   react: ^16.8.6
   react-dom: ^16.8.6
@@ -11844,3 +11858,4 @@ specifiers:
   strip-markdown: ^3.1.1
   styled-components: ^5.0.1
   turndown: ^5.0.3
+  use-immer: ^0.4.1
