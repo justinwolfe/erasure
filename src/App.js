@@ -6,6 +6,7 @@ import "./App.css";
 
 const App = () => {
   const [content, setContent] = useState(undefined);
+  const [meta, setMeta] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
   
   const saveToLocalStorage = (key, dataObject) => {
