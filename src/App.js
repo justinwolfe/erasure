@@ -26,10 +26,10 @@ const App = () => {
   const [textStyle, setTextStyle] = useState(initialTextStyle);
   const [state, dispatch] = useImmerReducer(reducer, initialState)
   
-  /*const logDispatch = (action) => {
+  const logDispatch = (action) => {
     console.log(action);
     dispatch(action);
-  }*/
+  }
 
   const getWord = id => {
     if (!id) {
@@ -71,7 +71,7 @@ const App = () => {
   return (
     <div className="App">
       {!state.page && (
-        <Splash setCurrentError={setCurrentError} dispatch={dispatch} />
+        <Splash setCurrentError={setCurrentError} dispatch={logDispatch} />
       )}
       {state.page && (
         <Editor
@@ -80,7 +80,7 @@ const App = () => {
           toggleWord={toggleWord}
           editWord={editWord}
           reset={reset}
-          dispatch={dispatch}
+          dispatch={logDispatch}
           textStyle={state.style.text}
         />
       )}

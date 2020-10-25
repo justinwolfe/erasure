@@ -6,29 +6,28 @@ const style = {
   top: 0
 };
 
-const Controls = ({ textStyle, handleTextStyleChange, reset, dispatch }) => {
+const Controls = ({ textStyle, reset, dispatch }) => {
   return (
     <div>
       <div>
         <button
           onClick={() =>
-            dispatch('updateTextStyle', {parentKey:"global", propertyKey:"fontSize", value: textStyle.global.fontSize + 3})
-            handleTextStyleChange(
-              "global",
-              "fontSize",
-              textStyle.global.fontSize + 3
-            )
+            dispatch("updateTextStyle", {
+              parentKey: "global",
+              propertyKey: "fontSize",
+              operation: 'increment'
+            })
           }
         >
           +
         </button>
         <button
           onClick={() =>
-            handleTextStyleChange(
-              "global",
-              "fontSize",
-              textStyle.global.fontSize - 3
-            )
+            dispatch("updateTextStyle", {
+              parentKey: "global",
+              propertyKey: "fontSize",
+              operation: 'decrement'
+            })
           }
         >
           -
