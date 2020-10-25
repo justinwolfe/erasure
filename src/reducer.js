@@ -29,6 +29,7 @@ export const reducer = (draft, action) => {
       draft.meta = action.data.meta;
       return draft
     case "toggleWord":
+      const [paragraphIndex, wordIndex] = action.data.key.split("-");
       draft.page[action.data.paragraphIndex].words[action.data.wordIndex].isMarked = !draft.page[action.data.paragraphIndex].words[action.data.wordIndex].isMarked
       return draft
     case "toggleCharacter":

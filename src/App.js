@@ -60,7 +60,7 @@ const App = () => {
   };
 
   const toggleMark = (id, value) => {
-    const word = getWord(id);
+    /*const word = getWord(id);
 
     if (!word) {
       return undefined;
@@ -76,11 +76,11 @@ const App = () => {
 
     const updatedContent = { ...content };
 
-    updatedContent.page[paragraphIndex].words[wordIndex] = word;
+    updatedContent.page[paragraphIndex].words[wordIndex].isMarked = !word.isMarked;
 
     setContent(updatedContent);
     saveToLocalStorage('content', updatedContent);
-    return word.isMarked;
+    return word.isMarked;*/
   };
   
   const reset = () => {
@@ -92,8 +92,9 @@ const App = () => {
     const saved = getLocalStorage('content');
     setContent(saved);
   }, [])
-
+  
   console.log("state", state)
+
   return (
     <div className="App">
       {!content && (

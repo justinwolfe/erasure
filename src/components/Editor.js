@@ -13,7 +13,16 @@ const editorStyle = {
 
 const contentStyle = { backgroundColor: "white", padding: "12%" };
 
-const Editor = ({ page, toggleMark, getWord, editWord, reset, textStyle, setTextStyle, dispatch }) => {
+const Editor = ({
+  page,
+  toggleMark,
+  getWord,
+  editWord,
+  reset,
+  textStyle,
+  setTextStyle,
+  dispatch
+}) => {
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
@@ -29,7 +38,7 @@ const Editor = ({ page, toggleMark, getWord, editWord, reset, textStyle, setText
       }
     }
     toggleMark(key, currentGesture);
-    dispatch("toggleWord")
+    dispatch({ type: "toggleWord", data: { key } });
   };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {
@@ -61,13 +70,13 @@ const Editor = ({ page, toggleMark, getWord, editWord, reset, textStyle, setText
     setGestureStarted(false);
     setCurrentGesture(undefined);
   };
-  
+
   const handleDoubleClick = e => {
     const key = e.target.getAttribute("name");
-    if(key){
-      editWord(key)
+    if (key) {
+      editWord(key);
     }
-  }
+  };
 
   const debouncedMove = e => debounce(handleMove(e), 200);
 
