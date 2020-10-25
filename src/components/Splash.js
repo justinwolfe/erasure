@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getContentFromUrl } from "../utils";
 
-const Splash = ({ setContent, setCurrentError, dispatch }) => {
+const Splash = ({ setCurrentError, dispatch }) => {
   const [url, setUrl] = useState("");
   const [fetchStatus, setFetchStatus] = useState("");
 
@@ -9,8 +9,6 @@ const Splash = ({ setContent, setCurrentError, dispatch }) => {
     if (fetchStatus === "fetching") {
       getContentFromUrl(url)
         .then(data => {
-          console.log("data", data)
-          setContent(data);
           dispatch({type:'loadContent', data})
         })
         .catch(err => {

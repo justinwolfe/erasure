@@ -94,6 +94,7 @@ const Editor = ({
         handleTextStyleChange={handleTextStyleChange}
         textStyle={textStyle}
         reset={reset}
+        dispatch={dispatch}
       />
       <div id="content" style={contentStyle}>
         {page &&

@@ -22,16 +22,14 @@ const initialTextStyle = {
 };
 
 const App = () => {
-  const [content, setContent] = useState(undefined);
-  const [meta, setMeta] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
   const [textStyle, setTextStyle] = useState(initialTextStyle);
   const [state, dispatch] = useImmerReducer(reducer, initialState)
   
-  const logDispatch = (action) => {
+  /*const logDispatch = (action) => {
     console.log(action);
     dispatch(action);
-  }
+  }*/
 
   const getWord = id => {
     if (!id) {
@@ -55,35 +53,35 @@ const App = () => {
     }
     
     let marker = value === false || value === true ? value : undefined;
+    
     dispatch({ type: "toggleWord", data: { key, marker } });
   }
   
   const reset = () => {
-    setContent(undefined)
     window.localStorage.clear();
+    dispatch('reset');
   }
   
   useEffect(() => {
-    const saved = getLocalStorage('content');
-    setContent(saved);
+    //const saved = getLocalStorage('content');
   }, [])
   
   console.log("state", state)
 
   return (
     <div className="App">
-      {!content && (
-        <Splash setContent={setContent} setCurrentError={setCurrentError} dispatch={logDispatch} />
+      {!state.page && (
+        <Splash setCurrentError={setCurrentError} dispatch={dispatch} />
       )}
-      {content && (
+      {state.page && (
         <Editor
           page={state.page}
           getWord={getWord}
           toggleWord={toggleWord}
           editWord={editWord}
           reset={reset}
-          dispatch={logDispatch}
-          textStyle={textStyle}
+          dispatch={dispatch}
+          textStyle={state.style.text}
         />
       )}
     </div>

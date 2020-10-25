@@ -45,6 +45,7 @@ export const reducer = (draft, action) => {
     case "toggleCharacter":
       return draft;
     case "updateTextStyle":
+      draft.style.text[action.data.parentKey][action.data.propertyKey] = action.data.value;
       return draft;
   }
 };
