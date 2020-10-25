@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Splash from "./components/Splash.js";
 import Editor from "./components/Editor.js";
 
@@ -11,6 +11,15 @@ const App = () => {
   
   const saveToLocalStorage = (key, dataObject) => {
     window.localStorage.setItem(key, JSON.stringify(dataObject))
+  }
+
+  const getLocalStorage = (key) => {
+    const stored = localStorage.getItem(key);
+    try {
+      return JSON.parse(stored)
+    } catch(err){
+      return undefined
+    }
   }
 
   const getWord = id => {
@@ -55,6 +64,11 @@ const App = () => {
     setContent(undefined)
     window.localStorage.clear();
   }
+  
+  useEffect(() => {
+    const saved = getLocalStorage('content');
+    setContent(saved);
+  }, [])
 
   return (
     <div className="App">

@@ -27,7 +27,7 @@ const initialTextStyle = {
 
 const contentStyle = { backgroundColor: "white", padding: "12%" };
 
-const Editor = ({ content, toggleMark, getWord, editWordm, reset }) => {
+const Editor = ({ content, toggleMark, getWord, editWord, reset }) => {
   const { paragraphs, url, created } = content;
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
