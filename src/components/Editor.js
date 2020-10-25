@@ -11,27 +11,12 @@ const editorStyle = {
   userSelect: "none"
 };
 
-const initialTextStyle = {
-  global: {
-    fontSize: 20,
-    fontFamily: 'Helvetica, Arial',
-    lineHeight:'1.4'
-  },
-  marked: {
-    opacity: "5%"
-  },
-  unmarked: {
-    opacity: "100%"
-  }
-};
-
 const contentStyle = { backgroundColor: "white", padding: "12%" };
 
-const Editor = ({ content, toggleMark, getWord, editWord, reset }) => {
+const Editor = ({ content, toggleMark, getWord, editWord, reset, textStyle, setTextStyle }) => {
   const { paragraphs, url, created } = content;
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
-  const [textStyle, setTextStyle] = useState(initialTextStyle);
   const keyCache = useRef(new Set());
 
   const mark = node => {

@@ -4,10 +4,25 @@ import Editor from "./components/Editor.js";
 
 import "./App.css";
 
+const initialTextStyle = {
+  global: {
+    fontSize: 20,
+    fontFamily: 'Helvetica, Arial',
+    lineHeight:'1.4'
+  },
+  marked: {
+    opacity: "5%"
+  },
+  unmarked: {
+    opacity: "100%"
+  }
+};
+
 const App = () => {
   const [content, setContent] = useState(undefined);
   const [meta, setMeta] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
+  const [textStyle, setTextStyle] = useState(initialTextStyle);
   
   const saveToLocalStorage = (key, dataObject) => {
     window.localStorage.setItem(key, JSON.stringify(dataObject))
