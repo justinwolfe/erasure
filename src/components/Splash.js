@@ -9,8 +9,9 @@ const Splash = ({ setContent, setCurrentError, dispatch }) => {
     if (fetchStatus === "fetching") {
       getContentFromUrl(url)
         .then(data => {
-          setContent({ paragraphs: data, url, created: Date.now() });
-          dispatch({type:})
+          console.log("data", data)
+          setContent({ paragraphs: data.paragraphs, url, created: Date.now() });
+          //dispatch({type:'loadArticle', data: { paragraphs: data, url, created: Date.now() }})
         })
         .catch(err => {
           setCurrentError(err);

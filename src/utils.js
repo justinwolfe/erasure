@@ -45,7 +45,7 @@ export const getContentFromUrl = url =>
 ${cleanedContent}`;
             }
             const converted = convertToState(cleanedContent);
-            resolve(converted);
+            resolve({...result, paragraphs: converted});
           } else {
             reject(JSON.stringify(result));
           }
