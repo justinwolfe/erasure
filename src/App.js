@@ -10,10 +10,10 @@ import "./App.css";
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState)
   
-  const logDispatch = (action) => {
+  /*const logDispatch = (action) => {
     console.log(action);
     dispatch(action);
-  }
+  }*/
 
   const getWord = id => {
     if (!id) {
@@ -48,24 +48,21 @@ const App = () => {
   
   useEffect(() => {
     if(typeof state.meta !== "undefined"){
-      console.log("saving state", state)
       setLocalStorage('state', state)
-      console.log(getLocalStorage('state'))
     }
   }, [state])
   
   useEffect(() => {
     const saved = getLocalStorage('state');
     if(saved){
-      console.log("loading state", state)
-      dispatch({type:'loadFromStorage', data: state})
+      dispatch({type:'loadFromStorage', data: saved})
     }
   }, [])
   
   return (
     <div className="App">
       {!state.page && (
-        <Splash dispatch={logDispatch} />
+        <Splash dispatch={dispatch} />
       )}
       {state.page && (
         <Editor
@@ -74,7 +71,7 @@ const App = () => {
           toggleWord={toggleWord}
           editWord={editWord}
           reset={reset}
-          dispatch={logDispatch}
+          dispatch={dispatch}
           textStyle={state.style.text}
           editorStyle={state.style.editor}
           contentStyle={state.style.content}
