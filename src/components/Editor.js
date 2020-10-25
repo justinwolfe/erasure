@@ -13,8 +13,7 @@ const editorStyle = {
 
 const contentStyle = { backgroundColor: "white", padding: "12%" };
 
-const Editor = ({ content, toggleMark, getWord, editWord, reset, textStyle, setTextStyle, dispatch }) => {
-  const { paragraphs, url, created } = content;
+const Editor = ({ page, toggleMark, getWord, editWord, reset, textStyle, setTextStyle, dispatch }) => {
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
@@ -88,8 +87,8 @@ const Editor = ({ content, toggleMark, getWord, editWord, reset, textStyle, setT
         reset={reset}
       />
       <div id="content" style={contentStyle}>
-        {paragraphs &&
-          paragraphs.map(paragraph => (
+        {page &&
+          page.map(paragraph => (
             <p className="paragraph" key={paragraph.id} name={paragraph.id}>
               {paragraph.words.map(word => (
                 <Word

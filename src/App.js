@@ -50,7 +50,7 @@ const App = () => {
       return undefined;
     }
     const [paragraphIndex, wordIndex] = id.split("-");
-    const word = content.paragraphs[paragraphIndex].words[wordIndex];
+    const word = content.page[paragraphIndex].words[wordIndex];
     return word;
   };
 
@@ -76,7 +76,7 @@ const App = () => {
 
     const updatedContent = { ...content };
 
-    updatedContent.paragraphs[paragraphIndex].words[wordIndex] = word;
+    updatedContent.page[paragraphIndex].words[wordIndex] = word;
 
     setContent(updatedContent);
     saveToLocalStorage('content', updatedContent);
@@ -100,7 +100,7 @@ const App = () => {
       )}
       {content && (
         <Editor
-          content={content}
+          page={content.page}
           getWord={getWord}
           toggleMark={toggleMark}
           editWord={editWord}

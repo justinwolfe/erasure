@@ -2,6 +2,7 @@ export const initialState = {
   content: undefined,
   original: undefined,
   meta: undefined,
+  error: false,
   text: {
     global: {
       fontSize: 20,
