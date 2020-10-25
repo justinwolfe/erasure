@@ -15,7 +15,7 @@ const contentStyle = { backgroundColor: "white", padding: "12%" };
 
 const Editor = ({
   page,
-  toggleMark,
+  toggleWord,
   getWord,
   editWord,
   reset,
@@ -37,7 +37,7 @@ const Editor = ({
         setCurrentGesture(!word.isMarked);
       }
     }
-    toggleMark(key, currentGesture);
+    toggleWord(key, currentGesture);
   };
 
   const handleTextStyleChange = (parentKey, propertyKey, value) => {

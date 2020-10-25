@@ -15,10 +15,10 @@ const convertToState = document =>
       })),
       isMarked: false,
       id: `${paragraphIndex}-${wordIndex}`,
-      customCharacters: false,
+      customCharacters: false
     })),
     id: `${paragraphIndex}`,
-    isMarked: false,
+    isMarked: false
   }));
 
 export const getContentFromUrl = url =>
@@ -45,7 +45,7 @@ export const getContentFromUrl = url =>
 ${cleanedContent}`;
             }
             const converted = convertToState(cleanedContent);
-            resolve({meta:result, page: converted});
+            resolve({ meta: result, page: converted });
           } else {
             reject(JSON.stringify(result));
           }
@@ -60,4 +60,17 @@ export const handleScreenshot = () => {
   domtoimage.toBlob(document.querySelector("#content")).then(function(blob) {
     window.saveAs(blob, "my-node.png");
   });
+};
+
+export const saveLocalStorage = (key, dataObject) => {
+  window.localStorage.setItem(key, JSON.stringify(dataObject));
+};
+
+export const getLocalStorage = key => {
+  const stored = localStorage.getItem(key);
+  try {
+    return JSON.parse(stored);
+  } catch (err) {
+    return undefined;
+  }
 };

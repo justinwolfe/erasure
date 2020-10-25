@@ -2,17 +2,19 @@ export const initialState = {
   meta: undefined,
   error: false,
   page: undefined,
-  text: {
-    global: {
-      fontSize: 20,
-      fontFamily: "Helvetica, Arial",
-      lineHeight: "1.4"
-    },
-    marked: {
-      opacity: "5%"
-    },
-    unmarked: {
-      opacity: "100%"
+  style: {
+    text: {
+      global: {
+        fontSize: 20,
+        fontFamily: "Helvetica, Arial",
+        lineHeight: "1.4"
+      },
+      marked: {
+        opacity: "5%"
+      },
+      unmarked: {
+        opacity: "100%"
+      }
     }
   }
 };
@@ -30,16 +32,19 @@ export const reducer = (draft, action) => {
     case "toggleWord":
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
       if (draft.page[paragraphIndex].words[wordIndex]) {
-        if (typeof action.data.marker === 'undefined') {
+        if (typeof action.data.marker === "undefined") {
           draft.page[paragraphIndex].words[wordIndex].isMarked = !draft.page[
             paragraphIndex
           ].words[wordIndex].isMarked;
         } else {
-          draft.page[paragraphIndex].words[wordIndex].isMarked = action.data.marker;
+          draft.page[paragraphIndex].words[wordIndex].isMarked =
+            action.data.marker;
         }
       }
       return draft;
     case "toggleCharacter":
+      return draft;
+    case "updateTextStyle":
       return draft;
   }
 };

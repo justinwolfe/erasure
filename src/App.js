@@ -3,6 +3,7 @@ import Splash from "./components/Splash.js";
 import Editor from "./components/Editor.js";
 import {reducer, initialState} from "./reducer.js"
 import { useImmerReducer } from "use-immer";
+import {getLocalStorage, setLocalStorage} from './utils'
 
 import "./App.css";
 
@@ -31,19 +32,6 @@ const App = () => {
     console.log(action);
     dispatch(action);
   }
-  
-  const saveToLocalStorage = (key, dataObject) => {
-    window.localStorage.setItem(key, JSON.stringify(dataObject))
-  }
-
-  const getLocalStorage = (key) => {
-    const stored = localStorage.getItem(key);
-    try {
-      return JSON.parse(stored)
-    } catch(err){
-      return undefined
-    }
-  }
 
   const getWord = id => {
     if (!id) {
@@ -59,7 +47,7 @@ const App = () => {
     alert(word.characters.join(""));
   };
   
-  const toggleMark = (key, value) => {
+  const toggleWord = (key, value) => {
     const word = getWord(key);
     
     if (!word) {
@@ -69,30 +57,6 @@ const App = () => {
     let marker = value === false || value === true ? value : undefined;
     dispatch({ type: "toggleWord", data: { key, marker } });
   }
-
-  /*const toggleMark = (id, value) => {
-    const word = getWord(id);
-
-    if (!word) {
-      return undefined;
-    }
-
-    if (value === false || value === true) {
-      word.isMarked = value;
-    } else {
-      word.isMarked = !word.isMarked;
-    }
-
-    const [paragraphIndex, wordIndex] = id.split("-");
-
-    const updatedContent = { ...content };
-
-    updatedContent.page[paragraphIndex].words[wordIndex].isMarked = !word.isMarked;
-
-    setContent(updatedContent);
-    saveToLocalStorage('content', updatedContent);
-    return word.isMarked;
-  };*/
   
   const reset = () => {
     setContent(undefined)
@@ -115,7 +79,7 @@ const App = () => {
         <Editor
           page={state.page}
           getWord={getWord}
-          toggleMark={toggleMark}
+          toggleWord={toggleWord}
           editWord={editWord}
           reset={reset}
           dispatch={logDispatch}
