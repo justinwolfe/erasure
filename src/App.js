@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Splash from "./components/Splash.js";
 import Editor from "./components/Editor.js";
+import {reducer, initialState} from "./reducer.js"
+import { useImmerReducer } from "use-immer";
 
 import "./App.css";
 
@@ -23,13 +25,12 @@ const App = () => {
   const [meta, setMeta] = useState(undefined);
   const [currentError, setCurrentError] = useState("");
   const [textStyle, setTextStyle] = useState(initialTextStyle);
-  const [state, dispatch] = useReducer((state, action) => {
-    switch(action.type)
-  }, {
-    content:undefined,
-    meta: undefined,
-    text:initialTextStyle
-  })
+  const [state, dispatch] = useImmerReducer(reducer, initialState)
+  
+  const logDispatch = (action) => {
+    console.log(action);
+    dispatch(action);
+  }
   
   const saveToLocalStorage = (key, dataObject) => {
     window.localStorage.setItem(key, JSON.stringify(dataObject))
@@ -91,11 +92,13 @@ const App = () => {
     const saved = getLocalStorage('content');
     setContent(saved);
   }, [])
+  
+  console.log("state",state)
 
   return (
     <div className="App">
       {!content && (
-        <Splash setContent={setContent} setCurrentError={setCurrentError} />
+        <Splash setContent={setContent} setCurrentError={setCurrentError} dispatch={logDispatch} />
       )}
       {content && (
         <Editor
@@ -104,6 +107,7 @@ const App = () => {
           toggleMark={toggleMark}
           editWord={editWord}
           reset={reset}
+          dispatch={logDispatch}
         />
       )}
     </div>

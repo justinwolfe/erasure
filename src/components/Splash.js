@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getContentFromUrl } from "../utils";
 
-const Splash = ({ setContent, setCurrentError }) => {
+const Splash = ({ setContent, setCurrentError, dispatch }) => {
   const [url, setUrl] = useState("");
   const [fetchStatus, setFetchStatus] = useState("");
 
@@ -10,6 +10,7 @@ const Splash = ({ setContent, setCurrentError }) => {
       getContentFromUrl(url)
         .then(data => {
           setContent({ paragraphs: data, url, created: Date.now() });
+          dispatch({type:})
         })
         .catch(err => {
           setCurrentError(err);

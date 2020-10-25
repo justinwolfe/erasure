@@ -1,5 +1,6 @@
-const initialState = {
+export const initialState = {
   content: undefined,
+  original: undefined,
   meta: undefined,
   text: {
     global: {
@@ -16,13 +17,19 @@ const initialState = {
   }
 };
 
-const reducer = (draft, action) => {
+export const reducer = (draft, action) => {
   switch (action.type) {
     case "reset":
       return initialState;
-    case "increment":
-      return void draft.count++;
-    case "decrement":
-      return void draft.count--;
+    case "loadLocalStorage": 
+      return draft
+    case "loadArticle":
+      return draft
+    case "toggleWord": 
+      return draft
+    case "toggleCharacter":
+      return draft
   }
 };
+
+

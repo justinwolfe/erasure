@@ -13,7 +13,7 @@ const editorStyle = {
 
 const contentStyle = { backgroundColor: "white", padding: "12%" };
 
-const Editor = ({ content, toggleMark, getWord, editWord, reset, textStyle, setTextStyle }) => {
+const Editor = ({ content, toggleMark, getWord, editWord, reset, textStyle, setTextStyle, dispatch }) => {
   const { paragraphs, url, created } = content;
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
