@@ -10,8 +10,8 @@ const Splash = ({ setContent, setCurrentError, dispatch }) => {
       getContentFromUrl(url)
         .then(data => {
           console.log("data", data)
-          setContent({ paragraphs: data.paragraphs, url, created: Date.now() });
-          //dispatch({type:'loadArticle', data: { paragraphs: data, url, created: Date.now() }})
+          setContent(data);
+          dispatch({type:'loadContent', data})
         })
         .catch(err => {
           setCurrentError(err);

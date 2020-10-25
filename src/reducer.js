@@ -23,7 +23,9 @@ export const reducer = (draft, action) => {
       return initialState;
     case "loadLocalStorage": 
       return draft
-    case "loadArticle":
+    case "loadContent":
+      draft.content = action.content;
+      draft.meta = action.meta;
       return draft
     case "toggleWord": 
       return draft

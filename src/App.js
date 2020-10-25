@@ -92,8 +92,6 @@ const App = () => {
     const saved = getLocalStorage('content');
     setContent(saved);
   }, [])
-  
-  console.log("state",state)
 
   return (
     <div className="App">
@@ -108,6 +106,7 @@ const App = () => {
           editWord={editWord}
           reset={reset}
           dispatch={logDispatch}
+          textStyle={textStyle}
         />
       )}
     </div>
