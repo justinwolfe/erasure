@@ -58,9 +58,20 @@ const App = () => {
     const word = getWord(id);
     alert(word.characters.join(""));
   };
+  
+  const toggleMark = (key, value) => {
+    const word = getWord(key);
+    
+    if (!word) {
+      return undefined;
+    }
+    
+    let marker = value === false || value === true ? value : undefined;
+    dispatch({ type: "toggleWord", data: { key, marker } });
+  }
 
-  const toggleMark = (id, value) => {
-    /*const word = getWord(id);
+  /*const toggleMark = (id, value) => {
+    const word = getWord(id);
 
     if (!word) {
       return undefined;
@@ -80,8 +91,8 @@ const App = () => {
 
     setContent(updatedContent);
     saveToLocalStorage('content', updatedContent);
-    return word.isMarked;*/
-  };
+    return word.isMarked;
+  };*/
   
   const reset = () => {
     setContent(undefined)

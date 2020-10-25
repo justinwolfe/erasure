@@ -30,7 +30,13 @@ export const reducer = (draft, action) => {
     case "toggleWord":
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
       if (draft.page[paragraphIndex].words[wordIndex]) {
-        draft.page[paragraphIndex].words[wordIndex].isMarked = action.data.currentGesture;
+        if (typeof action.data.marker === 'undefined') {
+          draft.page[paragraphIndex].words[wordIndex].isMarked = !draft.page[
+            paragraphIndex
+          ].words[wordIndex].isMarked;
+        } else {
+          draft.page[paragraphIndex].words[wordIndex].isMarked = action.data.marker;
+        }
       }
       return draft;
     case "toggleCharacter":
