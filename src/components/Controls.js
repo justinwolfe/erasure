@@ -1,11 +1,5 @@
 import React from "react";
 
-const style = {
-  position: "sticky",
-  backgroundColor: "gray",
-  top: 0
-};
-
 const Controls = ({ textStyle, dispatch, reset }) => {
   return (
     <div>
@@ -40,7 +34,6 @@ const Controls = ({ textStyle, dispatch, reset }) => {
         </button>
         <button onClick={() => reset()}>reset</button>
       </div>
-      <div style={style}></div>
     </div>
   );
 };

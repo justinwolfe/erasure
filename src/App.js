@@ -9,16 +9,8 @@ import "./App.css";
 
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState)
-  
-  /*const logDispatch = (action) => {
-    console.log(action);
-    dispatch(action);
-  }*/
 
-  const getWord = id => {
-    if (!id) {
-      return undefined;
-    }
+  const getWord = (id) => {
     const [paragraphIndex, wordIndex] = id.split("-");
     const word = state.page[paragraphIndex].words[wordIndex];
     return word;
@@ -30,14 +22,7 @@ const App = () => {
   };
   
   const toggleWord = (key, value) => {
-    const word = getWord(key);
-    
-    if (!word) {
-      return undefined;
-    }
-    
     let marker = value === false || value === true ? value : undefined;
-    
     dispatch({ type: "toggleWord", data: { key, marker } });
   }
   
