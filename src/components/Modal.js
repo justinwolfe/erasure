@@ -13,9 +13,11 @@ const container = {
 
 const cornerButton = {
   position: "absolute",
-  right:"2%",
-  top:"2%",
+  right:"0",
+  top:"0",
   fontSize:"1em",
+  padding:"1.5%",
+  border:"1px solid red"
 }
 
 const content = {
@@ -24,8 +26,8 @@ const content = {
   top: "50%",
   webkitTransform: "translate(-50%, -50%)",
   transform: "translate(-50%, -50%)",
-  width:"50%",
-  height:"50%",
+  width:"90%",
+  height:"60%",
   border:"1px solid red"
 }
 

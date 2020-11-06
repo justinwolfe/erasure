@@ -20,8 +20,10 @@ const Editor = ({
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(undefined)
 
   const mark = node => {
+    if(modalOpen)
     const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
@@ -81,7 +83,7 @@ const Editor = ({
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
     >
-      {modalOpen && <Modal closeModal={closeModal}>test</Modal>}
+      {modalOpen && <Modal closeModal={closeModal}>{modalContent}</Modal>}
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {page &&
