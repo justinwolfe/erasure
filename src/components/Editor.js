@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
-import Modal from "./Modal";
+import WordEditor from "./WordEditor"
 import debounce from "just-debounce";
 import { handleScreenshot } from "../utils";
 
@@ -19,11 +19,11 @@ const Editor = ({
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(undefined)
+  const [wordEditorOpen, setWordEditorOpen] = useState(false);
+  const [editedWord, setEditedWord] = useState({})
 
   const mark = node => {
-    if(modalOpen) return;
+    if(wordEditorOpen) return;
     const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
@@ -62,14 +62,16 @@ const Editor = ({
 
   const handleDoubleClick = e => {
     const key = e.target.getAttribute("name");
-    if (key) {
-      setModalOpen(true)
-    }
+    if(!key) return;
+    const word = getWord(key);
+    if(!word) return;
+    setEditedWord(word);
+    setWordEditorOpen(true)
   };
 
   const debouncedMove = e => debounce(handleMove(e), 100);
   
-  const closeModal = () => setModalOpen(false)
+  const close = () => setWordEditorOpen(false)
 
 
   return (
@@ -83,7 +85,7 @@ const Editor = ({
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
     >
-      {modalOpen && <Modal closeModal={closeModal}>{modalContent}</Modal>}
+      {wordEditorOpen && <WordEditor word={editedWord} close={close}/>}
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {page &&

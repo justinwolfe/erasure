@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Modal from './Modal'
+import Letter from "./Letter"
 
-const WordEditor = ({closeModal}) => {
- return <Modal>
+const WordEditor = ({word, close}) => {
+ return <Modal close={close}>
    <div>
-     fjkdsljfkdsfd
+     {JSON.stringify(word)}
    </div>
  </Modal>
 }

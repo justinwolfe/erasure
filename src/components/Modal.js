@@ -6,7 +6,7 @@ const container = {
   top: "35%",
   width: "80%",
   height: "30%",
-  backgroundColor: "black",
+  backgroundColor: "gray",
   color:"white",
   zIndex: 999
 }
@@ -17,7 +17,6 @@ const cornerButton = {
   top:"0",
   fontSize:"1em",
   padding:"1%",
-  border:"1px solid red"
 }
 
 const content = {
@@ -28,12 +27,13 @@ const content = {
   transform: "translate(-50%, -50%)",
   width:"85%",
   height:"65%",
-  border:"1px solid red"
+  border:"1px solid red",
+  backgroundColor:"white",
 }
 
-const Modal = ({children, closeModal}) => {
+const Modal = ({children, close}) => {
   return <div style={container}>
-    <div style={cornerButton} onClick={() => closeModal()}>x</div>
+    <div style={cornerButton} onClick={() => close()}>x</div>
     <div style={content}>
       {children}
     </div>
