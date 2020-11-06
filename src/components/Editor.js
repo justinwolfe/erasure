@@ -23,7 +23,7 @@ const Editor = ({
   const [modalContent, setModalContent] = useState(undefined)
 
   const mark = node => {
-    if(modalOpen)
+    if(modalOpen) return;
     const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
