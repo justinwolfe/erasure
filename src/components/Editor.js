@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
+import Modal from "./Modal";
 import debounce from "just-debounce";
 import { handleScreenshot } from "../utils";
 
@@ -18,6 +19,7 @@ const Editor = ({
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
+  const [modalOpen, setModalOpen] = useState(true);
 
   const mark = node => {
     const key = node.getAttribute("name");
@@ -63,7 +65,7 @@ const Editor = ({
     }
   };
 
-  const debouncedMove = e => debounce(handleMove(e), 200);
+  const debouncedMove = e => debounce(handleMove(e), 100);
 
   return (
     <div
@@ -76,11 +78,8 @@ const Editor = ({
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
     >
-      <Controls
-        textStyle={textStyle}
-        dispatch={dispatch}
-        reset={reset}
-      />
+      {modalOpen && <Modal>test</Modal>}
+      <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {page &&
           page.map(paragraph => (

@@ -16,10 +16,10 @@ const App = () => {
     return word;
   };
 
-  const editWord = id => {
+  /*const editWord = id => {
     const word = getWord(id);
     alert(word.characters.join(""));
-  };
+  };*/
   
   const toggleWord = (key, value) => {
     let marker = value === false || value === true ? value : undefined;
@@ -54,7 +54,6 @@ const App = () => {
           page={state.page}
           getWord={getWord}
           toggleWord={toggleWord}
-          editWord={editWord}
           reset={reset}
           dispatch={dispatch}
           textStyle={state.style.text}
