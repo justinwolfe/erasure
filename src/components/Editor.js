@@ -19,7 +19,7 @@ const Editor = ({
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const mark = node => {
     const key = node.getAttribute("name");
@@ -61,11 +61,14 @@ const Editor = ({
   const handleDoubleClick = e => {
     const key = e.target.getAttribute("name");
     if (key) {
-      editWord(key);
+      setModalOpen(true)
     }
   };
 
   const debouncedMove = e => debounce(handleMove(e), 100);
+  
+  const closeModal = () => setModalOpen(false)
+
 
   return (
     <div
@@ -78,7 +81,7 @@ const Editor = ({
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
     >
-      {modalOpen && <Modal>test</Modal>}
+      {modalOpen && <Modal closeModal={closeModal}>test</Modal>}
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {page &&
