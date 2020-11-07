@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const outOfBounds = {
-  position: "absolute",
+  position: "fixed",
   width: "100%",
   height: "100%",
   left: 0,
@@ -19,15 +19,6 @@ const container = {
   backgroundColor: "#f2f2f2",
   color: "white",
   zIndex: 999
-};
-
-const cornerButton = {
-  position: "absolute",
-  right: "0",
-  top: "0",
-  fontSize: "1em",
-  padding: "1%",
-  color: "black"
 };
 
 const content = {

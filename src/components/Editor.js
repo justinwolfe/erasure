@@ -61,8 +61,8 @@ const Editor = ({
   };
 
   const handleDoubleClick = e => {
-    console.log(e.target)
-    const key = e.target.getAttribute("name");
+    console.dir(e.target)
+    const key = e.target.parentElement.getAttribute("name");
     console.log(key)
     if (!key) return;
     const word = getWord(key);
@@ -79,7 +79,7 @@ const Editor = ({
     <div
       style={editorStyle}
       onTouchStart={handleStart}
-      onTouchMove={debouncedMove}
+      onTouchMove={debo}
       onTouchEnd={handleStop}
       onMouseDown={handleStart}
       onMouseMove={debouncedMove}
