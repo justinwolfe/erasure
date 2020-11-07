@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
-import WordEditor from "./WordEditor"
+import WordEditor from "./WordEditor";
 import debounce from "just-debounce";
 import { handleScreenshot } from "../utils";
 
@@ -20,10 +20,10 @@ const Editor = ({
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
-  const [editedWord, setEditedWord] = useState({})
+  const [editedWord, setEditedWord] = useState({});
 
   const mark = node => {
-    if(wordEditorOpen) return;
+    if (wordEditorOpen) return;
     const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
@@ -62,17 +62,16 @@ const Editor = ({
 
   const handleDoubleClick = e => {
     const key = e.target.getAttribute("name");
-    if(!key) return;
+    if (!key) return;
     const word = getWord(key);
-    if(!word) return;
+    if (!word) return;
     setEditedWord(word);
-    setWordEditorOpen(true)
+    setWordEditorOpen(true);
   };
 
   const debouncedMove = e => debounce(handleMove(e), 100);
-  
-  const close = () => setWordEditorOpen(false)
 
+  const close = () => setWordEditorOpen(false);
 
   return (
     <div
@@ -85,7 +84,14 @@ const Editor = ({
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
     >
-      {wordEditorOpen && <WordEditor word={editedWord} editWord={editWord} close={close}/>}
+      {wordEditorOpen && (
+        <WordEditor
+          word={editedWord}
+          editWord={editWord}
+          close={close}
+          textStyle={textStyle}
+        />
+      )}
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {page &&
