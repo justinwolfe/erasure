@@ -29,7 +29,6 @@ const Editor = ({
     keyCache.current.add(key);
     if (currentGesture === undefined) {
       const word = getWord(key);
-      console.log(word)
       if (word) {
         setCurrentGesture(!word.isMarked);
       }
@@ -45,6 +44,7 @@ const Editor = ({
       e.nativeEvent.type === "touchmove"
     ) {
       const movedIntoElement = document.elementFromPoint(clientX, clientY);
+      console.log(movedIntoElement)
       if (movedIntoElement) {
         mark(movedIntoElement);
       }
