@@ -109,7 +109,7 @@ const Editor = ({
       <div id="content" style={contentStyle}>
         {page &&
           page.map(paragraph => (
-            <Paragraph className="paragraph" key={paragraph.id} name={paragraph.id}>
+            <Paragraph key={paragraph.id} name={paragraph.id}>
               {paragraph.words.map(word => (
                 <Word
                   characters={word.characters}
