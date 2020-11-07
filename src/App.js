@@ -25,6 +25,10 @@ const App = () => {
     dispatch({ type: "toggleWord", data: { key, marker } });
   }
   
+  const toggleParagraph = (key) => {
+    
+  }
+  
   const reset = () => {
     window.localStorage.clear();
     dispatch({type:'reset'});
@@ -53,6 +57,7 @@ const App = () => {
           page={state.page}
           getWord={getWord}
           toggleWord={toggleWord}
+          toggleParagraph={toggleParagraph}
           editWord={editWord}
           reset={reset}
           dispatch={dispatch}
