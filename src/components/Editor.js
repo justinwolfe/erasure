@@ -47,6 +47,11 @@ const Editor = ({
       console.log(movedIntoElement)
       if (movedIntoElement) {
         mark(movedIntoElement);
+      } else {
+        if(movedIntoElement.parentElement && movedIntoElement.parentElement.parentElement && movedIntoElement.parentElement.getAttribute("name")){
+          console.log("parent", movedIntoElement.parentElement)
+          mark(movedIntoElement.parentElement.parentElement);
+        }
       }
     }
   };
