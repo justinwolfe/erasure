@@ -6,7 +6,7 @@ const container = {
   top: "35%",
   width: "80%",
   height: "30%",
-  backgroundColor: "gray",
+  backgroundColor: "#f2f2f2",
   color:"white",
   zIndex: 999
 }
@@ -17,6 +17,7 @@ const cornerButton = {
   top:"0",
   fontSize:"1em",
   padding:"1%",
+  color:"black"
 }
 
 const content = {
@@ -27,8 +28,7 @@ const content = {
   transform: "translate(-50%, -50%)",
   width:"85%",
   height:"65%",
-  border:"1px solid red",
-  backgroundColor:"white",
+  color:"black"
 }
 
 const Modal = ({children, close}) => {

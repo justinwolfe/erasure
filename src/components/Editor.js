@@ -85,7 +85,7 @@ const Editor = ({
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
     >
-      {wordEditorOpen && <WordEditor word={editedWord} close={close}/>}
+      {wordEditorOpen && <WordEditor word={editedWord} editWord={editWord} close={close}/>}
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {page &&

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Modal from './Modal'
-import Letter from "./Letter"
+import CharacterEditor from "./CharacterEditor"
 
-const WordEditor = ({word, close}) => {
+const WordEditor = ({word, close, editWord}) => {
  return <Modal close={close}>
    <div>
-     {JSON.stringify(word)}
+     {word.characters.map(({character, id}) => <CharacterEditor key={id} character={character} />)}
    </div>
  </Modal>
 }

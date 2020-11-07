@@ -16,10 +16,9 @@ const App = () => {
     return word;
   };
 
-  /*const editWord = id => {
-    const word = getWord(id);
-    alert(word.characters.join(""));
-  };*/
+  const editWord = (word) => {
+    alert("saving edit");
+  };
   
   const toggleWord = (key, value) => {
     let marker = value === false || value === true ? value : undefined;
