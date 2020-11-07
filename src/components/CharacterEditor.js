@@ -4,7 +4,8 @@ const style = {
   display: "inline-block",
   border: "1px solid black",
   padding: "2%",
-  margin: "2%"
+  margin: "2%",
+  fontSize: "2"
 };
 
 const CharacterEditor = ({

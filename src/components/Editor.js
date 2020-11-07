@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
 import Controls from "./Controls";
 import WordEditor from "./WordEditor";
-import debounce from "just-debounce";
 import { handleScreenshot } from "../utils";
 
 const Editor = ({
@@ -79,8 +78,6 @@ const Editor = ({
     setWordEditorOpen(true);
   };
 
-  const debouncedMove = e => debounce(handleMove(e), 100);
-
   const close = () => setWordEditorOpen(false);
 
   return (
@@ -90,7 +87,7 @@ const Editor = ({
       onTouchMove={handleMove}
       onTouchEnd={handleStop}
       onMouseDown={handleStart}
-      onMouseMove={debouncedMove}
+      onMouseMove={handleMove}
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
     >

@@ -7,7 +7,9 @@ const outOfBounds = {
   left: 0,
   top: 0,
   zIndex: 998,
-  backgroundColor: "black"
+  backgroundColor: "black",
+  opacity:0.2,
+  filter: "blur(4px)"
 };
 
 const container = {
