@@ -16,9 +16,8 @@ const App = () => {
     return word;
   };
 
-  const editWord = (id, characters) => {
-    alert("saving edit");
-    dispatch({type:'editWord', data: {id, characters}})
+  const editWord = (key, characters) => {
+    dispatch({type:'editWord', data: {key, characters}})
   };
   
   const toggleWord = (key, value) => {
@@ -43,6 +42,8 @@ const App = () => {
       dispatch({type:'loadFromStorage', data: saved})
     }
   }, [])
+  
+  console.log(state)
   
   return (
     <div className="App">

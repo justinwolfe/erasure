@@ -1,8 +1,8 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
+import Character from "./Character";
 
 const Word = ({ characters, id, isMarked, name, textStyle }) => {
-  const word = characters.map(character => character.character).join("");
   return (
     <React.Fragment>
       <span
@@ -12,7 +12,14 @@ const Word = ({ characters, id, isMarked, name, textStyle }) => {
           ...(isMarked ? textStyle.marked : textStyle.unmarked)
         }}
       >
-        {word}
+        {characters.map(({ character, id isMarked: characterIsMarked }) => (
+          <Character
+            key={characterId}
+            character={character}
+            textStyle={textStyle}
+            isMarked={characterIsMarked}
+          />
+        ))}
       </span>{" "}
     </React.Fragment>
   );

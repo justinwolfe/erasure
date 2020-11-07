@@ -1,4 +1,4 @@
-import { defaultStyle} from './data'
+import { defaultStyle } from "./data";
 
 export const initialState = {
   meta: undefined,
@@ -18,7 +18,7 @@ export const reducer = (draft, action) => {
       draft.page = action.data.page;
       draft.meta = action.data.meta;
       return draft;
-    case "toggleWord":{
+    case "toggleWord": {
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
       if (draft.page[paragraphIndex].words[wordIndex]) {
         if (typeof action.data.marker === "undefined") {
@@ -31,8 +31,10 @@ export const reducer = (draft, action) => {
         }
       }
       return draft;
-    case "editWord":{
+    }
+    case "editWord": {
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
+      draft.page[paragraphIndex].words[wordIndex].characters = action.data.characters;
       return draft;
     }
     case "toggleCharacter":
