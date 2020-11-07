@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
+import Paragraph from "./Paragraph"
 import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
+
+const useTouchMove = () => {
+  
+}
 
 const Editor = ({
   page,
@@ -35,6 +40,7 @@ const Editor = ({
   };
 
   const getWordKey = element => {
+    if(element === null) return undefined;
     if (element.getAttribute("name")) {
       return element.getAttribute("name");
     }
@@ -103,7 +109,7 @@ const Editor = ({
       <div id="content" style={contentStyle}>
         {page &&
           page.map(paragraph => (
-            <p className="paragraph" key={paragraph.id} name={paragraph.id}>
+            <Paragraph className="paragraph" key={paragraph.id} name={paragraph.id}>
               {paragraph.words.map(word => (
                 <Word
                   characters={word.characters}
@@ -115,7 +121,7 @@ const Editor = ({
                   textStyle={textStyle}
                 />
               ))}
-            </p>
+            </Paragraph>
           ))}
       </div>
     </div>

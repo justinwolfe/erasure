@@ -36,12 +36,12 @@ const content = {
 
 const Modal = ({ children, close }) => {
   return (
-    <div>
+    <>
       <div style={outOfBounds} onClick={() => close()}></div>
       <div style={container}>
         <div style={content}>{children}</div>
       </div>
-    </div>
+    </>
   );
 };
 
