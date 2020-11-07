@@ -2,20 +2,32 @@ import React from "react";
 import styled from "styled-components";
 import Character from "./Character";
 
-/*
-        {characters.map(
-          ({ character, id: characterId, isMarked: characterIsMarked }) => (
-            <Character
-              key={characterId}
-              character={character}
-              textStyle={textStyle}
-              isMarked={characterIsMarked}
-            />
-          )
-        )}
-*/
+const simpleWord = characters =>
+  characters.map(character => character.character).join("");
 
-const Word = ({ characters, id, isMarked, name, textStyle }) => {
+const customWord = (characters, textStyle) =>
+  characters.map(
+    ({ character, id: characterId, isMarked: characterIsMarked }) => (
+      <Character
+        key={characterId}
+        character={character}
+        textStyle={textStyle}
+        isMarked={characterIsMarked}
+      />
+    )
+  );
+
+const Word = ({
+  characters,
+  id,
+  isMarked,
+  name,
+  textStyle,
+  customCharacters
+}) => {
+  const content = !customCharacters
+    ? simpleWord(characters)
+    : customWord(characters, textStyle);
   return (
     <React.Fragment>
       <span
@@ -25,7 +37,7 @@ const Word = ({ characters, id, isMarked, name, textStyle }) => {
           ...(isMarked ? textStyle.marked : textStyle.unmarked)
         }}
       >
-        {characters.map(character => character.character).join("")}
+        {content}
       </span>{" "}
     </React.Fragment>
   );

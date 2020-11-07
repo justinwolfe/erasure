@@ -29,6 +29,7 @@ const Editor = ({
     keyCache.current.add(key);
     if (currentGesture === undefined) {
       const word = getWord(key);
+      console.log(word)
       if (word) {
         setCurrentGesture(!word.isMarked);
       }
@@ -62,7 +63,7 @@ const Editor = ({
 
   const handleDoubleClick = e => {
     console.dir(e.target)
-    const key = e.target.parentElement.getAttribute("name");
+    const key = e.target.getAttribute("name");
     console.log(key)
     if (!key) return;
     const word = getWord(key);
@@ -79,7 +80,7 @@ const Editor = ({
     <div
       style={editorStyle}
       onTouchStart={handleStart}
-      onTouchMove={debo}
+      onTouchMove={handleMove}
       onTouchEnd={handleStop}
       onMouseDown={handleStart}
       onMouseMove={debouncedMove}

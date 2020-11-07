@@ -35,6 +35,7 @@ export const reducer = (draft, action) => {
     case "editWord": {
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
       draft.page[paragraphIndex].words[wordIndex].characters = action.data.characters;
+      draft.page[paragraphIndex].words[wordIndex].customCharacters = true;
       return draft;
     }
     case "toggleCharacter":
