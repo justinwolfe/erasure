@@ -12,14 +12,16 @@ const Word = ({ characters, id, isMarked, name, textStyle }) => {
           ...(isMarked ? textStyle.marked : textStyle.unmarked)
         }}
       >
-        {characters.map(({ character, id isMarked: characterIsMarked }) => (
-          <Character
-            key={characterId}
-            character={character}
-            textStyle={textStyle}
-            isMarked={characterIsMarked}
-          />
-        ))}
+        {characters.map(
+          ({ character, id: characterId, isMarked: characterIsMarked }) => (
+            <Character
+              key={characterId}
+              character={character}
+              textStyle={textStyle}
+              isMarked={characterIsMarked}
+            />
+          )
+        )}
       </span>{" "}
     </React.Fragment>
   );

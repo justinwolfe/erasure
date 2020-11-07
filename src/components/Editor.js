@@ -61,7 +61,9 @@ const Editor = ({
   };
 
   const handleDoubleClick = e => {
+    console.log(e.target)
     const key = e.target.getAttribute("name");
+    console.log(key)
     if (!key) return;
     const word = getWord(key);
     if (!word) return;
