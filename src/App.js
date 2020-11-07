@@ -16,7 +16,7 @@ const App = () => {
     return word;
   };
 
-  const editWord = (word) => {
+  const editWord = (id, characters) => {
     alert("saving edit");
   };
   

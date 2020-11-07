@@ -10,11 +10,12 @@ const WordEditor = ({ word, close, editWord, textStyle }) => {
     const characterIndex = newCharacters.findIndex(
       character => character.id === characterId
     );
-    console.log("characterIndex", characterIndex);
-    console.log(newCharacters[characterIndex]);
-    newCharacters[characterIndex].isMarked = true;
-    //newCharacters[characterIndex].isMarked = false;
-    //setCharacters(newCharacters);
+    newCharacters[characterIndex] = {
+      ...newCharacters[characterIndex],
+      isMarked: !newCharacters[characterIndex].isMarked
+    };
+    setCharacters(newCharacters);
+    editWord(word.id, characters);
   };
 
   return (
