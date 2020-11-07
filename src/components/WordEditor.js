@@ -4,22 +4,23 @@ import CharacterEditor from "./CharacterEditor";
 
 const WordEditor = ({ word, close, editWord, textStyle }) => {
   const [characters, setCharacters] = useState(word.characters);
-  console.log(word.characters);
 
   const toggleMark = characterId => {
     const newCharacters = [...characters];
     const characterIndex = newCharacters.findIndex(
       character => character.id === characterId
     );
-    newCharacters[characterIndex].isMarked = !characters[characterIndex]
-      .isMarked;
-    setCharacters(newCharacters);
+    console.log("characterIndex", characterIndex);
+    console.log(newCharacters[characterIndex]);
+    newCharacters[characterIndex].isMarked = true;
+    //newCharacters[characterIndex].isMarked = false;
+    //setCharacters(newCharacters);
   };
 
   return (
     <Modal close={close}>
       <div>
-        {word.characters.map(({ character, id, isMarked }) => (
+        {characters.map(({ character, id, isMarked }) => (
           <CharacterEditor
             key={id}
             id={id}
