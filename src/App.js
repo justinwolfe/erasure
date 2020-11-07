@@ -18,6 +18,7 @@ const App = () => {
 
   const editWord = (id, characters) => {
     alert("saving edit");
+    dispatch({type:'editWord', data: {id, characters}})
   };
   
   const toggleWord = (key, value) => {
@@ -53,6 +54,7 @@ const App = () => {
           page={state.page}
           getWord={getWord}
           toggleWord={toggleWord}
+          editWord={editWord}
           reset={reset}
           dispatch={dispatch}
           textStyle={state.style.text}

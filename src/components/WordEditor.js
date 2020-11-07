@@ -15,11 +15,15 @@ const WordEditor = ({ word, close, editWord, textStyle }) => {
       isMarked: !newCharacters[characterIndex].isMarked
     };
     setCharacters(newCharacters);
-    editWord(word.id, characters);
   };
 
   return (
-    <Modal close={close}>
+    <Modal
+      close={() => {
+        editWord(word.id, characters);
+        close();
+      }}
+    >
       <div>
         {characters.map(({ character, id, isMarked }) => (
           <CharacterEditor
