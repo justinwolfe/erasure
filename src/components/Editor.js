@@ -22,12 +22,11 @@ const Editor = ({
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
 
-  const mark = node => {
+  const mark = key => {
     if (wordEditorOpen) return;
-    const key = node.getAttribute("name");
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
-    if (currentGesture === undefined) {
+    if (typeof currentGesture === "undefined") {
       const word = getWord(key);
       if (word) {
         setCurrentGesture(!word.isMarked);
@@ -36,12 +35,12 @@ const Editor = ({
     toggleWord(key, currentGesture);
   };
 
-  const getValidWordElement = element => {
-    if (!element.getAttribute("name")) {
-      return element;
+  const getWordKey = element => {
+    if (element.getAttribute("name")) {
+      return element.getAttribute("name");
     }
     if (element.parentElement && element.parentElement.getAttribute("name")) {
-      return element.parentElement;
+      return element.parentElement.getAttribute("name");
     }
     return undefined;
   };
@@ -54,10 +53,9 @@ const Editor = ({
       e.nativeEvent.type === "touchmove"
     ) {
       const movedIntoElement = document.elementFromPoint(clientX, clientY);
-      const wordElement = getValidWordElement(movedIntoElement);
-      console.log("wordElement", wordElement);
-      if (wordElement) {
-        mark(wordElement);
+      const wordKey = getWordKey(movedIntoElement);
+      if (wordKey) {
+        mark(wordKey);
       }
     }
   };
@@ -73,11 +71,9 @@ const Editor = ({
   };
 
   const handleDoubleClick = e => {
-    console.dir(e.target);
-    const key = e.target.getAttribute("name");
-    console.log(key);
-    if (!key) return;
-    const word = getWord(key);
+    const wordKey = getWordKey(e.target);
+    if (!wordKey) return;
+    const word = getWord(wordKey);
     if (!word) return;
     setEditedWord(word);
     setWordEditorOpen(true);

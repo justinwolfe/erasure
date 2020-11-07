@@ -11,7 +11,7 @@ export const defaultStyle = {
   },
   text: {
     global: {
-      fontSize: 20,
+      fontSize: 15,
       fontFamily: "Helvetica, Arial",
       lineHeight: "1.4"
     },
