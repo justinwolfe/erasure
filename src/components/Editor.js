@@ -36,6 +36,16 @@ const Editor = ({
     toggleWord(key, currentGesture);
   };
 
+  const getValidWordElement = element => {
+    if (!element.getAttribute("name")) {
+      return element;
+    }
+    if (element.parentElement && element.parentElement.getAttribute("name")) {
+      return element.parentElement;
+    }
+    return undefined;
+  };
+
   const handleMove = e => {
     const { clientX, clientY } =
       e.nativeEvent.type === "mousemove" ? e : e.changedTouches[0];
@@ -44,14 +54,10 @@ const Editor = ({
       e.nativeEvent.type === "touchmove"
     ) {
       const movedIntoElement = document.elementFromPoint(clientX, clientY);
-      console.log(movedIntoElement)
-      if (movedIntoElement) {
-        mark(movedIntoElement);
-      } else {
-        if(movedIntoElement.parentElement && movedIntoElement.parentElement.parentElement && movedIntoElement.parentElement.getAttribute("name")){
-          console.log("parent", movedIntoElement.parentElement)
-          mark(movedIntoElement.parentElement.parentElement);
-        }
+      const wordElement = getValidWordElement(movedIntoElement);
+      console.log("wordElement", wordElement);
+      if (wordElement) {
+        mark(wordElement);
       }
     }
   };
@@ -67,9 +73,9 @@ const Editor = ({
   };
 
   const handleDoubleClick = e => {
-    console.dir(e.target)
+    console.dir(e.target);
     const key = e.target.getAttribute("name");
-    console.log(key)
+    console.log(key);
     if (!key) return;
     const word = getWord(key);
     if (!word) return;

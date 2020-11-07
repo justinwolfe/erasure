@@ -29,7 +29,7 @@ const Word = ({
     ? simpleWord(characters)
     : customWord(characters, textStyle);
   return (
-    <span>
+    <>
       <span
         name={id}
         style={{
@@ -39,7 +39,7 @@ const Word = ({
       >
         {content}
       </span>{" "}
-    </span>
+    </>
   );
 };
 
