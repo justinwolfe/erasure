@@ -20,21 +20,25 @@ export const reducer = (draft, action) => {
       return draft;
     case "toggleWord": {
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
+      let marker =
+        action.data.value === false || action.data.value === true
+          ? action.data.value
+          : undefined;
       if (draft.page[paragraphIndex].words[wordIndex]) {
-        if (typeof action.data.marker === "undefined") {
+        if (typeof marker === "undefined") {
           draft.page[paragraphIndex].words[wordIndex].isMarked = !draft.page[
             paragraphIndex
           ].words[wordIndex].isMarked;
         } else {
-          draft.page[paragraphIndex].words[wordIndex].isMarked =
-            action.data.marker;
+          draft.page[paragraphIndex].words[wordIndex].isMarked = marker;
         }
       }
       return draft;
     }
     case "editWord": {
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
-      draft.page[paragraphIndex].words[wordIndex].characters = action.data.characters;
+      draft.page[paragraphIndex].words[wordIndex].characters =
+        action.data.characters;
       draft.page[paragraphIndex].words[wordIndex].customCharacters = true;
       return draft;
     }

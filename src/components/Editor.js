@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import Word from "./Word";
-import Paragraph from "./Paragraph"
+import Paragraph from "./Paragraph";
 import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
-
-const useTouchMove = () => {
-  
-}
 
 const Editor = ({
   page,
@@ -40,7 +36,7 @@ const Editor = ({
   };
 
   const getWordKey = element => {
-    if(element === null) return undefined;
+    if (element === null) return undefined;
     if (element.getAttribute("name")) {
       return element.getAttribute("name");
     }
@@ -78,7 +74,7 @@ const Editor = ({
   const handleDoubleClick = e => {
     const wordKey = getWordKey(e.target);
     if (!wordKey) return;
-    const word = getWord(wordKey);
+    const word = getWord(wordKey, page);
     if (!word) return;
     setEditedWord(word);
     setWordEditorOpen(true);

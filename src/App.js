@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Splash from "./components/Splash.js";
 import Editor from "./components/Editor.js";
-import {reducer, initialState} from "./reducer.js"
+import { reducer, initialState } from "./reducer.js";
 import { useImmerReducer } from "use-immer";
-import {getLocalStorage, setLocalStorage} from './utils'
+import { getLocalStorage, setLocalStorage } from "./utils";
 
 import "./App.css";
 
 const App = () => {
-  const [state, dispatch] = useImmerReducer(reducer, initialState)
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
 
   const getWord = (id, page) => {
     const [paragraphIndex, wordIndex] = id.split("-");
@@ -17,41 +17,38 @@ const App = () => {
   };
 
   const editWord = (key, characters) => {
-    dispatch({type:'editWord', data: {key, characters}})
+    dispatch({ type: "editWord", data: { key, characters } });
   };
-  
+
   const toggleWord = (key, value) => {
-    let marker = value === false || value === true ? value : undefined;
-    dispatch({ type: "toggleWord", data: { key, marker } });
-  }
-  
-  const toggleParagraph = (key) => {
-    
-  }
-  
+    dispatch({ type: "toggleWord", data: { key, value } });
+  };
+
+  const toggleParagraph = key => {
+    dispatch({ type: "toggleParagraph", data: { key } });
+  };
+
   const reset = () => {
     window.localStorage.clear();
-    dispatch({type:'reset'});
-  }
-  
+    dispatch({ type: "reset" });
+  };
+
   useEffect(() => {
-    if(typeof state.meta !== "undefined"){
-      setLocalStorage('state', state)
+    if (typeof state.meta !== "undefined") {
+      setLocalStorage("state", state);
     }
-  }, [state])
-  
+  }, [state]);
+
   useEffect(() => {
-    const saved = getLocalStorage('state');
-    if(saved){
-      dispatch({type:'loadFromStorage', data: saved})
+    const saved = getLocalStorage("state");
+    if (saved) {
+      dispatch({ type: "loadFromStorage", data: saved });
     }
-  }, [])
-  
+  }, []);
+
   return (
     <div className="App">
-      {!state.page && (
-        <Splash dispatch={dispatch} />
-      )}
+      {!state.page && <Splash dispatch={dispatch} />}
       {state.page && (
         <Editor
           page={state.page}
