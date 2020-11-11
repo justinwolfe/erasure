@@ -37,9 +37,15 @@ export const reducer = (draft, action) => {
     }
     case "toggleParagraph": {
       const paragraphIndex = action.data.key;
-      const paragraph = draft.page[paragraphIndex];
       const firstMark = draft.page[paragraphIndex].words[0].isMarked;
-      draft.page[paragraphIndex] = paragraph.map(word => {word.isMarked = !firstMark})
+      for (var word of draft.page[paragraphIndex].words) {
+        word.isMarked = !firstMark;
+        word.customCharacters = false;
+        for (var character of word.characters) {
+          character.isMarked = !firstMark;
+        }
+      }
+      return draft;
     }
     case "editWord": {
       const [paragraphIndex, wordIndex] = action.data.key.split("-");

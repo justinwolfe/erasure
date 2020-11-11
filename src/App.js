@@ -25,8 +25,7 @@ const App = () => {
   };
 
   const toggleParagraph = key => {
-    alert(key)
-    //dispatch({ type: "toggleParagraph", data: { key } });
+    dispatch({ type: "toggleParagraph", data: { key } });
   };
 
   const reset = () => {
