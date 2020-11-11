@@ -21,6 +21,7 @@ const Editor = ({
   const keyCache = useRef(new Set());
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
+  const [isScrolling, setIsScrolling] = useState(false)
 
   const mark = key => {
     if (wordEditorOpen) return;
@@ -79,6 +80,11 @@ const Editor = ({
     setEditedWord(word);
     setWordEditorOpen(true);
   };
+  
+  const handleScroll = e => {
+    setIsScrolling(true)
+    setTimeout()
+  }
 
   const close = () => setWordEditorOpen(false);
 
@@ -92,6 +98,7 @@ const Editor = ({
       onMouseMove={handleMove}
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
+      onScroll={handleScroll}
     >
       {wordEditorOpen && (
         <WordEditor

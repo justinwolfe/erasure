@@ -3,13 +3,16 @@ import React, { useState, useEffect, useRef } from "react";
 const spanStyle = {
   position: "relative",
   left: "-10px",
-  display:"none"
 };
 
-const Paragraph = ({ children, toggleParagraph }) => {
+const Paragraph = ({ children, toggleParagraph, handleVisible }) => {
   return (
     <p>
-      <span onDoubleClick={toggleParagraph} style={spanStyle}>#</span>
+      {handleVisible && (
+        <span onDoubleClick={toggleParagraph} style={spanStyle}>
+          #
+        </span>
+      )}
       {children}
     </p>
   );
