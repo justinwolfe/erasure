@@ -4,7 +4,6 @@ import Paragraph from "./Paragraph";
 import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
-import debounce from "just-debounce";
 
 const Editor = ({
   page,

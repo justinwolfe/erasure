@@ -16,17 +16,14 @@ const App = () => {
     return word;
   };
 
-  const editWord = (key, characters) => {
+  const editWord = (key, characters) =>
     dispatch({ type: "editWord", data: { key, characters } });
-  };
 
-  const toggleWord = (key, value) => {
+  const toggleWord = (key, value) =>
     dispatch({ type: "toggleWord", data: { key, value } });
-  };
 
-  const toggleParagraph = key => {
+  const toggleParagraph = key =>
     dispatch({ type: "toggleParagraph", data: { key } });
-  };
 
   const reset = () => {
     window.localStorage.clear();
