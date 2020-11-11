@@ -3,16 +3,15 @@ import React, { useState, useEffect, useRef } from "react";
 const spanStyle = {
   position: "relative",
   left: "-10px",
+  opacity: "15%"
 };
 
-const Paragraph = ({ children, toggleParagraph, handleVisible }) => {
+const Paragraph = ({ children, name, toggleParagraph, handleVisible }) => {
   return (
     <p>
-      {handleVisible && (
-        <span onDoubleClick={toggleParagraph} style={spanStyle}>
-          #
-        </span>
-      )}
+      <span onDoubleClick={() => toggleParagraph(name)} style={spanStyle}>
+        ◦
+      </span>
       {children}
     </p>
   );
