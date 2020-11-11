@@ -21,7 +21,7 @@ const Editor = ({
   const keyCache = useRef(new Set());
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
-  const [isScrolling, setIsScrolling] = useState(false)
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const mark = key => {
     if (wordEditorOpen) return;
@@ -80,13 +80,25 @@ const Editor = ({
     setEditedWord(word);
     setWordEditorOpen(true);
   };
-  
+
   const handleScroll = e => {
-    setIsScrolling(true)
-    setTimeout()
-  }
+    console.log("scrolling");
+    if (!isScrolling) {
+      setIsScrolling(true);
+      setTimeout(() => {
+        setIsScrolling(false);
+      }, 300);
+    }
+  };
 
   const close = () => setWordEditorOpen(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div
@@ -98,7 +110,6 @@ const Editor = ({
       onMouseMove={handleMove}
       onMouseUp={handleStop}
       onDoubleClick={handleDoubleClick}
-      onScroll={handleScroll}
     >
       {wordEditorOpen && (
         <WordEditor
@@ -112,7 +123,11 @@ const Editor = ({
       <div id="content" style={contentStyle}>
         {page &&
           page.map(paragraph => (
-            <Paragraph key={paragraph.id} name={paragraph.id}>
+            <Paragraph
+              key={paragraph.id}
+              name={paragraph.id}
+              handleVisible={isScrolling}
+            >
               {paragraph.words.map(word => (
                 <Word
                   characters={word.characters}
