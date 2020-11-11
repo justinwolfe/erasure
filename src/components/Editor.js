@@ -4,6 +4,7 @@ import Paragraph from "./Paragraph";
 import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
+import debounce from "just-debounce";
 
 const Editor = ({
   page,
@@ -81,24 +82,9 @@ const Editor = ({
     setWordEditorOpen(true);
   };
 
-  const handleScroll = e => {
-    console.log("scrolling");
-    if (!isScrolling) {
-      setIsScrolling(true);
-      setTimeout(() => {
-        setIsScrolling(false);
-      }, 300);
-    }
-  };
+
 
   const close = () => setWordEditorOpen(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <div
