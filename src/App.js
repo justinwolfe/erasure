@@ -10,9 +10,9 @@ import "./App.css";
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState)
 
-  const getWord = (id) => {
+  const getWord = (id, page) => {
     const [paragraphIndex, wordIndex] = id.split("-");
-    const word = state.page[paragraphIndex].words[wordIndex];
+    const word = page[paragraphIndex].words[wordIndex];
     return word;
   };
 

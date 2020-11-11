@@ -31,7 +31,7 @@ const Editor = ({
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
     if (typeof currentGesture === "undefined") {
-      const word = getWord(key);
+      const word = getWord(key, page);
       if (word) {
         setCurrentGesture(!word.isMarked);
       }
