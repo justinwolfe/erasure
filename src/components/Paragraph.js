@@ -6,15 +6,12 @@ const spanStyle = {
   opacity: "15%"
 };
 
-const Paragraph = ({ children, name, toggleParagraph, handleVisible }) => {
-  return (
-    <p>
-      <span onDoubleClick={() => toggleParagraph(name)} style={spanStyle}>
+/*      <span onDoubleClick={() => toggleParagraph(name)} style={spanStyle}>
         ◦
-      </span>
-      {children}
-    </p>
-  );
+      </span>*/
+
+const Paragraph = ({ children, name, toggleParagraph, handleVisible }) => {
+  return <p>{children}</p>;
 };
 
 export default Paragraph;
