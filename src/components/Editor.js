@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import Word from "./Word";
-import Paragraph from "./Paragraph";
+import React, { useEffect, useRef, useState } from "react";
+
 import Controls from "./Controls";
+import Paragraph from "./Paragraph";
+import Word from "./Word";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 
@@ -15,7 +16,7 @@ const Editor = ({
   editorStyle,
   contentStyle,
   dispatch,
-  toggleParagraph
+  toggleParagraph,
 }) => {
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
@@ -23,7 +24,7 @@ const Editor = ({
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
 
-  const mark = key => {
+  const mark = (key) => {
     if (wordEditorOpen) return;
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
@@ -36,18 +37,18 @@ const Editor = ({
     toggleWord(key, currentGesture);
   };
 
-  const getWordKey = element => {
+  const getWordKey = (element) => {
     if (element === null) return undefined;
     if (element.getAttribute("name")) {
       return element.getAttribute("name");
     }
-    if (element.parentElement && element.parentElement.getAttribute("name")) {
-      return element.parentElement.getAttribute("name");
+    if (element.closest("[name]")) {
+      return element.closest("[name]").getAttribute("name");
     }
     return undefined;
   };
 
-  const handleMove = e => {
+  const handleMove = (e) => {
     const { clientX, clientY } =
       e.nativeEvent.type === "mousemove" ? e : e.changedTouches[0];
     if (
@@ -62,17 +63,17 @@ const Editor = ({
     }
   };
 
-  const handleStart = e => {
+  const handleStart = (e) => {
     setGestureStarted(true);
   };
 
-  const handleStop = e => {
+  const handleStop = (e) => {
     keyCache.current.clear();
     setGestureStarted(false);
     setCurrentGesture(undefined);
   };
 
-  const handleDoubleClick = e => {
+  const handleDoubleClick = (e) => {
     const wordKey = getWordKey(e.target);
     if (!wordKey) return;
     const word = getWord(wordKey, page);
@@ -105,14 +106,14 @@ const Editor = ({
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {page &&
-          page.map(paragraph => (
+          page.map((paragraph) => (
             <Paragraph
               key={paragraph.id}
               name={paragraph.id}
               id={paragraph.id}
               toggleParagraph={toggleParagraph}
             >
-              {paragraph.words.map(word => (
+              {paragraph.words.map((word) => (
                 <Word
                   characters={word.characters}
                   key={word.id}
