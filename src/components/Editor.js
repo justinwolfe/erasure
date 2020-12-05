@@ -20,10 +20,10 @@ const Editor = ({
 }) => {
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
-  const keyCache = useRef(new Set());
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
-  const [isScrolling, setIsScrolling] = useState({});
+  const [keyCache] = useRef(new Set());
+  const [scroll] = useRef(false);
 
   const mark = (key) => {
     if (wordEditorOpen) return;
@@ -84,6 +84,17 @@ const Editor = ({
   };
 
   const close = () => setWordEditorOpen(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      window.clearTimeout(scroll.current);
+      scroll.current = setTimeeout(() => {
+        
+      }, []) 
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {};
+  }, []);
 
   return (
     <div
