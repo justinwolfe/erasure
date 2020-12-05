@@ -1,20 +1,17 @@
 import React from "react";
 
 const spanStyle = {
-  position: "absolute",
-  left: "10%",
-  opacity: "30%",
+  position: "relative",
+  left: "-10px",
+  opacity: "15%"
 };
 
-const Paragraph = ({ children, name, toggleParagraph, handleVisible }) => (
-  <p>
-    {handleVisible && (
-      <span onDoubleClick={() => toggleParagraph(name)} style={spanStyle}>
+/*      <span onDoubleClick={() => toggleParagraph(name)} style={spanStyle}>
         ◦
-      </span>
-    )}
-    {children}
-  </p>
-);
+      </span>*/
+
+const Paragraph = ({ children, name, toggleParagraph, handleVisible }) => {
+  return <p>{children}</p>;
+};
 
 export default Paragraph;
