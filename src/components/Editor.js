@@ -23,7 +23,7 @@ const Editor = ({
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
   const [keyCache] = useRef(new Set());
-  const [scroll] = useRef(0);
+  //const [scroll] = useRef(0);
 
   const mark = (key) => {
     if (wordEditorOpen) return;
