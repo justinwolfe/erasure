@@ -112,6 +112,7 @@ const Editor = ({
               name={paragraph.id}
               id={paragraph.id}
               toggleParagraph={toggleParagraph}
+              handleVisible={true}
             >
               {paragraph.words.map((word) => (
                 <Word
