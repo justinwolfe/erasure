@@ -41,8 +41,8 @@ const Editor = ({
     if (element.getAttribute("name")) {
       return element.getAttribute("name");
     }
-    if (element.parentElement && element.parentElement.getAttribute("name")) {
-      return element.parentElement.getAttribute("name");
+    if(element.closest("[name]")){
+      return element.closest("[name]").getAttribute("name")
     }
     return undefined;
   };
@@ -111,6 +111,7 @@ const Editor = ({
               name={paragraph.id}
               id={paragraph.id}
               toggleParagraph={toggleParagraph}
+              handleVisible={true}
             >
               {paragraph.words.map(word => (
                 <Word
