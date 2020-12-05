@@ -23,7 +23,7 @@ const Editor = ({
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
   const [keyCache] = useRef(new Set());
-  const [scroll] = useRef(false);
+  const [scroll] = useRef(null);
 
   const mark = (key) => {
     if (wordEditorOpen) return;
@@ -88,12 +88,12 @@ const Editor = ({
   useEffect(() => {
     const handleScroll = () => {
       window.clearTimeout(scroll.current);
-      scroll.current = setTimeeout(() => {
-        
-      }, []) 
+      scroll.current = setTimeout(() => {
+        console.log("stopped scrolling");
+      }, 100);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => {};
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
