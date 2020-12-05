@@ -1,25 +1,25 @@
 export const defaultStyle = {
   content: {
     backgroundColor: "white",
-    padding: "12%"
+    padding: "12%",
   },
   editor: {
     textAlign: "left",
     wordWrap: "break-word",
     cursor: "pointer",
-    userSelect: "none"
+    userSelect: "none",
   },
   text: {
     global: {
       fontSize: 15,
       fontFamily: "Helvetica, Arial",
-      lineHeight: "1.4"
+      lineHeight: "1.4",
     },
     marked: {
-      opacity: "5%"
+      opacity: "5%",
     },
     unmarked: {
-      opacity: "100%"
-    }
-  }
+      opacity: "100%",
+    },
+  },
 };
