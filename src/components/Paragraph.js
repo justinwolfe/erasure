@@ -2,8 +2,8 @@ import React from "react";
 
 const spanStyle = {
   position: "absolute",
-  left: "-10px",
-  opacity: "100%",
+  left: "10%",
+  opacity: "30%",
 };
 
 const Paragraph = ({ children, name, toggleParagraph, handleVisible }) => (
