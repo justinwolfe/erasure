@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useReducer } from "react";
-import Splash from "./components/Splash.js";
-import Editor from "./components/Editor.js";
-import { reducer, initialState } from "./reducer.js";
-import { useImmerReducer } from "use-immer";
-import { getLocalStorage, setLocalStorage } from "./utils";
-
 import "./App.css";
+
+import React, { useEffect, useReducer, useState } from "react";
+import { getLocalStorage, setLocalStorage } from "./utils";
+import { initialState, reducer } from "./reducer.js";
+
+import Editor from "./components/Editor.js";
+import Splash from "./components/Splash.js";
+import { useImmerReducer } from "use-immer";
 
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
@@ -22,7 +23,7 @@ const App = () => {
   const toggleWord = (key, value) =>
     dispatch({ type: "toggleWord", data: { key, value } });
 
-  const toggleParagraph = key =>
+  const toggleParagraph = (key) =>
     dispatch({ type: "toggleParagraph", data: { key } });
 
   const reset = () => {
