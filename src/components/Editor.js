@@ -6,7 +6,7 @@ import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 
 const useGestureOnPage = (collection, callback) => {
-  const [statefulCollection, setCollection] = useState(collection)
+  const [statefulCollection, setCollection] = useState(collection);
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
@@ -20,13 +20,13 @@ const useGestureOnPage = (collection, callback) => {
   const mark = key => {
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
+    const word = getWord(key, statefulCollection);
     if (typeof currentGesture === "undefined") {
-      const word = getWord(key, statefulCollection);
       if (word) {
         setCurrentGesture(!word.isMarked);
       }
     }
-    
+    console.log(word, currentGesture);
     callback(key, currentGesture);
   };
 
@@ -70,7 +70,7 @@ const useGestureOnPage = (collection, callback) => {
     gestureStart: handleStart,
     gestureStop: handleStop,
     gestureMove: handleMove,
-    gesture: currentGesture,
+    gesture: currentGesture
   };
 };
 
@@ -91,7 +91,7 @@ const Editor = ({
   const { gestureStart, gestureStop, gestureMove } = useGestureOnPage(
     page,
     (key, gesture) => {
-      toggleWord(key, gesture)
+      toggleWord(key, gesture);
     }
   );
 

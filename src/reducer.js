@@ -20,10 +20,10 @@ export const reducer = (draft, action) => {
       return draft;
     case "toggleWord": {
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
-      let marker =
-        action.data.value === false || action.data.value === true
+      let marker = action.data.value
+        /*action.data.value === false || action.data.value === true
           ? action.data.value
-          : undefined;
+          : undefined;*/
       if (draft.page[paragraphIndex].words[wordIndex]) {
         if (typeof marker === "undefined") {
           draft.page[paragraphIndex].words[wordIndex].isMarked = !draft.page[
