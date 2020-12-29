@@ -5,20 +5,21 @@ import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 
-const useGestureOnPage = (collection, callback) => {
+const useGestureOnPage = (collection) => {
   const [statefulCollection, setStatefulCollection] = useState(collection);
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
+  console.log(keyCache.current);
 
   const toggleWord = key => {
-    const newCollection = JSON.parse(JSON.stringify(statefulCollection))
+    const newCollection = JSON.parse(JSON.stringify(statefulCollection));
     const [paragraphIndex, wordIndex] = key.split("-");
     if (newCollection[paragraphIndex].words[wordIndex]) {
       if (typeof currentGesture === "undefined") {
         newCollection[paragraphIndex].words[
           wordIndex
-        ].isMarked = !newCollection[paragraphIndex].words[wordIndex]
+        ].isMarked = !statefulCollection[paragraphIndex].words[wordIndex]
           .isMarked;
       } else {
         newCollection[paragraphIndex].words[
@@ -43,8 +44,7 @@ const useGestureOnPage = (collection, callback) => {
         setCurrentGesture(!word.isMarked);
       }
     }
-    toggleWord(key, currentGesture)
-    //callback(key, currentGesture);
+    toggleWord(key, currentGesture);
     keyCache.current.add(key);
   };
 
@@ -76,9 +76,9 @@ const useGestureOnPage = (collection, callback) => {
 
   const handleStart = e => {
     setGestureStarted(true);
-    if (getWordKey(e.target)) {
+    /*if (getWordKey(e.target)) {
       mark(getWordKey(e.target));
-    }
+    }*/
   };
 
   const handleStop = e => {
@@ -113,9 +113,7 @@ const Editor = ({
     gestureStop,
     gestureMove,
     statefulCollection
-  } = useGestureOnPage(page, (key, gesture) => {
-    //toggleWord(key, gesture);
-  });
+  } = useGestureOnPage(page);
 
   const handleDoubleClick = e => {
     /*const wordKey = getWordKey(e.target);
