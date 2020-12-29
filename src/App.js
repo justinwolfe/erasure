@@ -11,12 +11,6 @@ import { useImmerReducer } from "use-immer";
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
-  const editWord = (key, characters) =>
-    dispatch({ type: "editWord", data: { key, characters } });
-
-  const toggleParagraph = (key) =>
-    dispatch({ type: "toggleParagraph", data: { key } });
-
   const reset = () => {
     window.localStorage.clear();
     dispatch({ type: "reset" });
@@ -35,7 +29,7 @@ const App = () => {
     }
   }, []);
   
-  const updateSavedState = () => {
+  const updateSavedState = (state) => {
     
   }
 

@@ -7,17 +7,8 @@ export const initialState = {
   style: defaultStyle
 };
 
-export const reducer = (draft, action) => {
-  switch (action.type) {
-    case "reset":
-      return initialState;
-    case "loadFromStorage":
-      draft = action.data;
-      return draft;
-    case "loadContent":
-      draft.page = action.data.page;
-      draft.meta = action.data.meta;
-      return draft;
+/*
+
     case "toggleWord": {
       const [paragraphIndex, wordIndex] = action.data.key.split("-");
       let marker =
@@ -68,5 +59,23 @@ export const reducer = (draft, action) => {
       } else {
       }
       return draft;
+  }
+
+*/
+
+export const reducer = (draft, action) => {
+  switch (action.type) {
+    case "reset":
+      return initialState;
+    case "loadFromStorage":
+      draft = action.data;
+      return draft;
+    case "loadContent":
+      draft.page = action.data.page;
+      draft.meta = action.data.meta;
+      return draft;
+    case "updateContent":
+      draft.page = action.data.page
+      return draft
   }
 };
