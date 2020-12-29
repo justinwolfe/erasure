@@ -88,7 +88,9 @@ const useGestureOnPage = (collection) => {
     gestureStop: handleStop,
     gestureMove: handleMove,
     gesture: currentGesture,
-    gesturefulPage: statefulCollection
+    gesturefulPage: statefulCollection,
+    getWord,
+    getWordKey
   };
 };
 
@@ -108,16 +110,18 @@ const Editor = ({
     gestureStart,
     gestureStop,
     gestureMove,
-    gesturefulPage
+    gesturefulPage,
+    getWordKey,
+    getWord
   } = useGestureOnPage(page);
 
   const handleDoubleClick = e => {
-    /*const wordKey = getWordKey(e.target);
+    const wordKey = getWordKey(e.target);
     if (!wordKey) return;
     const word = getWord(wordKey, page);
     if (!word) return;
     setEditedWord(word);
-    setWordEditorOpen(true);*/
+    setWordEditorOpen(true);
   };
 
   const close = () => setWordEditorOpen(false);
