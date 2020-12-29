@@ -10,8 +10,6 @@ const useGestureOnPage = (collection, callback) => {
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
-  
-  console.log('reset', currentGesture)
 
   const getWord = (id, page) => {
     const [paragraphIndex, wordIndex] = id.split("-");
@@ -21,13 +19,12 @@ const useGestureOnPage = (collection, callback) => {
 
   const mark = key => {
     if (!key || keyCache.current.has(key)) return;
-    const word = getWord(key, statefulCollection);
+    const word = getWord(key, collection);
     if (typeof currentGesture === "undefined") {
       if (word) {
         setCurrentGesture(!word.isMarked);
       }
     }
-    console.log(word, currentGesture);
     callback(key, currentGesture);
     keyCache.current.add(key);
   };
@@ -60,6 +57,7 @@ const useGestureOnPage = (collection, callback) => {
 
   const handleStart = e => {
     setGestureStarted(true);
+    console.log(e.target)
   };
 
   const handleStop = e => {
@@ -72,7 +70,8 @@ const useGestureOnPage = (collection, callback) => {
     gestureStart: handleStart,
     gestureStop: handleStop,
     gestureMove: handleMove,
-    gesture: currentGesture
+    gesture: currentGesture,
+    statefulCollection: statefulCollection
   };
 };
 
