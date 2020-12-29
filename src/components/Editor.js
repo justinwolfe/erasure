@@ -5,10 +5,22 @@ import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 
-const useGesture = elementCallback => {
+const useGestureOnPage = (elementCallback, collection) => {
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
+
+  const mark = key => {
+    if (!key || keyCache.current.has(key)) return;
+    keyCache.current.add(key);
+    if (typeof currentGesture === "undefined") {
+      //const word = getWord(key, page);
+      /*if (word) {
+        setCurrentGesture(!word.isMarked);
+      }*/
+    }
+    elementCallback(key);
+  };
 
   const getWordKey = element => {
     if (element === null) return undefined;
@@ -70,7 +82,7 @@ const Editor = ({
   const keyCache = useRef(new Set());
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
-  const { gestureStart, gestureStop, gestureMove } = useGesture(el => {
+  const { gestureStart, gestureStop, gestureMove } = useGestureOnPage(el => {
     console.log(el);
   });
 
