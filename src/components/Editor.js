@@ -5,13 +5,49 @@ import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 
-const useTouchMark = () => {
+const useGesture = elementCallback => {
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
-  const [wordEditorOpen, setWordEditorOpen] = useState(false);
-  const [editedWord, setEditedWord] = useState({});
-}
+
+  const getWordKey = element => {
+    if (element === null) return undefined;
+    if (element.getAttribute("name")) {
+      return element.getAttribute("name");
+    }
+    if (element.closest("[name]")) {
+      return element.closest("[name]").getAttribute("name");
+    }
+    return undefined;
+  };
+
+  const handleMove = e => {
+    const { clientX, clientY } =
+      e.nativeEvent.type === "mousemove" ? e : e.changedTouches[0];
+    if (
+      (e.nativeEvent.type === "mousemove" && gestureStarted) ||
+      e.nativeEvent.type === "touchmove"
+    ) {
+      const movedIntoElement = document.elementFromPoint(clientX, clientY);
+      const wordKey = getWordKey(movedIntoElement);
+      if (wordKey) {
+        elementCallback(wordKey);
+      }
+    }
+  };
+
+  const handleStart = e => {
+    setGestureStarted(true);
+  };
+
+  const handleStop = e => {
+    keyCache.current.clear();
+    setGestureStarted(false);
+    setCurrentGesture(undefined);
+  };
+  
+  return [gestureStarted, currentGesture, keyCache]
+};
 
 const Editor = ({
   page,
@@ -49,8 +85,8 @@ const Editor = ({
     if (element.getAttribute("name")) {
       return element.getAttribute("name");
     }
-    if(element.closest("[name]")){
-      return element.closest("[name]").getAttribute("name")
+    if (element.closest("[name]")) {
+      return element.closest("[name]").getAttribute("name");
     }
     return undefined;
   };
