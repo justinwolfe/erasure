@@ -12,9 +12,8 @@ const useGestureOnPage = (collection, callback) => {
   const keyCache = useRef(new Set());
 
   const toggleWord = key => {
-    const newCollection = { ...statefulCollection };
+    const newCollection = JSON.parse(JSON.stringify(statefulCollection))
     const [paragraphIndex, wordIndex] = key.split("-");
-    console.log(newCollection)
     if (newCollection[paragraphIndex].words[wordIndex]) {
       if (typeof currentGesture === "undefined") {
         newCollection[paragraphIndex].words[
