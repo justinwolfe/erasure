@@ -11,17 +11,8 @@ import { useImmerReducer } from "use-immer";
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
-  const getWord = (id, page) => {
-    const [paragraphIndex, wordIndex] = id.split("-");
-    const word = page[paragraphIndex].words[wordIndex];
-    return word;
-  };
-
   const editWord = (key, characters) =>
     dispatch({ type: "editWord", data: { key, characters } });
-
-  const toggleWord = (key, value) =>
-    dispatch({ type: "toggleWord", data: { key, value } });
 
   const toggleParagraph = (key) =>
     dispatch({ type: "toggleParagraph", data: { key } });
@@ -43,6 +34,10 @@ const App = () => {
       dispatch({ type: "loadFromStorage", data: saved });
     }
   }, []);
+  
+  const updateSavedState = () => {
+    
+  }
 
   return (
     <div className="App">
@@ -50,8 +45,6 @@ const App = () => {
       {state.page && (
         <Editor
           page={state.page}
-          getWord={getWord}
-          toggleWord={toggleWord}
           toggleParagraph={toggleParagraph}
           editWord={editWord}
           reset={reset}
@@ -59,6 +52,7 @@ const App = () => {
           textStyle={state.style.text}
           editorStyle={state.style.editor}
           contentStyle={state.style.content}
+          updateSavedState={updateSavedState}
         />
       )}
     </div>
