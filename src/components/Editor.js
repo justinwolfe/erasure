@@ -102,7 +102,8 @@ const Editor = ({
   editorStyle,
   contentStyle,
   dispatch,
-  toggleParagraph
+  toggleParagraph,
+  updateSavedState,
 }) => {
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
@@ -115,6 +116,10 @@ const Editor = ({
     getWord
   } = useGestureOnPage(page);
 
+  useEffect(() => {
+    updateSavedState(gesturefulPage)
+  }, [gesturefulPage])
+  
   const handleDoubleClick = e => {
     const wordKey = getWordKey(e.target);
     if (!wordKey) return;

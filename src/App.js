@@ -9,6 +9,7 @@ import Splash from "./components/Splash.js";
 import { useImmerReducer } from "use-immer";
 
 const App = () => {
+  console.log(state)
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
   const reset = () => {
@@ -29,8 +30,8 @@ const App = () => {
     }
   }, []);
   
-  const updateSavedState = (state) => {
-    
+  const updateSavedState = (newState) => {
+    dispatch({ type: "updateContent", value: newState });
   }
 
   return (
@@ -39,8 +40,6 @@ const App = () => {
       {state.page && (
         <Editor
           page={state.page}
-          toggleParagraph={toggleParagraph}
-          editWord={editWord}
           reset={reset}
           dispatch={dispatch}
           textStyle={state.style.text}

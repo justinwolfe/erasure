@@ -75,7 +75,9 @@ export const reducer = (draft, action) => {
       draft.meta = action.data.meta;
       return draft;
     case "updateContent":
-      draft.page = action.data.page
-      return draft
+      draft.page = action.data;
+      return draft;
+    default:
+      return draft;
   }
 };
