@@ -11,6 +11,41 @@ const useGestureOnPage = (collection, callback) => {
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
 
+  /*
+        const [paragraphIndex, wordIndex] = action.data.key.split("-");
+      let marker =
+        action.data.value === false || action.data.value === true
+          ? action.data.value
+          : undefined;
+      if (draft.page[paragraphIndex].words[wordIndex]) {
+        if (typeof marker === "undefined") {
+          draft.page[paragraphIndex].words[wordIndex].isMarked = !draft.page[
+            paragraphIndex
+          ].words[wordIndex].isMarked;
+        } else {
+          draft.page[paragraphIndex].words[wordIndex].isMarked = marker;
+        }
+      }
+      return draft;
+  */
+
+  const toggleWord = key => {
+    const newCollection = { ...statefulCollection };
+    const [paragraphIndex, wordIndex] = key.split("-");
+    if (statefulCollection[paragraphIndex].words[wordIndex]) {
+      if (typeof currentGesture === "undefined") {
+        statefulCollection[paragraphIndex].words[
+          wordIndex
+        ].isMarked = !statefulCollection[paragraphIndex].words[wordIndex]
+          .isMarked;
+      } else {
+        statefulCollection[paragraphIndex].words[
+          wordIndex
+        ].isMarked = currentGesture;
+      }
+    }
+  };
+
   const getWord = (id, page) => {
     const [paragraphIndex, wordIndex] = id.split("-");
     const word = page[paragraphIndex].words[wordIndex];
@@ -57,8 +92,9 @@ const useGestureOnPage = (collection, callback) => {
 
   const handleStart = e => {
     setGestureStarted(true);
-    console.log(e.target)
-    console.log(getWordKey(e.target))
+    if (getWordKey(e.target)) {
+      mark(getWordKey(e.target));
+    }
   };
 
   const handleStop = e => {
@@ -79,7 +115,6 @@ const useGestureOnPage = (collection, callback) => {
 const Editor = ({
   page,
   toggleWord,
-  getWord,
   editWord,
   reset,
   textStyle,
@@ -129,7 +164,7 @@ const Editor = ({
       )}
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
-        {page &&
+        {statefulCollection &&
           page.map(paragraph => (
             <Paragraph
               key={paragraph.id}
