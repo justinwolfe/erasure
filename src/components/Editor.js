@@ -58,6 +58,7 @@ const useGestureOnPage = (collection, callback) => {
   const handleStart = e => {
     setGestureStarted(true);
     console.log(e.target)
+    console.log(getWordKey(e.target))
   };
 
   const handleStop = e => {
