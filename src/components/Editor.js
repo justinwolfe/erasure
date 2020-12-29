@@ -5,6 +5,14 @@ import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 
+const useTouchMark = () => {
+  const [currentGesture, setCurrentGesture] = useState(undefined);
+  const [gestureStarted, setGestureStarted] = useState(false);
+  const keyCache = useRef(new Set());
+  const [wordEditorOpen, setWordEditorOpen] = useState(false);
+  const [editedWord, setEditedWord] = useState({});
+}
+
 const Editor = ({
   page,
   toggleWord,
