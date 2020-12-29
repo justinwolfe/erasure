@@ -6,43 +6,27 @@ import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 
 const useGestureOnPage = (collection, callback) => {
-  const [statefulCollection, setCollection] = useState(collection);
+  const [statefulCollection, setStatefulCollection] = useState(collection);
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
 
-  /*
-        const [paragraphIndex, wordIndex] = action.data.key.split("-");
-      let marker =
-        action.data.value === false || action.data.value === true
-          ? action.data.value
-          : undefined;
-      if (draft.page[paragraphIndex].words[wordIndex]) {
-        if (typeof marker === "undefined") {
-          draft.page[paragraphIndex].words[wordIndex].isMarked = !draft.page[
-            paragraphIndex
-          ].words[wordIndex].isMarked;
-        } else {
-          draft.page[paragraphIndex].words[wordIndex].isMarked = marker;
-        }
-      }
-      return draft;
-  */
-
   const toggleWord = key => {
     const newCollection = { ...statefulCollection };
     const [paragraphIndex, wordIndex] = key.split("-");
-    if (statefulCollection[paragraphIndex].words[wordIndex]) {
+    console.log(newCollection)
+    if (newCollection[paragraphIndex].words[wordIndex]) {
       if (typeof currentGesture === "undefined") {
-        statefulCollection[paragraphIndex].words[
+        newCollection[paragraphIndex].words[
           wordIndex
-        ].isMarked = !statefulCollection[paragraphIndex].words[wordIndex]
+        ].isMarked = !newCollection[paragraphIndex].words[wordIndex]
           .isMarked;
       } else {
-        statefulCollection[paragraphIndex].words[
+        newCollection[paragraphIndex].words[
           wordIndex
         ].isMarked = currentGesture;
       }
+      setStatefulCollection(newCollection);
     }
   };
 
@@ -60,7 +44,8 @@ const useGestureOnPage = (collection, callback) => {
         setCurrentGesture(!word.isMarked);
       }
     }
-    callback(key, currentGesture);
+    toggleWord(key, currentGesture)
+    //callback(key, currentGesture);
     keyCache.current.add(key);
   };
 
@@ -114,7 +99,6 @@ const useGestureOnPage = (collection, callback) => {
 
 const Editor = ({
   page,
-  toggleWord,
   editWord,
   reset,
   textStyle,
@@ -125,12 +109,14 @@ const Editor = ({
 }) => {
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
-  const { gestureStart, gestureStop, gestureMove } = useGestureOnPage(
-    page,
-    (key, gesture) => {
-      toggleWord(key, gesture);
-    }
-  );
+  const {
+    gestureStart,
+    gestureStop,
+    gestureMove,
+    statefulCollection
+  } = useGestureOnPage(page, (key, gesture) => {
+    //toggleWord(key, gesture);
+  });
 
   const handleDoubleClick = e => {
     /*const wordKey = getWordKey(e.target);
@@ -165,7 +151,7 @@ const Editor = ({
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {statefulCollection &&
-          page.map(paragraph => (
+          statefulCollection.map(paragraph => (
             <Paragraph
               key={paragraph.id}
               name={paragraph.id}
