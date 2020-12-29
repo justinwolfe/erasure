@@ -29,7 +29,7 @@ const App = () => {
     }
   }, []);
   
-  const updateSavedState = (newState) => {
+  const updateSavedPage = (newState) => {
     dispatch({ type: "updateContent", data: newState });
   }
 
@@ -44,7 +44,7 @@ const App = () => {
           textStyle={state.style.text}
           editorStyle={state.style.editor}
           contentStyle={state.style.content}
-          updateSavedState={updateSavedState}
+          updateSavedPage={updateSavedPage}
         />
       )}
     </div>
