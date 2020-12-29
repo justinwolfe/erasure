@@ -6,20 +6,29 @@ import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 
 const useGestureOnPage = (collection, callback) => {
+  console.log(collection);
+  const [statefulCollection, setCollection] = useState(collection)
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
+
+  const getWord = (id, page) => {
+    const [paragraphIndex, wordIndex] = id.split("-");
+    const word = page[paragraphIndex].words[wordIndex];
+    return word;
+  };
 
   const mark = key => {
     if (!key || keyCache.current.has(key)) return;
     keyCache.current.add(key);
     if (typeof currentGesture === "undefined") {
-      //const word = getWord(key, page);
-      /*if (word) {
+      const word = getWord(key, statefulCollection);
+      if (word) {
         setCurrentGesture(!word.isMarked);
-      }*/
+      }
+      console.log(word, currentGesture)
     }
-    callback(key);
+    callback(key, currentGesture);
   };
 
   const getWordKey = element => {
@@ -43,7 +52,7 @@ const useGestureOnPage = (collection, callback) => {
       const movedIntoElement = document.elementFromPoint(clientX, clientY);
       const wordKey = getWordKey(movedIntoElement);
       if (wordKey) {
-        mark(wordKey)
+        mark(wordKey);
       }
     }
   };
@@ -82,9 +91,12 @@ const Editor = ({
   const keyCache = useRef(new Set());
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
-  const { gestureStart, gestureStop, gestureMove } = useGestureOnPage(page, el => {
-    console.log(el);
-  });
+  const { gestureStart, gestureStop, gestureMove } = useGestureOnPage(
+    page,
+    el => {
+      console.log(el);
+    }
+  );
 
   const mark = key => {
     if (wordEditorOpen) return;
