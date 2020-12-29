@@ -10,7 +10,6 @@ const useGestureOnPage = (collection) => {
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
-  console.log(keyCache.current);
 
   const toggleWord = key => {
     const newCollection = JSON.parse(JSON.stringify(statefulCollection));
@@ -38,7 +37,7 @@ const useGestureOnPage = (collection) => {
 
   const mark = key => {
     if (!key || keyCache.current.has(key)) return;
-    const word = getWord(key, collection);
+    const word = getWord(key, statefulCollection);
     if (typeof currentGesture === "undefined") {
       if (word) {
         setCurrentGesture(!word.isMarked);
@@ -76,9 +75,6 @@ const useGestureOnPage = (collection) => {
 
   const handleStart = e => {
     setGestureStarted(true);
-    /*if (getWordKey(e.target)) {
-      mark(getWordKey(e.target));
-    }*/
   };
 
   const handleStop = e => {
@@ -92,7 +88,7 @@ const useGestureOnPage = (collection) => {
     gestureStop: handleStop,
     gestureMove: handleMove,
     gesture: currentGesture,
-    statefulCollection: statefulCollection
+    gesturefulPage: statefulCollection
   };
 };
 
@@ -112,7 +108,7 @@ const Editor = ({
     gestureStart,
     gestureStop,
     gestureMove,
-    statefulCollection
+    gesturefulPage
   } = useGestureOnPage(page);
 
   const handleDoubleClick = e => {
@@ -147,8 +143,8 @@ const Editor = ({
       )}
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
-        {statefulCollection &&
-          statefulCollection.map(paragraph => (
+        {gesturefulPage &&
+          gesturefulPage.map(paragraph => (
             <Paragraph
               key={paragraph.id}
               name={paragraph.id}
