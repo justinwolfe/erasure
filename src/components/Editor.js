@@ -45,8 +45,12 @@ const useGesture = elementCallback => {
     setGestureStarted(false);
     setCurrentGesture(undefined);
   };
-  
-  return [gestureStarted, currentGesture, keyCache]
+
+  return {
+    gestureStart: handleStart,
+    gestureStop: handleStop,
+    gestureMove: handleMove
+  };
 };
 
 const Editor = ({
@@ -66,6 +70,9 @@ const Editor = ({
   const keyCache = useRef(new Set());
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
+  const { gestureStart, gestureStop, gestureMove } = useGesture(el => {
+    console.log(el);
+  });
 
   const mark = key => {
     if (wordEditorOpen) return;
@@ -136,6 +143,9 @@ const Editor = ({
       onMouseDown={handleStart}
       onMouseMove={handleMove}
       onMouseUp={handleStop}
+      onMouseDown={gestureStart}
+      onMouseMove={gestureMove}
+      onMouseUp={gestureStop}
       onDoubleClick={handleDoubleClick}
     >
       {wordEditorOpen && (
