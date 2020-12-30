@@ -34,6 +34,7 @@ export const useGestureOnPage = (collection) => {
 
   const mark = key => {
     if (!key || keyCache.current.has(key)) return;
+    keyCache.current.add(key);
     const word = getWord(key, statefulCollection);
     if (typeof currentGesture === "undefined") {
       if (word) {
@@ -41,7 +42,6 @@ export const useGestureOnPage = (collection) => {
       }
     }
     toggleWord(key, currentGesture);
-    keyCache.current.add(key);
   };
 
   const getWordKey = element => {
