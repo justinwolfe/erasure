@@ -14,6 +14,7 @@ dependencies:
   serve: 11.3.2
   strip-markdown: 3.1.2
   styled-components: 5.2.1
+  throttle-debounce: 3.0.1
   turndown: 5.0.3
   use-immer: 0.4.2
 packages:
@@ -13296,6 +13297,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA==
+  /throttle-debounce/3.0.1:
+    dev: false
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-dTEWWNu6JmeVXY0ZYoPuH5cRIwc0MeGbJwah9KUNYSJwommQpCzTySTpEe8Gs1J23aeWEuAobe4Ag7EHVt/LOg==
   /through2/2.0.5:
     dependencies:
       readable-stream: 2.3.7
@@ -14514,5 +14521,6 @@ specifiers:
   serve: ^11.3.2
   strip-markdown: ^3.1.1
   styled-components: ^5.0.1
+  throttle-debounce: ^3.0.1
   turndown: ^5.0.3
   use-immer: ^0.4.1

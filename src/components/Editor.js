@@ -5,19 +5,7 @@ import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
-import debounce from "just-debounce";
-
-function throttled(delay, fn) {
-  let lastCall = 0;
-  return function (...args) {
-    const now = (new Date).getTime();
-    if (now - lastCall < delay) {
-      return;
-    }
-    lastCall = now;
-    return fn(...args);
-  }
-}
+import { throttle } from 'throttle-debounce';
 
 const Editor = ({
   page,
@@ -62,7 +50,7 @@ const Editor = ({
       onTouchMove={gestureMove}
       onTouchEnd={gestureStop}
       onMouseDown={gestureStart}
-      onMouseMove={() => throttled(10,gestureMove)}
+      onMouseMove={gestureMove}
       onMouseUp={gestureStop}
       onDoubleClick={handleDoubleClick}
     >
