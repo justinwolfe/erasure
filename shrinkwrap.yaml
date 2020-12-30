@@ -5,6 +5,7 @@ dependencies:
   firebase: 8.2.1
   immer: 7.0.15
   just-debounce: 1.0.0
+  lodash.clonedeep: 4.5.0
   react: 16.14.0
   react-dom: 16.14.0
   react-scripts: 4.0.1
@@ -9218,6 +9219,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
+  /lodash.clonedeep/4.5.0:
+    dev: false
+    resolution:
+      integrity: sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
   /lodash.defaults/4.2.0:
     dev: false
     resolution:
@@ -14487,6 +14492,7 @@ packages:
     dev: false
     name: difflib
     resolution:
+      registry: 'https://registry.npmjs.org/'
       tarball: 'https://codeload.github.com/postlight/difflib.js/tar.gz/32e8e38c7fcd935241b9baab71bb432fd9b166ed'
     version: 0.2.6
 registry: 'https://registry.npmjs.org/'
@@ -14499,6 +14505,7 @@ specifiers:
   firebase: ^8.2.1
   immer: ^7.0.13
   just-debounce: ^1.0.0
+  lodash.clonedeep: ^4.5.0
   react: ^16.8.6
   react-dom: ^16.8.6
   react-scripts: ^4.0.0

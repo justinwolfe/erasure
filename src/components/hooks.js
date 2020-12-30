@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import _cloneDeep from 'lodash.clonedeep'
+
 export const useGestureOnPage = (collection) => {
   const [statefulCollection, setStatefulCollection] = useState(collection);
   const [currentGesture, setCurrentGesture] = useState(undefined);
@@ -7,7 +9,7 @@ export const useGestureOnPage = (collection) => {
   const keyCache = useRef(new Set());
 
   const toggleWord = key => {
-    const newCollection = JSON.parse(JSON.stringify(statefulCollection));
+    const newCollection = _cloneDeep(statefulCollection);
     const [paragraphIndex, wordIndex] = key.split("-");
     if (newCollection[paragraphIndex].words[wordIndex]) {
       if (typeof currentGesture === "undefined") {

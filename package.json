@@ -18,7 +18,8 @@
     "use-immer": "^0.4.1",
     "serve": "^11.3.2",
     "firebase": "^8.2.1",
-    "@postlight/mercury-parser": "^2.2.0"
+    "@postlight/mercury-parser": "^2.2.0",
+    "lodash.clonedeep": "^4.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
