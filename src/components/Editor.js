@@ -7,6 +7,18 @@ import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
 import debounce from "just-debounce";
 
+function throttled(delay, fn) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = (new Date).getTime();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return fn(...args);
+  }
+}
+
 const Editor = ({
   page,
   editWord,
@@ -50,7 +62,7 @@ const Editor = ({
       onTouchMove={gestureMove}
       onTouchEnd={gestureStop}
       onMouseDown={gestureStart}
-      onMouseMove={gestureMove}
+      onMouseMove={() => throttled(10,gestureMove)}
       onMouseUp={gestureStop}
       onDoubleClick={handleDoubleClick}
     >
