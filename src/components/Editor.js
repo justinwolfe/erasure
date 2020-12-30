@@ -5,7 +5,6 @@ import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
-import { throttle } from 'throttle-debounce';
 
 const Editor = ({
   page,

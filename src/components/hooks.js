@@ -56,8 +56,6 @@ export const useGestureOnPage = (collection) => {
   };
 
   const handleMove = e => {
-    e.persist();
-    if(!e.nativeEvent) return
     const { clientX, clientY } =
       e.nativeEvent.type === "mousemove" ? e : e.changedTouches[0];
     if (
