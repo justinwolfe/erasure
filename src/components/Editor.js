@@ -73,7 +73,7 @@ const Editor = ({
                 name={unit.id}
                 isMarked={unit.isMarked}
                 customCharacters={unit.customCharacters}
-                textStyle={unit}
+                textStyle={textStyle}
               />
             ) : (
               <div key={`break-${unitIndex}`}>
