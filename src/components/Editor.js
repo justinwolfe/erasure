@@ -42,8 +42,6 @@ const Editor = ({
 
   const close = () => setWordEditorOpen(false);
 
-  console.log(gesturefulPage);
-
   return (
     <div
       style={editorStyle}
