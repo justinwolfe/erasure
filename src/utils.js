@@ -5,6 +5,10 @@ import { saveAs } from "file-saver";
 
 const addProxy = url => `https://api.codetabs.com/v1/proxy?quest=${url}`;
 
+const convertToStateV2 = document => {
+  
+}
+
 const convertToState = document =>
   document.split("\n\n").map((paragraph, paragraphIndex) => ({
     words: paragraph.split(" ").map((word, wordIndex) => ({
