@@ -9,10 +9,10 @@ export const useGestureOnPage = collection => {
   const keyCache = useRef(new Set());
 
   const toggleWord = key => {
-    const newCollection = JSON.parse(JSON.stringify(statefulCollection));
+    const newCollection = _cloneDeep(statefulCollection);
     const word = getWord(key, newCollection);
     const wordIndex = getWordIndex(key, newCollection);
-    console.log(word, currentGesture)
+    console.log(word, currentGesture);
     if (word) {
       if (typeof currentGesture === "undefined") {
         newCollection[wordIndex].isMarked = !newCollection[wordIndex].isMarked;
