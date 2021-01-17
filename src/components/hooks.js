@@ -12,7 +12,6 @@ export const useGestureOnPage = collection => {
     const newCollection = _cloneDeep(statefulCollection);
     const word = getWord(key, newCollection);
     const wordIndex = getWordIndex(key, newCollection);
-    console.log(word, currentGesture);
     if (word) {
       if (typeof currentGesture === "undefined") {
         newCollection[wordIndex].isMarked = !newCollection[wordIndex].isMarked;
