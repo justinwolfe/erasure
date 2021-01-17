@@ -20,7 +20,8 @@ const convertToStateV2 = document => {
             isMarked: false
           };
         }),
-        isMarked: false
+        isMarked: false,
+        customCharacters: false
       });
     });
     state.push({ type: "break" });
