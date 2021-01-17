@@ -8,35 +8,23 @@ export const useGestureOnPage = collection => {
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
 
-  const toggleWord2 = key => {
-    const newCollection = [...statefulCollection];
+  const toggleWord = key => {
+    const newCollection = JSON.parse(JSON.stringify(statefulCollection))
     const word = getWord(key, newCollection);
+    const wordIndex = getWordIndex(key, newCollection)
+    console.log(word, wordIndex)
     if (word) {
       if(typeof currentGesture === "undefined"){
-        
-      }
-    }
-  };
-
-  const toggleWord = key => {
-    const newCollection = _cloneDeep(statefulCollection);
-    const [paragraphIndex, wordIndex] = key.split("-");
-    if (newCollection[paragraphIndex].words[wordIndex]) {
-      if (typeof currentGesture === "undefined") {
-        newCollection[paragraphIndex].words[
-          wordIndex
-        ].isMarked = !statefulCollection[paragraphIndex].words[wordIndex]
-          .isMarked;
+        newCollection[wordIndex].isMarked = !newCollection[wordIndex].isMarked
       } else {
-        newCollection[paragraphIndex].words[
-          wordIndex
-        ].isMarked = currentGesture;
+        newCollection[wordIndex].isMarked = currentGesture
       }
-      setStatefulCollection(newCollection);
     }
+    setStatefulCollection(newCollection)
   };
 
   const getWord = (id, page) => page.find(word => word.id === id);
+  const getWordIndex = (id, page) => page.findIndex(word => word.id === id);
 
   const mark = key => {
     if (!key || keyCache.current.has(key)) return;
