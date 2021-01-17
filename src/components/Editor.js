@@ -64,8 +64,8 @@ const Editor = ({
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {gesturefulPage &&
-          gesturefulPage.map((unit, unitIndex) => {
-            return unit.type === "word" ? (
+          gesturefulPage.map((unit, unitIndex) =>
+            unit.type === "word" ? (
               <Word
                 characters={unit.characters}
                 key={unit.id}
@@ -79,8 +79,8 @@ const Editor = ({
               <div key={`break-${unitIndex}`}>
                 <br />
               </div>
-            );
-          })}
+            )
+          )}
       </div>
     </div>
   );
