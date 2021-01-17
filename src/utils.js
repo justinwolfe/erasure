@@ -7,6 +7,7 @@ const addProxy = url => `https://api.codetabs.com/v1/proxy?quest=${url}`;
 
 const convertToStateV2 = document => {
   const state = [];
+
   document.split("\n\n").forEach((paragraph, paragraphIndex) => {
     paragraph.split(" ").forEach((word, wordIndex) => {
       state.push({
@@ -17,13 +18,15 @@ const convertToStateV2 = document => {
             character,
             id: `${paragraphIndex}-${wordIndex}-${characterIndex}`,
             isMarked: false
-          }
+          };
         }),
         isMarked: false
       });
     });
     state.push({ type: "break" });
   });
+
+  return state;
 };
 
 const convertToState = document =>
@@ -65,7 +68,7 @@ export const getContentFromUrl = url =>
 
 ${cleanedContent}`;
             }
-            const converted = convertToState(cleanedContent);
+            const converted = convertToStateV2(cleanedContent);
             resolve({ meta: result, page: converted });
           } else {
             reject(JSON.stringify(result));

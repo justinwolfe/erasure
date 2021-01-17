@@ -64,7 +64,37 @@ const Editor = ({
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {gesturefulPage &&
-          gesturefulPage.map(paragraph => (
+          gesturefulPage.map(unit => {
+            unit.type === "word" ?             <Word
+              characters={unit.characters}
+              key={unit.id}
+              id={unit.id}
+              name={unit.id}
+              isMarked={unit.isMarked}
+              customCharacters={unit.customCharacters}
+              textStyle={unit}
+            /> : <div></div>;
+          })}
+      </div>
+    </div>
+  );
+};
+
+export default Editor;
+
+/*
+
+            <Word
+              characters={word.characters}
+              key={word.id}
+              id={word.id}
+              name={word.id}
+              isMarked={word.isMarked}
+              customCharacters={word.customCharacters}
+              textStyle={textStyle}
+            />
+
+          /*gesturefulPage.map(paragraph => (
             <Paragraph
               key={paragraph.id}
               name={paragraph.id}
@@ -82,11 +112,4 @@ const Editor = ({
                   textStyle={textStyle}
                 />
               ))}
-            </Paragraph>
-          ))}
-      </div>
-    </div>
-  );
-};
-
-export default Editor;
+            </Paragraph>*/
