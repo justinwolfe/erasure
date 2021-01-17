@@ -1,12 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import _cloneDeep from 'lodash.clonedeep'
+import _cloneDeep from "lodash.clonedeep";
 
-export const useGestureOnPage = (collection) => {
+export const useGestureOnPage = collection => {
   const [statefulCollection, setStatefulCollection] = useState(collection);
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
+
+  const toggleWord2 = key => {
+    const newCollection = [...statefulCollection];
+    const word = getWord(key, newCollection);
+    if (word) {
+      if(typeof currentGesture === "undefined"){
+        
+      }
+    }
+  };
 
   const toggleWord = key => {
     const newCollection = _cloneDeep(statefulCollection);
@@ -26,10 +36,7 @@ export const useGestureOnPage = (collection) => {
     }
   };
 
-  const getWord = (id, page) => {
-    const word = page.find(word => word.id === id);
-    return word;
-  };
+  const getWord = (id, page) => page.find(word => word.id === id);
 
   const mark = key => {
     if (!key || keyCache.current.has(key)) return;
