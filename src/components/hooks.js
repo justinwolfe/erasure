@@ -27,8 +27,7 @@ export const useGestureOnPage = (collection) => {
   };
 
   const getWord = (id, page) => {
-    const [paragraphIndex, wordIndex] = id.split("-");
-    const word = page[paragraphIndex].words[wordIndex];
+    const word = page.find(word => word.id === id);
     return word;
   };
 

@@ -42,6 +42,8 @@ const Editor = ({
 
   const close = () => setWordEditorOpen(false);
 
+  console.log(gesturefulPage);
+
   return (
     <div
       style={editorStyle}
@@ -64,16 +66,22 @@ const Editor = ({
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {gesturefulPage &&
-          gesturefulPage.map(unit => {
-            unit.type === "word" ?             <Word
-              characters={unit.characters}
-              key={unit.id}
-              id={unit.id}
-              name={unit.id}
-              isMarked={unit.isMarked}
-              customCharacters={unit.customCharacters}
-              textStyle={unit}
-            /> : <div></div>;
+          gesturefulPage.map((unit, unitIndex) => {
+            return unit.type === "word" ? (
+              <Word
+                characters={unit.characters}
+                key={unit.id}
+                id={unit.id}
+                name={unit.id}
+                isMarked={unit.isMarked}
+                customCharacters={unit.customCharacters}
+                textStyle={unit}
+              />
+            ) : (
+              <div key={`break-${unitIndex}`}>
+                <br />
+              </div>
+            );
           })}
       </div>
     </div>
