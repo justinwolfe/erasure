@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import Character from "./Character";
 
@@ -43,4 +43,6 @@ const Word = ({
   );
 };
 
-export default Word;
+const MemoizedWord = memo(Word);
+
+export default MemoizedWord;
