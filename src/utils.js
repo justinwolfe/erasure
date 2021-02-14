@@ -24,7 +24,7 @@ const convertToStateV2 = document => {
         customCharacters: false
       });
     });
-    state.push({ type: "break" });
+    state.push({ type: "break", id:`break-after-${paragraph.id}` });
   });
 
   return state;

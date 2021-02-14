@@ -48,9 +48,6 @@ const Editor = ({
       onTouchStart={gestureStart}
       onTouchMove={gestureMove}
       onTouchEnd={gestureStop}
-      onMouseDown={gestureStart}
-      onMouseMove={gestureMove}
-      onMouseUp={gestureStop}
       onDoubleClick={handleDoubleClick}
     >
       {wordEditorOpen && (
@@ -64,7 +61,7 @@ const Editor = ({
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {gesturefulPage &&
-          gesturefulPage.map((unit, unitIndex) =>
+          gesturefulPage.map((unit) =>
             unit.type === "word" ? (
               <Word
                 characters={unit.characters}
@@ -76,7 +73,7 @@ const Editor = ({
                 textStyle={textStyle}
               />
             ) : (
-              <div key={`break-${unitIndex}`}>
+              <div key={`break-${unit.id}`}>
                 <br />
               </div>
             )
@@ -88,34 +85,3 @@ const Editor = ({
 
 export default Editor;
 
-/*
-
-            <Word
-              characters={word.characters}
-              key={word.id}
-              id={word.id}
-              name={word.id}
-              isMarked={word.isMarked}
-              customCharacters={word.customCharacters}
-              textStyle={textStyle}
-            />
-
-          /*gesturefulPage.map(paragraph => (
-            <Paragraph
-              key={paragraph.id}
-              name={paragraph.id}
-              id={paragraph.id}
-              handleVisible={false}
-            >
-              {paragraph.words.map(word => (
-                <Word
-                  characters={word.characters}
-                  key={word.id}
-                  id={word.id}
-                  name={word.id}
-                  isMarked={word.isMarked}
-                  customCharacters={word.customCharacters}
-                  textStyle={textStyle}
-                />
-              ))}
-            </Paragraph>*/
