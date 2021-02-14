@@ -20,7 +20,8 @@
     "firebase": "^8.2.1",
     "@postlight/mercury-parser": "^2.2.0",
     "lodash.clonedeep": "^4.5.0",
-    "throttle-debounce": "^3.0.1"
+    "throttle-debounce": "^3.0.1",
+    "detect-it": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

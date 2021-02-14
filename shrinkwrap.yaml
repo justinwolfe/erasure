@@ -1,5 +1,6 @@
 dependencies:
   '@postlight/mercury-parser': 2.2.0
+  detect-it: 4.0.1
   dom-to-image: 2.6.0
   file-saver: 2.0.5
   firebase: 8.2.1
@@ -5742,6 +5743,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA=
+  /detect-it/4.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-dg5YBTJYvogK1+dA2mBUDKzOWfYZtHVba89SyZUhc4+e3i2tzgjANFg5lDRCd3UOtRcw00vUTMK8LELcMdicug==
   /detect-newline/3.1.0:
     dev: false
     engines:
@@ -14507,6 +14512,7 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   '@postlight/mercury-parser': ^2.2.0
+  detect-it: ^4.0.0
   dom-to-image: ^2.6.0
   file-saver: ^2.0.2
   firebase: ^8.2.1
