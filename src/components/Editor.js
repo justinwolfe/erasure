@@ -14,7 +14,8 @@ const Editor = ({
   editorStyle,
   contentStyle,
   dispatch,
-  updateSavedPage
+  updateSavedPage,
+  interactionType
 }) => {
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
@@ -42,15 +43,22 @@ const Editor = ({
 
   const close = () => setWordEditorOpen(false);
 
+  const touchListeners = {
+    onTouchStart: gestureStart,
+    onTouchMove: gestureMove,
+    onTouchEnd: gestureStop
+  };
+
+  const mouseListeners = {
+    onMouseDown: gestureStart,
+    onMouseMove: gestureMove,
+    onMouseUp: gestureStop
+  };
+
   return (
     <div
       style={editorStyle}
-      onTouchStart={gestureStart}
-      onTouchMove={gestureMove}
-      onTouchEnd={gestureStop}
-      onMouseDown={gestureStart}
-      onMouseMove={gestureMove}
-      onMouseUp={gestureStop}
+      {...(interactionType === "touch" ? touchListeners : mouseListeners)}
       onDoubleClick={handleDoubleClick}
     >
       {wordEditorOpen && (
@@ -64,7 +72,7 @@ const Editor = ({
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {gesturefulPage &&
-          gesturefulPage.map((unit) =>
+          gesturefulPage.map(unit =>
             unit.type === "word" ? (
               <Word
                 characters={unit.characters}
@@ -87,4 +95,3 @@ const Editor = ({
 };
 
 export default Editor;
-

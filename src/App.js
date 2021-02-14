@@ -7,6 +7,7 @@ import { initialState, reducer } from "./reducer.js";
 import Editor from "./components/Editor.js";
 import Splash from "./components/Splash.js";
 import { useImmerReducer } from "use-immer";
+import { primaryInput } from 'detect-it';
 
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
@@ -45,6 +46,7 @@ const App = () => {
           editorStyle={state.style.editor}
           contentStyle={state.style.content}
           updateSavedPage={updateSavedPage}
+          interactionType={primaryInput}
         />
       )}
     </div>
