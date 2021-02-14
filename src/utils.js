@@ -55,7 +55,6 @@ export const getContentFromUrl = url =>
           html: htmlString,
           contentType: "markdown"
         }).then(result => {
-          console.log(result);
           if (result.content) {
             let cleanedContent = remove(result.content)
               .replace(/[\[\]\(\)]/gm, "")
@@ -70,7 +69,9 @@ export const getContentFromUrl = url =>
 ${cleanedContent}`;
             }
             const converted = convertToStateV2(cleanedContent);
-            resolve({ meta: result, page: converted });
+            const metaWithoutContent = {...result}
+            delete metaWithoutContent.content;
+            resolve({ meta: metaWithoutContent, page: converted });
           } else {
             reject(JSON.stringify(result));
           }

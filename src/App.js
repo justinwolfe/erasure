@@ -23,12 +23,12 @@ const App = () => {
     }
   }, [state]);*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     const saved = getLocalStorage("state");
     if (saved) {
       dispatch({ type: "loadFromStorage", data: saved });
     }
-  }, []);
+  }, []);*/
   
   const updateSavedPage = (newState) => {
     dispatch({ type: "updateContent", data: newState });
