@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import Word from "./Word";
 import Paragraph from "./Paragraph";
 import Controls from "./Controls";
@@ -29,9 +29,9 @@ const Editor = ({
     getWord
   } = useGestureOnPage(page);
 
-  /*useEffect(() => {
+  useEffect(() => {
     updateSavedPage(gesturefulPage);
-  }, [gesturefulPage]);*/
+  }, [gesturefulPage]);
 
   const handleDoubleClick = e => {
     const wordKey = getWordKey(e.target);

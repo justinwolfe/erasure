@@ -43,6 +43,4 @@ const Word = ({
   );
 };
 
-const MemoizedWord = memo(Word);
-
-export default MemoizedWord;
+export default memo(Word);
