@@ -84,7 +84,7 @@ const Editor = ({
                 textStyle={textStyle}
               />
             ) : (
-              <div key={`break-${unit.id}`}>
+              <div key={unit.id}>
                 <br />
               </div>
             )
