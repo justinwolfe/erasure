@@ -24,7 +24,8 @@ const convertToStateV2 = document => {
         customCharacters: false
       });
     });
-    state.push({ type: "break", id:`break-after-${paragraph.id}` });
+    console.log("paragraphIndex", paragraphIndex);
+    state.push({ type: "break", id: `break-after-${paragraphIndex}` });
   });
 
   return state;

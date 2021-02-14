@@ -9,7 +9,7 @@ export const useGestureOnPage = collection => {
   const keyCache = useRef(new Set());
 
   const toggleWord = key => {
-    const newCollection = _cloneDeep(statefulCollection);
+    const newCollection = JSON.parse(JSON.stringify(statefulCollection));
     const word = getWord(key, newCollection);
     const wordIndex = getWordIndex(key, newCollection);
     if (word) {
