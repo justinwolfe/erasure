@@ -48,6 +48,9 @@ const Editor = ({
       onTouchStart={gestureStart}
       onTouchMove={gestureMove}
       onTouchEnd={gestureStop}
+      onMouseDown={gestureStart}
+      onMouseMove={gestureMove}
+      onMouseUp={gestureStop}
       onDoubleClick={handleDoubleClick}
     >
       {wordEditorOpen && (
