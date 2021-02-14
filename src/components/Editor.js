@@ -48,13 +48,13 @@ const Editor = ({
 
   const touchListeners = {
     onTouchStart: gestureStart,
-    onTouchMove: throttle(100, true, gestureMove),
+    onTouchMove: throttle(50, true, gestureMove),
     onTouchEnd: gestureStop
   };
 
   const mouseListeners = {
     onMouseDown: gestureStart,
-    onMouseMove: throttle(100, true, gestureMove),
+    onMouseMove: throttle(50, true, gestureMove),
     onMouseUp: gestureStop
   };
 

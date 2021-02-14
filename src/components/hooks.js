@@ -1,24 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
-
-import _cloneDeep from "lodash.clonedeep";
+import { useImmer } from "use-immer";
 
 export const useGestureOnPage = collection => {
-  const [statefulCollection, setStatefulCollection] = useState(collection);
+  const [statefulCollection, setStatefulCollection] = useImmer(collection)
   const [currentGesture, setCurrentGesture] = useState(undefined);
   const [gestureStarted, setGestureStarted] = useState(false);
   const keyCache = useRef(new Set());
 
   const toggleWord = key => {
-    const newCollection = _cloneDeep(statefulCollection);
-    const word = getWord(key, newCollection);
-    const wordIndex = getWordIndex(key, newCollection);
-    if (word) {
+    const word = getWord(key, statefulCollection);
+    const wordIndex = getWordIndex(key, statefulCollection);
+    if(word){
+      setStatefulCollection(draft => {
       if (typeof currentGesture === "undefined") {
-        newCollection[wordIndex].isMarked = !newCollection[wordIndex].isMarked;
+        draft[wordIndex].isMarked = !draft[wordIndex].isMarked;
       } else {
-        newCollection[wordIndex].isMarked = currentGesture;
+        draft[wordIndex].isMarked = currentGesture;
       }
-      setStatefulCollection(newCollection);
+      })
     }
   };
 

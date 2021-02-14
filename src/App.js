@@ -17,11 +17,11 @@ const App = () => {
     dispatch({ type: "reset" });
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (typeof state.meta !== "undefined") {
       setLocalStorage("state", state);
     }
-  }, [state]);
+  }, [state]);*/
 
   useEffect(() => {
     const saved = getLocalStorage("state");
