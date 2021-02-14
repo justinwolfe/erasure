@@ -28,6 +28,7 @@ const Word = ({
   const content = !customCharacters
     ? simpleWord(characters)
     : customWord(characters, textStyle);
+  console.log(`rendered word ${id}`)
   return (
     <>
       <span
