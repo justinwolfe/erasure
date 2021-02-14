@@ -5,7 +5,7 @@ import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
-import { throttle } from 'throttle-debounce';
+import { throttle } from "throttle-debounce";
 
 const Editor = ({
   page,
@@ -42,11 +42,13 @@ const Editor = ({
     setWordEditorOpen(true);
   };
 
-  const close = () => setWordEditorOpen(false);
+  const close = () => {
+    setWordEditorOpen(false);
+  };
 
   const touchListeners = {
     onTouchStart: gestureStart,
-    onTouchMove: throttle(100, true,gestureMove),
+    onTouchMove: throttle(100, true, gestureMove),
     onTouchEnd: gestureStop
   };
 
