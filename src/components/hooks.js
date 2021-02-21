@@ -78,6 +78,7 @@ export const useGestureOnPage = collection => {
     gestureMove: handleMove,
     gesture: currentGesture,
     gesturefulPage: statefulCollection,
+    gestureActive: gestureStarted,
     getWord,
     getWordKey
   };

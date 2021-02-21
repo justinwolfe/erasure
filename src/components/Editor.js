@@ -5,7 +5,7 @@ import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
-import { debounce } from "throttle-debounce";
+import { throttle } from "throttle-debounce";
 
 const Editor = ({
   page,
@@ -25,13 +25,17 @@ const Editor = ({
     gestureStop,
     gestureMove,
     gesturefulPage,
+    gestureActive,
     getWordKey,
     getWord
   } = useGestureOnPage(page);
 
   useEffect(() => {
-    updateSavedPage(gesturefulPage);
-  }, [gesturefulPage]);
+    if (!gestureActive) {
+      console.log("gesture stop");
+      updateSavedPage(gesturefulPage);
+    }
+  }, [gestureActive]);
 
   const handleDoubleClick = e => {
     const wordKey = getWordKey(e.target);
@@ -48,13 +52,13 @@ const Editor = ({
 
   const touchListeners = {
     onTouchStart: gestureStart,
-    onTouchMove: gestureMove,
+    onTouchMove: throttle(20, true, gestureMove),
     onTouchEnd: gestureStop
   };
 
   const mouseListeners = {
     onMouseDown: gestureStart,
-    onMouseMove: gestureMove,
+    onMouseMove: throttle(20, true, gestureMove),
     onMouseUp: gestureStop
   };
 
