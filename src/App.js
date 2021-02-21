@@ -7,7 +7,7 @@ import { initialState, reducer } from "./reducer.js";
 import Editor from "./components/Editor.js";
 import Splash from "./components/Splash.js";
 import { useImmerReducer } from "use-immer";
-import { primaryInput } from 'detect-it';
+import { primaryInput } from "detect-it";
 
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
@@ -19,7 +19,11 @@ const App = () => {
 
   useEffect(() => {
     if (typeof state.meta !== "undefined") {
-      setLocalStorage("state", state);
+      try {
+        setLocalStorage("state", state);
+      } catch (err) {
+        alert("Error saving to local storage: ", err);
+      }
     }
   }, [state]);
 
@@ -29,10 +33,10 @@ const App = () => {
       dispatch({ type: "loadFromStorage", data: saved });
     }
   }, []);
-  
-  const updateSavedPage = (newState) => {
+
+  const updateSavedPage = newState => {
     dispatch({ type: "updateContent", data: newState });
-  }
+  };
 
   return (
     <div className="App">

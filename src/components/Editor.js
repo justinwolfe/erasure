@@ -5,7 +5,7 @@ import Controls from "./Controls";
 import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
-import { throttle } from "throttle-debounce";
+import { debounce } from "throttle-debounce";
 
 const Editor = ({
   page,
@@ -48,13 +48,13 @@ const Editor = ({
 
   const touchListeners = {
     onTouchStart: gestureStart,
-    onTouchMove: throttle(20, true, gestureMove),
+    onTouchMove: gestureMove,
     onTouchEnd: gestureStop
   };
 
   const mouseListeners = {
     onMouseDown: gestureStart,
-    onMouseMove: throttle(20, true, gestureMove),
+    onMouseMove: gestureMove,
     onMouseUp: gestureStop
   };
 
