@@ -17,18 +17,18 @@ const App = () => {
     dispatch({ type: "reset" });
   };
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (typeof state.meta !== "undefined") {
       setLocalStorage("state", state);
     }
-  }, [state]);*/
+  }, [state]);
 
-  /*useEffect(() => {
+  useEffect(() => {
     const saved = getLocalStorage("state");
     if (saved) {
       dispatch({ type: "loadFromStorage", data: saved });
     }
-  }, []);*/
+  }, []);
   
   const updateSavedPage = (newState) => {
     dispatch({ type: "updateContent", data: newState });
