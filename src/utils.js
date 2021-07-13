@@ -46,7 +46,44 @@ const convertToState = document =>
     isMarked: false
   }));
 
-export const getContentFromUrl = url =>
+export const getContentFromUrl = async url => {
+  try {
+  const response = await fetch(addProxy(url));
+  const inputHtml = await response.text();
+  const parsed = await Mercury.parse(url, {
+    html: inputHtml,
+    contentType: "markdown"
+  });
+
+  if (!parsed.content) {
+    parsed.content === convertHtmlToPlain(inputHtml);
+  }
+
+  const cleanedContent = remove(parsed.content)
+    .replace(/[\[\]\(\)]/gm, "")
+    .replace(
+      /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm,
+      ""
+    )
+    .replace(/\n\s*\n/g, "\n\n");
+
+  if (parsed.title) {
+    cleanedContent = `${parsed.title}
+
+${cleanedContent}`;
+  }
+
+  const converted = convertToStateV2(cleanedContent);
+  const metaWithoutContent = { ...parsed };
+  delete metaWithoutContent.content;
+  
+  return { meta: metaWithoutContent, page: converted }
+  } catch(err){
+    console.log(err)
+  }
+};
+
+/*export const getContentFromUrl = url =>
   new Promise((resolve, reject) => {
     fetch(addProxy(url))
       .then(res => res.text())
@@ -80,7 +117,7 @@ ${cleanedContent}`;
       .catch(err => {
         reject(JSON.stringify(err));
       });
-  });
+  });*/
 
 export const handleScreenshot = () => {
   domtoimage.toBlob(document.querySelector("#content")).then(function(blob) {
