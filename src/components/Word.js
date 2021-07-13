@@ -17,30 +17,25 @@ const customWord = (characters, textStyle) =>
     )
   );
 
-const Word = ({
-  characters,
-  id,
-  isMarked,
-  name,
-  textStyle,
-  customCharacters
-}) => {
-  const content = !customCharacters
-    ? simpleWord(characters)
-    : customWord(characters, textStyle);
-  return (
-    <>
-      <span
-        name={id}
-        style={{
-          ...textStyle.global,
-          ...(isMarked ? textStyle.marked : textStyle.unmarked)
-        }}
-      >
-        {content}
-      </span>{" "}
-    </>
-  );
-};
+const Word = memo(
+  ({ characters, id, isMarked, name, textStyle, customCharacters }) => {
+    const content = !customCharacters
+      ? simpleWord(characters)
+      : customWord(characters, textStyle);
+    return (
+      <>
+        <span
+          name={id}
+          style={{
+            ...textStyle.global,
+            ...(isMarked ? textStyle.marked : textStyle.unmarked)
+          }}
+        >
+          {content}
+        </span>{" "}
+      </>
+    );
+  }
+);
 
 export default memo(Word);

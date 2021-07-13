@@ -37,6 +37,8 @@ const App = () => {
   const updateSavedPage = newState => {
     dispatch({ type: "updateContent", data: newState });
   };
+  
+  console.log(state)
 
   return (
     <div className="App">
