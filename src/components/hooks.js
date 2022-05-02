@@ -20,6 +20,10 @@ export const useGestureOnPage = collection => {
       })
     }
   };
+  
+  const editWord = key => {
+    
+  }
 
   const getWord = (id, page) => page.find(word => word.id === id);
   const getWordIndex = (id, page) => page.findIndex(word => word.id === id);

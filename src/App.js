@@ -17,6 +17,9 @@ const App = () => {
     dispatch({ type: "reset" });
   };
 
+  const editWord = (key, characters) =>
+    dispatch({ type: "editWord", data: { key, characters } });
+
   useEffect(() => {
     if (typeof state.meta !== "undefined") {
       try {
@@ -34,11 +37,9 @@ const App = () => {
     }
   }, []);
 
-  const updateSavedPage = newState => {
+  const updateSavedPage = (newState) => {
     dispatch({ type: "updateContent", data: newState });
   };
-  
-  console.log(state)
 
   return (
     <div className="App">
@@ -49,6 +50,7 @@ const App = () => {
           reset={reset}
           dispatch={dispatch}
           textStyle={state.style.text}
+          editWord={editWord}
           editorStyle={state.style.editor}
           contentStyle={state.style.content}
           updateSavedPage={updateSavedPage}

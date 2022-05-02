@@ -4,7 +4,7 @@ export const initialState = {
   meta: undefined,
   error: false,
   page: undefined,
-  style: defaultStyle
+  style: defaultStyle,
 };
 
 export const reducer = (draft, action) => {
@@ -21,6 +21,13 @@ export const reducer = (draft, action) => {
     case "updateContent":
       draft.page = action.data;
       return draft;
+    case "editWord": {
+      const [paragraphIndex, wordIndex] = action.data.key.split("-");
+      const word = draft.page.find((word) => word.id === action.data.key);
+      word.characters = action.data.characters;
+      word.customCharacters = true;
+      return draft;
+    }
     default:
       return draft;
   }
