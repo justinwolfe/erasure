@@ -21,8 +21,12 @@ export const useGestureOnPage = collection => {
     }
   };
   
-  const editWord = key => {
-    
+  const editWord = (key, characters) => {
+    const wordIndex = getWordIndex(key, statefulCollection);
+    setStatefulCollection(draft => {
+      draft[wordIndex].characters = characters
+      draft[wordIndex].customCharacters = true;
+    })
   }
 
   const getWord = (id, page) => page.find(word => word.id === id);
@@ -83,6 +87,7 @@ export const useGestureOnPage = collection => {
     gesture: currentGesture,
     gesturefulPage: statefulCollection,
     gestureActive: gestureStarted,
+    editWord,
     getWord,
     getWordKey
   };

@@ -9,14 +9,13 @@ import { throttle } from "throttle-debounce";
 
 const Editor = ({
   page,
-  editWord,
   reset,
   textStyle,
   editorStyle,
   contentStyle,
   dispatch,
   updateSavedPage,
-  interactionType
+  interactionType,
 }) => {
   const [wordEditorOpen, setWordEditorOpen] = useState(false);
   const [editedWord, setEditedWord] = useState({});
@@ -27,7 +26,8 @@ const Editor = ({
     gesturefulPage,
     gestureActive,
     getWordKey,
-    getWord
+    getWord,
+    editWord,
   } = useGestureOnPage(page);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Editor = ({
     }
   }, [gestureActive]);
 
-  const handleDoubleClick = e => {
+  const handleDoubleClick = (e) => {
     const wordKey = getWordKey(e.target);
     if (!wordKey) return;
     const word = getWord(wordKey, page);
@@ -53,13 +53,13 @@ const Editor = ({
   const touchListeners = {
     onTouchStart: gestureStart,
     onTouchMove: throttle(20, true, gestureMove),
-    onTouchEnd: gestureStop
+    onTouchEnd: gestureStop,
   };
 
   const mouseListeners = {
     onMouseDown: gestureStart,
     onMouseMove: throttle(20, true, gestureMove),
-    onMouseUp: gestureStop
+    onMouseUp: gestureStop,
   };
 
   return (
@@ -79,7 +79,7 @@ const Editor = ({
       <Controls textStyle={textStyle} dispatch={dispatch} reset={reset} />
       <div id="content" style={contentStyle}>
         {gesturefulPage &&
-          gesturefulPage.map(unit =>
+          gesturefulPage.map((unit) =>
             unit.type === "word" ? (
               <Word
                 characters={unit.characters}
