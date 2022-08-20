@@ -61,6 +61,7 @@ const convertHtmlToPlain = html => {
 export const getContentFromUrl = async url => {
   try {
     const response = await fetch(addProxy(url));
+    console.log(response)
     const inputHtml = await response.text();
     const parsed = await Mercury.parse(url, {
       html: inputHtml,
