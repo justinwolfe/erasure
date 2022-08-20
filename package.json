@@ -21,7 +21,11 @@
     "@postlight/mercury-parser": "^2.2.0",
     "lodash.clonedeep": "^4.5.0",
     "throttle-debounce": "^3.0.1",
-    "detect-it": "^4.0.0"
+    "detect-it": "^4.0.0",
+    "@mui/material": "^5.10.1",
+    "@mui/styled-engine": "^5.10.1",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.8.4"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -9,6 +9,11 @@ import Splash from "./components/Splash.js";
 import { useImmerReducer } from "use-immer";
 import { primaryInput } from "detect-it";
 
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
 const App = () => {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
