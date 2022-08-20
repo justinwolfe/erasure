@@ -3,7 +3,7 @@ import remove from "remove-markdown";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 
-const addProxy = url => `https://api.codetabs.com/v1/proxy?quest=${url}`;
+const addProxy = url => `https://erasure-proxy.glitch.me/?url=${url}`;
 
 const convertToStateV3 = text => {
   text.split("\n\n").reduce((paragraph, paragraphIndex) => {
