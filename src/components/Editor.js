@@ -6,6 +6,8 @@ import WordEditor from "./WordEditor";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
 import { throttle } from "throttle-debounce";
+import Fab from '@mui/material/Fab'
+import AddIcon from '@mui/icons-material/Add';
 
 const Editor = ({
   page,
@@ -97,6 +99,9 @@ const Editor = ({
             )
           )}
       </div>
+      <Fab size="small" color="secondary" aria-label="add">
+        <AddIcon />
+      </Fab>
     </div>
   );
 };
