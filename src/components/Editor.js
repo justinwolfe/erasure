@@ -3,10 +3,10 @@ import Word from "./Word";
 import Paragraph from "./Paragraph";
 import Controls from "./Controls";
 import WordEditor from "./WordEditor";
+import Actions from "./Actions";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
 import { throttle } from "throttle-debounce";
-import Fab from '@mui/material/Fab'
 
 const Editor = ({
   page,
@@ -98,8 +98,7 @@ const Editor = ({
             )
           )}
       </div>
-      // <Fab size="small" color="secondary" aria-label="add">
-      // </Fab>
+      // <Actions />
     </div>
   );
 };
