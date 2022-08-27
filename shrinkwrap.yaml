@@ -16,6 +16,7 @@ dependencies:
   react: 16.14.0
   react-dom: 16.14.0
   react-scripts: 4.0.1
+  react-use-is-scrolling: 0.0.2
   remark: 11.0.2
   remove-markdown: 0.3.0
   serve: 11.3.2
@@ -9696,6 +9697,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==
+  /lodash.throttle/4.1.1:
+    dev: false
+    resolution:
+      integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==
   /lodash.uniq/4.5.0:
     dev: false
     resolution:
@@ -12127,6 +12132,14 @@ packages:
       react-dom: '>=16.6.0'
     resolution:
       integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==
+  /react-use-is-scrolling/0.0.2:
+    dependencies:
+      lodash.throttle: 4.1.1
+    dev: false
+    peerDependencies:
+      react: ^16.12.0
+    resolution:
+      integrity: sha512-tnrSZRTMUcNAbUG2Q8jTWUrp3Q8ka5X9cLeqXZa2Xh95NvMGxxfHnUHXd1JFmYUPm4O4Ig4cWbdlme+bhcjLWA==
   /react/16.14.0:
     dependencies:
       loose-envify: 1.4.0
@@ -15002,6 +15015,7 @@ specifiers:
   react: ^16.8.6
   react-dom: ^16.8.6
   react-scripts: ^4.0.0
+  react-use-is-scrolling: ^0.0.2
   remark: ^11.0.2
   remove-markdown: ^0.3.0
   serve: ^11.3.2

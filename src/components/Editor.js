@@ -7,6 +7,7 @@ import Actions from "./Actions";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
 import { throttle } from "throttle-debounce";
+import { useIsScrolling } from 'react-use-is-scrolling'
 
 const Editor = ({
   page,
@@ -30,6 +31,9 @@ const Editor = ({
     getWord,
     editWord,
   } = useGestureOnPage(page);
+  const [displayActions, setDisplayActions] = useState(false)
+  const { isScrollingY } = useIsScrolling()
+  console.log('is scrolling', isScrollingY)
 
   useEffect(() => {
     if (!gestureActive) {
@@ -37,6 +41,14 @@ const Editor = ({
       updateSavedPage(gesturefulPage);
     }
   }, [gestureActive]);
+  
+  useEffect(() => {
+    if(!isScrollingY){
+      setTimeout(() => {
+        
+      })
+    }
+  }, [isScrollingY])
 
   const handleDoubleClick = (e) => {
     const wordKey = getWordKey(e.target);
@@ -98,7 +110,7 @@ const Editor = ({
             )
           )}
       </div>
-      // <Actions />
+      <Actions />
     </div>
   );
 };
