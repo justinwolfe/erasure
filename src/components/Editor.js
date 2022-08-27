@@ -7,7 +7,6 @@ import Actions from "./Actions";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
 import { throttle } from "throttle-debounce";
-import { useIsScrolling } from "react-use-is-scrolling";
 
 const Editor = ({
   page,
@@ -31,7 +30,6 @@ const Editor = ({
     getWord,
     editWord,
   } = useGestureOnPage(page);
-  const { isScrollingY } = useIsScrolling();
 
   useEffect(() => {
     if (!gestureActive) {
@@ -97,10 +95,7 @@ const Editor = ({
             )
           )}
       </div>
-      <Actions
-        isScrolling={isScrollingY}
-      />
-      )
+      <Actions />)
     </div>
   );
 };
