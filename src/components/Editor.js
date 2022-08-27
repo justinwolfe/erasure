@@ -32,8 +32,7 @@ const Editor = ({
     editWord,
   } = useGestureOnPage(page);
   const [displayActions, setDisplayActions] = useState(false);
-  const [actionsHovered, setActionsHovered] = useState(false);
-  console.log('actionsHovered', actionsHovered)
+  const [actionsOpen, setActionsOpen] = useState(false);
   const { isScrollingY } = useIsScrolling();
 
   useEffect(() => {
@@ -48,12 +47,12 @@ const Editor = ({
     }
     if (!isScrollingY) {
       setTimeout(() => {
-        if (!actionsHovered) {
+        if (!actionsOpen) {
           setDisplayActions(false);
         }
       }, 500);
     }
-  }, [isScrollingY, actionsHovered]);
+  }, [isScrollingY, actionsOpen]);
 
   const handleDoubleClick = (e) => {
     const wordKey = getWordKey(e.target);
@@ -113,12 +112,14 @@ const Editor = ({
             )
           )}
       </div>
-      {displayActions && (
-        <Actions
-          onMouseEnter={() => setActionsHovered(true)}
-          onMouseLeave={() => setActionsHovered(false)}
-        />
-      )}
+      <Actions
+        isScrolling={isScrolling}
+        onOpen={() => console.log("is open")}
+        onClose={() => {
+          console.log("is closed");
+        }}
+      />
+      )
     </div>
   );
 };

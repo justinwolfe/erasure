@@ -4,7 +4,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
 
-const Actions = () => {
+const Actions = ({ onOpen, onClose, isScrolling }) => {
   const actions = [
     { icon: <FileCopyIcon />, name: "Copy" },
     { icon: <SaveIcon />, name: "Save" },
@@ -18,6 +18,8 @@ const Actions = () => {
       sx={{ position: "fixed", bottom: 16, right: 16 }}
       icon={<SpeedDialIcon />}
       direction="left"
+      onOpen={onOpen}
+      onClose={onClose}
     >
       {actions.map((action) => (
         <SpeedDialAction
