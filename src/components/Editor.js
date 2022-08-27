@@ -7,7 +7,7 @@ import Actions from "./Actions";
 import { handleScreenshot } from "../utils";
 import { useGestureOnPage } from "./hooks";
 import { throttle } from "throttle-debounce";
-import { useIsScrolling } from 'react-use-is-scrolling'
+import { useIsScrolling } from "react-use-is-scrolling";
 
 const Editor = ({
   page,
@@ -31,24 +31,24 @@ const Editor = ({
     getWord,
     editWord,
   } = useGestureOnPage(page);
-  const [displayActions, setDisplayActions] = useState(false)
-  const { isScrollingY } = useIsScrolling()
-  console.log('is scrolling', isScrollingY)
+  const [displayActions, setDisplayActions] = useState(false);
+  const [actionsHovered, setActionsHovered] = useState(false);
+  const { isScrollingY } = useIsScrolling();
 
   useEffect(() => {
     if (!gestureActive) {
-      console.log("gesture stop");
       updateSavedPage(gesturefulPage);
     }
   }, [gestureActive]);
-  
+
   useEffect(() => {
-    if(!isScrollingY){
-      setTimeout(() => {
-        
-      })
+    if (isScrollingY) {
+      setDisplayActions(true);
     }
-  }, [isScrollingY])
+    if (!isScrollingY && !actionsHovered) {
+      setTimeout(() => setDisplayActions(false), 500);
+    }
+  }, [isScrollingY, actionsHovered]);
 
   const handleDoubleClick = (e) => {
     const wordKey = getWordKey(e.target);
@@ -59,9 +59,9 @@ const Editor = ({
     setWordEditorOpen(true);
   };
 
-  const close = () => {
-    setWordEditorOpen(false);
-  };
+  const close = () => setWordEditorOpen(false);
+
+  const handleHover = (isHovered) => setActionsHovered(isHovered);
 
   const touchListeners = {
     onTouchStart: gestureStart,
@@ -110,7 +110,12 @@ const Editor = ({
             )
           )}
       </div>
-      <Actions />
+      {displayActions && (
+        <Actions
+          onMouseEnter={() => handleHover(true)}
+          onMouseLeave={() => handleHover(false)}
+        />
+      )}
     </div>
   );
 };
