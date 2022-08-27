@@ -33,6 +33,7 @@ const Editor = ({
   } = useGestureOnPage(page);
   const [displayActions, setDisplayActions] = useState(false);
   const [actionsHovered, setActionsHovered] = useState(false);
+  console.log('actionsHovered', actionsHovered)
   const { isScrollingY } = useIsScrolling();
 
   useEffect(() => {
@@ -45,8 +46,12 @@ const Editor = ({
     if (isScrollingY) {
       setDisplayActions(true);
     }
-    if (!isScrollingY && !actionsHovered) {
-      setTimeout(() => setDisplayActions(false), 500);
+    if (!isScrollingY) {
+      setTimeout(() => {
+        if (!actionsHovered) {
+          setDisplayActions(false);
+        }
+      }, 500);
     }
   }, [isScrollingY, actionsHovered]);
 
@@ -60,8 +65,6 @@ const Editor = ({
   };
 
   const close = () => setWordEditorOpen(false);
-
-  const handleHover = (isHovered) => setActionsHovered(isHovered);
 
   const touchListeners = {
     onTouchStart: gestureStart,
@@ -112,8 +115,8 @@ const Editor = ({
       </div>
       {displayActions && (
         <Actions
-          onMouseEnter={() => handleHover(true)}
-          onMouseLeave={() => handleHover(false)}
+          onMouseEnter={() => setActionsHovered(true)}
+          onMouseLeave={() => setActionsHovered(false)}
         />
       )}
     </div>
